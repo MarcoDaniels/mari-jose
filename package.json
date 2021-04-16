@@ -1,0 +1,18 @@
+{
+  "name": "mari-jose",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "description": "Marketing website for Cerejas Mari'José.",
+  "author": "Marco Daniel Martins <marcodanielmartins@gmail.com>",
+  "dependencies": {
+    "cockpit-http-client": "1.0.1",
+    "elm-pages": "1.5.5"
+  },
+  "devDependencies": {
+    "elm-format": "0.8.5",
+    "elm-tooling": "1.3.0",
+    "ts-node": "9.1.1",
+    "typescript": "4.2.4"
+  }
+}

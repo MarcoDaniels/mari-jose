@@ -1,0 +1,13 @@
+.DS_Store
+.env
+
+.idea/
+.cache/
+
+elm-stuff/
+gen/
+modules/
+content/
+
+node_modules/
+dist/
