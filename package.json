@@ -5,6 +5,9 @@
   "license": "MIT",
   "description": "Marketing website for Cerejas Mari'José.",
   "author": "Marco Daniel Martins <marcodanielmartins@gmail.com>",
+  "scripts": {
+    "sync": "ts-node utils/sync.ts"
+  },
   "dependencies": {
     "cockpit-http-client": "1.0.1",
     "elm-pages": "1.5.5"
