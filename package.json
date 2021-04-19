@@ -6,7 +6,8 @@
   "description": "Marketing website for Cerejas Mari'José.",
   "author": "Marco Daniel Martins <marcodanielmartins@gmail.com>",
   "scripts": {
-    "sync": "ts-node utils/sync.ts"
+    "sync": "ts-node utils/sync.ts",
+    "start:elm": "elm-pages develop"
   },
   "dependencies": {
     "cockpit-http-client": "1.0.1",
