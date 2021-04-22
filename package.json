@@ -7,7 +7,8 @@
   "author": "Marco Daniel Martins <marcodanielmartins@gmail.com>",
   "scripts": {
     "sync": "ts-node utils/sync.ts",
-    "start:elm": "elm-pages develop"
+    "start:elm": "elm-pages develop",
+    "build:elm": "elm-pages build"
   },
   "dependencies": {
     "cockpit-http-client": "1.0.1",
