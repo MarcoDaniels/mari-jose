@@ -1,6 +1,6 @@
 module Main exposing (..)
 
-import Html
+import Html.Styled as Html
 import OptimizedDecoder exposing (decodeString, decoder, errorToString, string, succeed)
 import OptimizedDecoder.Pipeline exposing (required)
 import Pages exposing (images, internals, pages)
@@ -8,6 +8,7 @@ import Pages.Manifest as Manifest
 import Pages.Manifest.Category
 import Pages.Platform
 import Pages.StaticHttp as StaticHttp
+import Theme exposing (useTheme)
 
 
 type Msg
@@ -40,7 +41,7 @@ main =
                     { view =
                         \model view ->
                             { title = ""
-                            , body = Html.div [] [ Html.text "content goes here" ]
+                            , body = useTheme (Html.text view.content)
                             }
                     , head = []
                     }
