@@ -1,5 +1,7 @@
 module Main exposing (..)
 
+import Context exposing (Model, Msg)
+import Element.Navigation exposing (navigation)
 import Html.Styled as Html
 import OptimizedDecoder exposing (decodeString, decoder, errorToString, string, succeed)
 import OptimizedDecoder.Pipeline exposing (required)
@@ -11,14 +13,6 @@ import Pages.StaticHttp as StaticHttp
 import Theme exposing (useTheme)
 
 
-type Msg
-    = NoOp
-
-
-type Element
-    = Html Msg
-
-
 type alias Content =
     { content : String }
 
@@ -27,8 +21,8 @@ type alias PageMetadata =
     { meta : String }
 
 
-type alias Model =
-    {}
+tempView data =
+    useTheme (Html.div [] [ navigation, Html.text data.content ])
 
 
 main : Pages.Platform.Program Model Msg PageMetadata Content Pages.PathKey
@@ -39,9 +33,9 @@ main =
             \listPath metadata ->
                 StaticHttp.succeed
                     { view =
-                        \model view ->
+                        \model data ->
                             { title = ""
-                            , body = useTheme (Html.text view.content)
+                            , body = tempView data
                             }
                     , head = []
                     }
