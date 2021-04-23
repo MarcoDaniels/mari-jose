@@ -1,7 +1,8 @@
 module Theme exposing (useColor, useDevice, useTheme, useWidth)
 
-import Css exposing (Px, Style, auto, backgroundColor, batch, color, hex, margin, padding, paddingLeft, paddingRight, pct, px)
-import Css.Global exposing (body, global)
+import Context exposing (Msg)
+import Css exposing (Px, Style, auto, backgroundColor, batch, color, hex, listStyle, margin, none, padding, paddingLeft, paddingRight, pct, px)
+import Css.Global exposing (body, global, ul)
 import Css.Media exposing (maxWidth, only, screen, withMedia)
 import Html exposing (Html)
 import Html.Styled exposing (div, toUnstyled)
@@ -34,11 +35,14 @@ useColor =
     }
 
 
-useTheme : Html.Styled.Html msg -> Html msg
+useTheme : Html.Styled.Html Msg -> Html Msg
 useTheme content =
     div
         [ css [ batch [ margin auto ] ] ]
-        [ global [ body [ margin (px 0), padding (px 0) ] ]
+        [ global
+            [ body [ margin (px 0), padding (px 0) ]
+            , ul [ margin (px 0), padding (px 0), listStyle none ]
+            ]
         , content
         ]
         |> toUnstyled

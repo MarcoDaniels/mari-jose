@@ -1,9 +1,12 @@
 module Main exposing (..)
 
+import Content.Decoder exposing (contentDecoder)
+import Content.Type exposing (Content)
 import Context exposing (Model, Msg)
 import Element.Navigation exposing (navigation)
-import Html.Styled as Html
-import OptimizedDecoder exposing (decodeString, decoder, errorToString, string, succeed)
+import Html exposing (Html)
+import Html.Styled
+import OptimizedDecoder exposing (decoder, errorToString, string, succeed)
 import OptimizedDecoder.Pipeline exposing (required)
 import Pages exposing (images, internals, pages)
 import Pages.Manifest as Manifest
@@ -13,40 +16,37 @@ import Pages.StaticHttp as StaticHttp
 import Theme exposing (useTheme)
 
 
-type alias Content =
-    { content : String }
-
-
 type alias PageMetadata =
     { meta : String }
 
 
-tempView data =
-    useTheme (Html.div [] [ navigation, Html.text data.content ])
+
+-- TODO: move to Content.View
+
+
+tempView : Content -> Html Msg
+tempView content =
+    useTheme
+        (Html.Styled.div []
+            [ navigation content.settings.navigation
+            , Html.Styled.text content.collection
+            ]
+        )
 
 
 main : Pages.Platform.Program Model Msg PageMetadata Content Pages.PathKey
 main =
     Pages.Platform.init
         { init = \maybeMetadata -> ( {}, Cmd.none )
-        , view =
-            \listPath metadata ->
-                StaticHttp.succeed
-                    { view =
-                        \model data ->
-                            { title = ""
-                            , body = tempView data
-                            }
-                    , head = []
-                    }
+        , view = \listPath metadata -> StaticHttp.succeed { view = \model data -> { title = "", body = tempView data }, head = [] }
         , update = \msg model -> ( model, Cmd.none )
         , subscriptions = \metadata path model -> Sub.none
         , documents =
             [ { extension = "md"
               , metadata = decoder (succeed PageMetadata |> required "collection" string)
               , body =
-                    \body ->
-                        case decodeString (succeed Content |> required "collection" string) body of
+                    \rawContent ->
+                        case contentDecoder rawContent of
                             Ok content ->
                                 Ok content
 
