@@ -2,7 +2,7 @@ module Main exposing (..)
 
 import Content.Decoder exposing (contentDecoder)
 import Content.Type exposing (Content)
-import Context exposing (Model, Msg)
+import Context exposing (Model, Msg(..))
 import Element.Navigation exposing (navigation)
 import Html exposing (Html)
 import Html.Styled
@@ -24,11 +24,11 @@ type alias PageMetadata =
 -- TODO: move to Content.View
 
 
-tempView : Content -> Html Msg
-tempView content =
+tempView : Model -> Content -> Html Msg
+tempView model content =
     useTheme
         (Html.Styled.div []
-            [ navigation content.settings.navigation
+            [ navigation model.menuExpand content.settings.navigation
             , Html.Styled.text content.collection
             ]
         )
@@ -37,9 +37,25 @@ tempView content =
 main : Pages.Platform.Program Model Msg PageMetadata Content Pages.PathKey
 main =
     Pages.Platform.init
-        { init = \maybeMetadata -> ( {}, Cmd.none )
-        , view = \listPath metadata -> StaticHttp.succeed { view = \model data -> { title = "", body = tempView data }, head = [] }
-        , update = \msg model -> ( model, Cmd.none )
+        { init = \maybeMetadata -> ( { menuExpand = False }, Cmd.none )
+        , view =
+            \listPath metadata ->
+                StaticHttp.succeed
+                    { view =
+                        \model data ->
+                            { title = ""
+                            , body = tempView model data
+                            }
+                    , head = []
+                    }
+        , update =
+            \msg model ->
+                case msg of
+                    MenuExpand expand ->
+                        ( { model | menuExpand = expand }, Cmd.none )
+
+                    _ ->
+                        ( model, Cmd.none )
         , subscriptions = \metadata path model -> Sub.none
         , documents =
             [ { extension = "md"

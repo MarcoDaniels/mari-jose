@@ -5,10 +5,11 @@ import Html.Styled exposing (Attribute, Html)
 
 type Msg
     = NoOp
+    | MenuExpand Bool
 
 
 type alias Model =
-    {}
+    { menuExpand : Bool }
 
 
 type alias Element =
