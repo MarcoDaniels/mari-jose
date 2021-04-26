@@ -8,15 +8,27 @@
   "scripts": {
     "sync": "ts-node utils/sync.ts",
     "start:elm": "elm-pages develop",
-    "build:elm": "elm-pages build"
+    "build:elm": "elm-pages build",
+    "start:serve": "COCKPIT_MODE=start ts-node utils/serve.ts",
+    "start": "npm-run-all --parallel start:elm start:serve",
+    "build": "elm-pages build",
+    "serve": "COCKPIT_MODE=serve ts-node utils/serve.ts",
+    "clean": "rm -rf dist",
+    "postinstall": "elm-tooling install"
   },
   "dependencies": {
     "cockpit-http-client": "1.0.1",
     "elm-pages": "1.5.5"
   },
   "devDependencies": {
+    "@types/express": "4.17.11",
+    "@types/parseurl": "1.3.1",
     "elm-format": "0.8.5",
     "elm-tooling": "1.3.0",
+    "express": "4.17.1",
+    "got": "11.8.2",
+    "http-proxy-middleware": "1.3.0",
+    "npm-run-all": "4.1.5",
     "ts-node": "9.1.1",
     "typescript": "4.2.4"
   }

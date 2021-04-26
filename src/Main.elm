@@ -2,10 +2,8 @@ module Main exposing (..)
 
 import Content.Decoder exposing (contentDecoder)
 import Content.Type exposing (Content)
+import Content.View exposing (contentView)
 import Context exposing (Model, Msg(..))
-import Element.Navigation exposing (navigation)
-import Html exposing (Html)
-import Html.Styled
 import OptimizedDecoder exposing (decoder, errorToString, string, succeed)
 import OptimizedDecoder.Pipeline exposing (required)
 import Pages exposing (images, internals, pages)
@@ -13,28 +11,13 @@ import Pages.Manifest as Manifest
 import Pages.Manifest.Category
 import Pages.Platform
 import Pages.StaticHttp as StaticHttp
-import Theme exposing (useTheme)
 
 
-type alias PageMetadata =
+type alias Metadata =
     { meta : String }
 
 
-
--- TODO: move to Content.View
-
-
-tempView : Model -> Content -> Html Msg
-tempView model content =
-    useTheme
-        (Html.Styled.div []
-            [ navigation model.menuExpand content.settings.navigation
-            , Html.Styled.text content.collection
-            ]
-        )
-
-
-main : Pages.Platform.Program Model Msg PageMetadata Content Pages.PathKey
+main : Pages.Platform.Program Model Msg Metadata Content Pages.PathKey
 main =
     Pages.Platform.init
         { init = \maybeMetadata -> ( { menuExpand = False }, Cmd.none )
@@ -42,9 +25,9 @@ main =
             \listPath metadata ->
                 StaticHttp.succeed
                     { view =
-                        \model data ->
-                            { title = ""
-                            , body = tempView model data
+                        \model content ->
+                            { title = content.data.title
+                            , body = contentView model content
                             }
                     , head = []
                     }
@@ -59,7 +42,7 @@ main =
         , subscriptions = \metadata path model -> Sub.none
         , documents =
             [ { extension = "md"
-              , metadata = decoder (succeed PageMetadata |> required "collection" string)
+              , metadata = decoder (succeed Metadata |> required "collection" string)
               , body =
                     \rawContent ->
                         case contentDecoder rawContent of
