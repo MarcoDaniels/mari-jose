@@ -24,6 +24,7 @@ overlay open onClick =
             , Css.right <| Css.px 0
             , Css.zIndex <| Css.int 1
             , Css.opacity <| Css.num 0.6
+            , Css.borderBottom3 (Css.px 1) Css.solid (Css.hex "#6A971F")
             , is open (Css.height <| Css.vh 100) (Css.height <| Css.vh 0)
             , Transitions.transition [ Transitions.height3 400 0 Transitions.easeInOut ]
             ]
