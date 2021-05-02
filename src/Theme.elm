@@ -3,7 +3,7 @@ module Theme exposing (useColor, useDevice, useTheme, useWidth)
 import Context exposing (Msg)
 import Css exposing (Px, Style, auto, backgroundColor, batch, color, hex, listStyle, margin, none, padding, px)
 import Css.Global exposing (body, global, ul)
-import Css.Media exposing (maxWidth, only, screen, withMedia)
+import Css.Media exposing (maxWidth, withMedia, all)
 import Html exposing (Html)
 import Html.Styled
 import Html.Styled.Attributes exposing (css)
@@ -20,10 +20,10 @@ useWidth =
 
 useDevice : Device (List Style -> Style)
 useDevice =
-    { s = withMedia [ only screen [ maxWidth useWidth.s ] ]
-    , m = withMedia [ only screen [ maxWidth useWidth.m ] ]
-    , l = withMedia [ only screen [ maxWidth useWidth.l ] ]
-    , xl = withMedia [ only screen [ maxWidth useWidth.xl ] ]
+    { s = withMedia [ all [ maxWidth useWidth.s ] ]
+    , m = withMedia [ all [ maxWidth useWidth.m ] ]
+    , l = withMedia [ all [ maxWidth useWidth.l ] ]
+    , xl = withMedia [ all [ maxWidth useWidth.xl ] ]
     }
 
 
