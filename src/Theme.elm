@@ -5,7 +5,7 @@ import Css exposing (Px, Style, auto, backgroundColor, batch, color, hex, listSt
 import Css.Global exposing (body, global, ul)
 import Css.Media exposing (maxWidth, only, screen, withMedia)
 import Html exposing (Html)
-import Html.Styled exposing (div, toUnstyled)
+import Html.Styled
 import Html.Styled.Attributes exposing (css)
 
 
@@ -29,20 +29,20 @@ useDevice =
 
 useColor : { primary : Style, secondary : Style, tertiary : Style }
 useColor =
-    { primary = batch [ backgroundColor (hex "#FFF"), color (hex "#000") ]
-    , secondary = batch [ backgroundColor (hex "#FFF"), color (hex "#6A971F") ]
-    , tertiary = batch [ backgroundColor (hex "#6A971F"), color (hex "#FFF") ]
+    { primary = batch [ backgroundColor <| hex "#FFF", color <| hex "#000" ]
+    , secondary = batch [ backgroundColor <| hex "#FFF", color <| hex "#6A971F" ]
+    , tertiary = batch [ backgroundColor <| hex "#6A971F", color <| hex "#FFF" ]
     }
 
 
 useTheme : Html.Styled.Html Msg -> Html Msg
 useTheme content =
-    div
+    Html.Styled.div
         [ css [ batch [ margin auto ] ] ]
         [ global
-            [ body [ margin (px 0), padding (px 0) ]
-            , ul [ margin (px 0), padding (px 0), listStyle none ]
+            [ body [ margin <| px 0, padding <| px 0 ]
+            , ul [ margin <| px 0, padding <| px 0, listStyle none ]
             ]
         , content
         ]
-        |> toUnstyled
+        |> Html.Styled.toUnstyled
