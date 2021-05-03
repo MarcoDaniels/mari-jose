@@ -1,12 +1,13 @@
 module Element.Icon exposing (icon)
 
 import Context exposing (Element)
+import Css
 import Svg.Styled as Svg
 import Svg.Styled.Attributes as SvgAttributes
 
 
 type alias IconSettings =
-    { size : String, color : String }
+    { size : String, color : Css.Color }
 
 
 icon :
@@ -46,4 +47,4 @@ type alias SvgSettings =
 drawSVG : SvgSettings -> IconSettings -> Element
 drawSVG { view, draw } { size, color } =
     Svg.svg [ SvgAttributes.viewBox view, SvgAttributes.width size, SvgAttributes.height size ]
-        [ Svg.path [ SvgAttributes.fill color, SvgAttributes.d draw ] [] ]
+        [ Svg.path [ SvgAttributes.fill color.value, SvgAttributes.d draw ] [] ]
