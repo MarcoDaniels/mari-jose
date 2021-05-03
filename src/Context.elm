@@ -22,3 +22,7 @@ type alias StyledAttribute =
 
 type alias StyledChildren =
     List Element
+
+
+type alias StyledElement =
+    StyledAttribute -> StyledChildren -> Element

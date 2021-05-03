@@ -1,8 +1,11 @@
 module Element.Navigation exposing (navigation)
 
 import Content.Type exposing (Navigation)
-import Context exposing (Element, Msg(..), StyledAttribute, StyledChildren)
+import Context exposing (Element, Msg(..), StyledElement)
 import Css
+import Element.Button exposing (button)
+import Element.Empty exposing (emptyEl)
+import Element.Icon exposing (icon)
 import Element.Link exposing (link)
 import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Html
@@ -13,7 +16,7 @@ import Style.Slide exposing (slideDown)
 import Theme exposing (useColor, useDevice)
 
 
-wrapper : StyledAttribute -> StyledChildren -> Element
+wrapper : StyledElement
 wrapper =
     Html.styled Html.header
         [ useColor.tertiary
@@ -24,6 +27,11 @@ wrapper =
         , Css.padding2 (Css.px 10) (Css.px 0)
         , Css.zIndex <| Css.int 2
         ]
+
+
+listItem : StyledElement
+listItem =
+    Html.styled Html.li [ useDevice.s [ Css.marginTop <| Css.px 12 ] ]
 
 
 navigation : Navigation -> Bool -> Msg -> Element
@@ -40,18 +48,23 @@ navigation data expanded onClick =
             ]
             [ Html.nav [ Html.css [ Css.displayFlex, useDevice.s [ Css.flexDirection Css.column ] ] ]
                 [ Html.ul []
-                    [ Html.li [ Html.css [ useDevice.s [ Css.displayFlex, Css.justifyContent Css.spaceBetween ] ] ]
-                        [ link.primary
-                            [ Html.href data.brand.url ]
-                            [ Html.text data.brand.text ]
-                        , Html.button
-                            [ Html.onClick onClick
-                            , Html.css
-                                [ Css.display Css.none
-                                , useDevice.s [ Css.display Css.block ]
+                    [ Html.li
+                        [ Html.css
+                            [ useDevice.s
+                                [ Css.displayFlex
+                                , Css.justifyContent Css.spaceBetween
+                                , Css.alignItems Css.center
                                 ]
                             ]
-                            [ Html.text <| is expanded "X" "O" ]
+                        ]
+                        [ link.secondary
+                            [ Html.href data.brand.url ]
+                            [ Html.text data.brand.text ]
+                        , button.primary
+                            [ Html.onClick onClick
+                            , Html.css [ Css.display Css.none, useDevice.s [ Css.display Css.block ] ]
+                            ]
+                            [ is expanded (icon.close { size = "10", color = "#FFF" }) (icon.burger { size = "10", color = "#FFF" }) ]
                         ]
                     ]
                 , Html.ul
@@ -63,23 +76,38 @@ navigation data expanded onClick =
                     (data.menu
                         |> List.map
                             (\item ->
-                                Html.li []
-                                    [ link.primary
+                                listItem
+                                    []
+                                    [ link.secondary
                                         [ Html.href item.url ]
                                         [ Html.text item.text ]
                                     ]
                             )
                     )
                 ]
-            , Html.nav [ Html.css [ useDevice.s [ slideDown expanded ] ] ]
+            , Html.nav
+                [ Html.css
+                    [ useDevice.s
+                        [ slideDown expanded
+                        , Css.displayFlex
+                        , Css.justifyContent Css.center
+                        ]
+                    ]
+                ]
                 [ Html.ul []
                     (data.social
                         |> List.map
                             (\item ->
-                                Html.li []
-                                    [ link.primary
+                                listItem []
+                                    [ link.secondary
                                         [ Html.href item.url ]
-                                        [ Html.text item.text ]
+                                        [ case String.toLower item.text of
+                                            "facebook" ->
+                                                icon.facebook { size = "12", color = "#FFF" }
+
+                                            _ ->
+                                                emptyEl
+                                        ]
                                     ]
                             )
                     )

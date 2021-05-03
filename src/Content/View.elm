@@ -6,6 +6,8 @@ import Element.Navigation exposing (navigation)
 import Element.Overlay exposing (overlay)
 import Html exposing (Html)
 import Html.Styled
+import Html.Styled.Attributes exposing (css)
+import Style.Container exposing (container)
 import Theme exposing (useTheme)
 
 
@@ -14,8 +16,10 @@ contentView model content =
     useTheme
         (Html.Styled.div []
             [ navigation content.settings.navigation model.menuExpand (MenuExpand <| not model.menuExpand)
-            , Html.Styled.text content.collection
-            , Html.Styled.h1 [] [ Html.Styled.text content.collection ]
+            , Html.Styled.div [ css [ container ] ]
+                [ Html.Styled.text content.collection
+                , Html.Styled.h1 [] [ Html.Styled.text content.collection ]
+                ]
             , overlay model.menuExpand (MenuExpand <| not model.menuExpand)
             ]
         )
