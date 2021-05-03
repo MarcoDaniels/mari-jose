@@ -3,7 +3,7 @@ module Theme exposing (useColor, useDevice, useTheme, useWidth)
 import Context exposing (Msg)
 import Css exposing (Px, Style, auto, backgroundColor, batch, color, hex, listStyle, margin, none, padding, px)
 import Css.Global exposing (body, global, ul)
-import Css.Media exposing (maxWidth, withMedia, all)
+import Css.Media exposing (all, maxWidth, withMedia)
 import Html exposing (Html)
 import Html.Styled
 import Html.Styled.Attributes exposing (css)

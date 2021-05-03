@@ -1,14 +1,17 @@
 module Element.Link exposing (link)
 
-import Context exposing (Element, StyledAttribute, StyledChildren)
+import Context exposing (StyledElement)
 import Css
 import Html.Styled as Html
 import Theme exposing (useColor, useDevice)
 
 
-link : { primary : StyledAttribute -> StyledChildren -> Element }
+link : { primary : StyledElement, secondary : StyledElement }
 link =
     { primary =
+        -- TODO: implement
+        Html.styled Html.a []
+    , secondary =
         Html.styled Html.a
             [ useColor.tertiary
             , Css.textDecoration Css.none
