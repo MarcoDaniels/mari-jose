@@ -13,7 +13,7 @@ import Html.Styled.Events as Html
 import Is exposing (is)
 import Style.Container exposing (container)
 import Style.Slide exposing (slideDown)
-import Theme exposing (useColor, useDevice, useColorTheme)
+import Theme exposing (useColor, useColorTheme, useDevice)
 
 
 wrapper : StyledElement
@@ -66,8 +66,8 @@ navigation data expanded onClick =
                             , Html.css [ Css.display Css.none, useDevice.s [ Css.display Css.block ] ]
                             ]
                             [ is expanded
-                                (icon.close { size = "10", color = useColor.primary.value })
-                                (icon.burger { size = "10", color = useColor.primary.value })
+                                (icon.close { size = "10", color = useColor.primary })
+                                (icon.burger { size = "10", color = useColor.primary })
                             ]
                         ]
                     ]
@@ -109,7 +109,7 @@ navigation data expanded onClick =
                                         []
                                         [ case String.toLower item.text of
                                             "facebook" ->
-                                                icon.facebook { size = "12", color = useColor.primary.value }
+                                                icon.facebook { size = "12", color = useColor.primary }
 
                                             _ ->
                                                 emptyElement

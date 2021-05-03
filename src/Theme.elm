@@ -47,14 +47,30 @@ useColorTheme =
     }
 
 
-useTheme : Html.Styled.Html Msg -> Html Msg
+globalStyle : List (Html.Styled.Html Msg)
+globalStyle =
+    [ Css.Global.global
+        [ Css.Global.body
+            [ Css.margin <| Css.px 0
+            , Css.padding <| Css.px 0
+            ]
+        , Css.Global.ul
+            [ Css.margin <| Css.px 0
+            , Css.padding <| Css.px 0
+            , Css.listStyle Css.none
+            ]
+        ]
+    ]
+
+
+useTheme : List (Html.Styled.Html Msg) -> Html Msg
 useTheme content =
     Html.Styled.div
-        [ css [ Css.batch [ Css.margin Css.auto ] ] ]
-        [ Css.Global.global
-            [ Css.Global.body [ Css.margin <| Css.px 0, Css.padding <| Css.px 0 ]
-            , Css.Global.ul [ Css.margin <| Css.px 0, Css.padding <| Css.px 0, Css.listStyle Css.none ]
+        [ css
+            [ Css.height <| Css.vh 100
+            , Css.displayFlex
+            , Css.flexDirection Css.column
             ]
-        , content
         ]
+        ([ globalStyle, content ] |> List.concat)
         |> Html.Styled.toUnstyled
