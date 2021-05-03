@@ -7,7 +7,7 @@ import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Html.Styled.Events as Html
 import Is exposing (is)
-import Theme exposing (useColor)
+import Theme exposing (useColor, useColorTheme)
 
 
 overlay : Bool -> Msg -> Element
@@ -15,7 +15,7 @@ overlay open onClick =
     Html.div
         [ Html.onClick onClick
         , Html.css
-            [ useColor.primary
+            [ useColorTheme.primary
             , Css.overflow Css.hidden
             , Css.position Css.fixed
             , Css.top <| Css.px 0
@@ -23,8 +23,8 @@ overlay open onClick =
             , Css.left <| Css.px 0
             , Css.right <| Css.px 0
             , Css.zIndex <| Css.int 1
-            , Css.opacity <| Css.num 0.6
-            , Css.borderBottom3 (Css.px 1) Css.solid (Css.hex "#6A971F")
+            , Css.opacity <| Css.num 0.8
+            , Css.borderBottom3 (Css.px 1) Css.solid useColor.tertiary
             , is open (Css.height <| Css.vh 100) (Css.height <| Css.vh 0)
             , Transitions.transition [ Transitions.height3 400 0 Transitions.easeInOut ]
             ]

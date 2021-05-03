@@ -1,47 +1,59 @@
-module Theme exposing (useColor, useDevice, useTheme, useWidth)
+module Theme exposing (DeviceUse, ThemeUse, useColor, useColorTheme, useDevice, useTheme, useWidth)
 
 import Context exposing (Msg)
-import Css exposing (Px, Style, auto, backgroundColor, batch, color, hex, listStyle, margin, none, padding, px)
-import Css.Global exposing (body, global, ul)
-import Css.Media exposing (all, maxWidth, withMedia)
+import Css
+import Css.Global
+import Css.Media
 import Html exposing (Html)
 import Html.Styled
 import Html.Styled.Attributes exposing (css)
 
 
-type alias Device t =
+type alias DeviceUse t =
     { s : t, m : t, l : t, xl : t }
 
 
-useWidth : Device Px
+useWidth : DeviceUse Css.Px
 useWidth =
-    { s = px 550, m = px 750, l = px 1000, xl = px 1200 }
+    { s = Css.px 550, m = Css.px 750, l = Css.px 1000, xl = Css.px 1200 }
 
 
-useDevice : Device (List Style -> Style)
+useDevice : DeviceUse (List Css.Style -> Css.Style)
 useDevice =
-    { s = withMedia [ all [ maxWidth useWidth.s ] ]
-    , m = withMedia [ all [ maxWidth useWidth.m ] ]
-    , l = withMedia [ all [ maxWidth useWidth.l ] ]
-    , xl = withMedia [ all [ maxWidth useWidth.xl ] ]
+    { s = Css.Media.withMedia [ Css.Media.all [ Css.Media.maxWidth useWidth.s ] ]
+    , m = Css.Media.withMedia [ Css.Media.all [ Css.Media.maxWidth useWidth.m ] ]
+    , l = Css.Media.withMedia [ Css.Media.all [ Css.Media.maxWidth useWidth.l ] ]
+    , xl = Css.Media.withMedia [ Css.Media.all [ Css.Media.maxWidth useWidth.xl ] ]
     }
 
 
-useColor : { primary : Style, secondary : Style, tertiary : Style }
+type alias ThemeUse t =
+    { primary : t, secondary : t, tertiary : t }
+
+
+useColor : ThemeUse Css.Color
 useColor =
-    { primary = batch [ backgroundColor <| hex "#FFF", color <| hex "#000" ]
-    , secondary = batch [ backgroundColor <| hex "#FFF", color <| hex "#6A971F" ]
-    , tertiary = batch [ backgroundColor <| hex "#6A971F", color <| hex "#FFF" ]
+    { primary = Css.hex "#FFF"
+    , secondary = Css.hex "#000"
+    , tertiary = Css.hex "#6A971F"
+    }
+
+
+useColorTheme : ThemeUse Css.Style
+useColorTheme =
+    { primary = Css.batch [ Css.backgroundColor useColor.primary, Css.color useColor.secondary ]
+    , secondary = Css.batch [ Css.backgroundColor useColor.primary, Css.color useColor.tertiary ]
+    , tertiary = Css.batch [ Css.backgroundColor useColor.tertiary, Css.color useColor.primary ]
     }
 
 
 useTheme : Html.Styled.Html Msg -> Html Msg
 useTheme content =
     Html.Styled.div
-        [ css [ batch [ margin auto ] ] ]
-        [ global
-            [ body [ margin <| px 0, padding <| px 0 ]
-            , ul [ margin <| px 0, padding <| px 0, listStyle none ]
+        [ css [ Css.batch [ Css.margin Css.auto ] ] ]
+        [ Css.Global.global
+            [ Css.Global.body [ Css.margin <| Css.px 0, Css.padding <| Css.px 0 ]
+            , Css.Global.ul [ Css.margin <| Css.px 0, Css.padding <| Css.px 0, Css.listStyle Css.none ]
             ]
         , content
         ]
