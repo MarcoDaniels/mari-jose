@@ -1,9 +1,9 @@
-module Element.Empty exposing (emptyEl)
+module Element.Empty exposing (emptyElement)
 
 import Context exposing (Element)
 import Html.Styled as Html
 
 
-emptyEl : Element
-emptyEl =
+emptyElement : Element
+emptyElement =
     Html.text ""

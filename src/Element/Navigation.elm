@@ -4,7 +4,7 @@ import Content.Type exposing (Navigation)
 import Context exposing (Element, Msg(..), StyledElement)
 import Css
 import Element.Button exposing (button)
-import Element.Empty exposing (emptyEl)
+import Element.Empty exposing (emptyElement)
 import Element.Icon exposing (icon)
 import Element.Link exposing (link)
 import Html.Styled as Html exposing (Html)
@@ -13,13 +13,13 @@ import Html.Styled.Events as Html
 import Is exposing (is)
 import Style.Container exposing (container)
 import Style.Slide exposing (slideDown)
-import Theme exposing (useColor, useDevice)
+import Theme exposing (useColor, useDevice, useColorTheme)
 
 
 wrapper : StyledElement
 wrapper =
     Html.styled Html.header
-        [ useColor.tertiary
+        [ useColorTheme.tertiary
         , Css.position Css.sticky
         , Css.top <| Css.px 0
         , Css.left <| Css.px 0
@@ -58,13 +58,17 @@ navigation data expanded onClick =
                             ]
                         ]
                         [ link.secondary
-                            [ Html.href data.brand.url ]
+                            data.brand.url
+                            []
                             [ Html.text data.brand.text ]
                         , button.primary
                             [ Html.onClick onClick
                             , Html.css [ Css.display Css.none, useDevice.s [ Css.display Css.block ] ]
                             ]
-                            [ is expanded (icon.close { size = "10", color = "#FFF" }) (icon.burger { size = "10", color = "#FFF" }) ]
+                            [ is expanded
+                                (icon.close { size = "10", color = useColor.primary.value })
+                                (icon.burger { size = "10", color = useColor.primary.value })
+                            ]
                         ]
                     ]
                 , Html.ul
@@ -79,7 +83,8 @@ navigation data expanded onClick =
                                 listItem
                                     []
                                     [ link.secondary
-                                        [ Html.href item.url ]
+                                        item.url
+                                        []
                                         [ Html.text item.text ]
                                     ]
                             )
@@ -100,13 +105,14 @@ navigation data expanded onClick =
                             (\item ->
                                 listItem []
                                     [ link.secondary
-                                        [ Html.href item.url ]
+                                        item.url
+                                        []
                                         [ case String.toLower item.text of
                                             "facebook" ->
-                                                icon.facebook { size = "12", color = "#FFF" }
+                                                icon.facebook { size = "12", color = useColor.primary.value }
 
                                             _ ->
-                                                emptyEl
+                                                emptyElement
                                         ]
                                     ]
                             )
