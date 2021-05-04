@@ -3,7 +3,7 @@ module Element.Button exposing (button)
 import Context exposing (StyledElement)
 import Css
 import Html.Styled as Html
-import Theme exposing (ThemeUse, useColor, useColorTheme)
+import Style.Theme exposing (ThemeUse, useColor, useColorTheme)
 
 
 button : ThemeUse StyledElement

@@ -13,7 +13,7 @@ import Html.Styled.Events as Html
 import Is exposing (is)
 import Style.Container exposing (container)
 import Style.Slide exposing (slideDown)
-import Theme exposing (useColor, useColorTheme, useDevice)
+import Style.Theme exposing (useColor, useColorTheme, useDevice)
 
 
 wrapper : StyledElement

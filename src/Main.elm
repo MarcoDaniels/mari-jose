@@ -1,5 +1,6 @@
 module Main exposing (..)
 
+import Color
 import Content.Decoder exposing (contentDecoder)
 import Content.Type exposing (Content)
 import Content.View exposing (contentView)
@@ -13,6 +14,7 @@ import Pages.Platform
 import Pages.StaticHttp as StaticHttp
 import SEO exposing (seo)
 import Settings exposing (settings)
+import Sitemap exposing (sitemap)
 
 
 main : Pages.Platform.Program Model Msg Metadata Content Pages.PathKey
@@ -52,21 +54,23 @@ main =
               }
             ]
         , manifest =
-            { backgroundColor = Nothing
+            { backgroundColor = Just Color.white
             , categories = [ Pages.Manifest.Category.food ]
             , displayMode = Manifest.Standalone
             , orientation = Manifest.Portrait
             , description = settings.description
             , iarcRatingId = Nothing
             , name = settings.title
-            , themeColor = Nothing
+            , themeColor = Just Color.white
             , startUrl = pages.index
             , shortName = Just settings.title
             , sourceIcon = images.iconPng
             , icons = []
             }
-        , canonicalSiteUrl = ""
+        , canonicalSiteUrl = settings.baseURL
         , onPageChange = Nothing
         , internals = internals
         }
+        |> Pages.Platform.withFileGenerator
+            (\data -> StaticHttp.succeed [ Ok { path = [ "sitemap.xml" ], content = sitemap data } ])
         |> Pages.Platform.toProgram

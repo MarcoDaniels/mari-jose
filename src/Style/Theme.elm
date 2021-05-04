@@ -1,4 +1,4 @@
-module Theme exposing (DeviceUse, ThemeUse, useColor, useColorTheme, useDevice, useTheme, useWidth)
+module Style.Theme exposing (DeviceUse, ThemeUse, useColor, useColorTheme, useDevice, useTheme, useWidth)
 
 import Context exposing (Msg)
 import Css

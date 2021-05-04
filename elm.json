@@ -9,6 +9,7 @@
     "dependencies": {
         "direct": {
             "avh4/elm-color": "1.0.0",
+            "billstclair/elm-xml-eeue56": "2.0.0",
             "dillonkearns/elm-markdown": "6.0.1",
             "dillonkearns/elm-pages": "7.0.0",
             "elm/browser": "1.0.2",
