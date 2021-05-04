@@ -39,11 +39,32 @@ useColor =
     }
 
 
+setSVGColor : Css.Color -> Css.Style
+setSVGColor color =
+    Css.Global.children
+        [ Css.Global.svg [ Css.Global.children [ Css.Global.everything [ Css.fill color ] ] ] ]
+
+
 useColorTheme : ThemeUse Css.Style
 useColorTheme =
-    { primary = Css.batch [ Css.backgroundColor useColor.primary, Css.color useColor.secondary ]
-    , secondary = Css.batch [ Css.backgroundColor useColor.primary, Css.color useColor.tertiary ]
-    , tertiary = Css.batch [ Css.backgroundColor useColor.tertiary, Css.color useColor.primary ]
+    { primary =
+        Css.batch
+            [ Css.backgroundColor useColor.primary
+            , Css.color useColor.secondary
+            , setSVGColor useColor.secondary
+            ]
+    , secondary =
+        Css.batch
+            [ Css.backgroundColor useColor.secondary
+            , Css.color useColor.tertiary
+            , setSVGColor useColor.tertiary
+            ]
+    , tertiary =
+        Css.batch
+            [ Css.backgroundColor useColor.tertiary
+            , Css.color useColor.primary
+            , setSVGColor useColor.primary
+            ]
     }
 
 
