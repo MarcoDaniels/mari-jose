@@ -4,17 +4,15 @@ import Content.Decoder exposing (contentDecoder)
 import Content.Type exposing (Content)
 import Content.View exposing (contentView)
 import Context exposing (Model, Msg(..))
-import OptimizedDecoder exposing (decoder, errorToString, string, succeed)
-import OptimizedDecoder.Pipeline exposing (required)
+import Metadata exposing (Metadata, metadataDecoder)
+import OptimizedDecoder exposing (decoder, errorToString)
 import Pages exposing (images, internals, pages)
 import Pages.Manifest as Manifest
 import Pages.Manifest.Category
 import Pages.Platform
 import Pages.StaticHttp as StaticHttp
-
-
-type alias Metadata =
-    { meta : String }
+import SEO exposing (seo)
+import Settings exposing (settings)
 
 
 main : Pages.Platform.Program Model Msg Metadata Content Pages.PathKey
@@ -22,14 +20,14 @@ main =
     Pages.Platform.init
         { init = \maybeMetadata -> ( { menuExpand = False }, Cmd.none )
         , view =
-            \listPath metadata ->
+            \listPath { frontmatter, path } ->
                 StaticHttp.succeed
                     { view =
                         \model content ->
                             { title = content.data.title
                             , body = contentView model content
                             }
-                    , head = []
+                    , head = seo frontmatter path
                     }
         , update =
             \msg model ->
@@ -42,7 +40,7 @@ main =
         , subscriptions = \metadata path model -> Sub.none
         , documents =
             [ { extension = "md"
-              , metadata = decoder (succeed Metadata |> required "collection" string)
+              , metadata = decoder metadataDecoder
               , body =
                     \rawContent ->
                         case contentDecoder rawContent of
@@ -55,15 +53,15 @@ main =
             ]
         , manifest =
             { backgroundColor = Nothing
-            , categories = [ Pages.Manifest.Category.lifestyle ]
+            , categories = [ Pages.Manifest.Category.food ]
             , displayMode = Manifest.Standalone
             , orientation = Manifest.Portrait
-            , description = ""
+            , description = settings.description
             , iarcRatingId = Nothing
-            , name = ""
+            , name = settings.title
             , themeColor = Nothing
             , startUrl = pages.index
-            , shortName = Just ""
+            , shortName = Just settings.title
             , sourceIcon = images.iconPng
             , icons = []
             }
