@@ -23,7 +23,7 @@ footer data =
             (data.links
                 |> List.map
                     (\item ->
-                        Html.li [] [ link.tertiary item.url [] [ Html.text item.text ] ]
+                        Html.li [] [ link.secondary item.url [] [ Html.text item.text ] ]
                     )
             )
         ]

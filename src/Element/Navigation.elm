@@ -57,7 +57,7 @@ navigation data expanded onClick =
                                 ]
                             ]
                         ]
-                        [ link.secondary
+                        [ link.tertiary
                             data.brand.url
                             []
                             [ Html.text data.brand.text ]
@@ -82,7 +82,7 @@ navigation data expanded onClick =
                             (\item ->
                                 listItem
                                     []
-                                    [ link.secondary
+                                    [ link.tertiary
                                         item.url
                                         []
                                         [ Html.text item.text ]
@@ -104,7 +104,7 @@ navigation data expanded onClick =
                         |> List.map
                             (\item ->
                                 listItem []
-                                    [ link.secondary
+                                    [ link.tertiary
                                         item.url
                                         []
                                         [ case String.toLower item.text of
