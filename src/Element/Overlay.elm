@@ -7,7 +7,7 @@ import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Html.Styled.Events as Html
 import Is exposing (is)
-import Theme exposing (useColor, useColorTheme)
+import Style.Theme exposing (useColor, useColorTheme)
 
 
 overlay : Bool -> Msg -> Element

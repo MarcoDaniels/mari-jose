@@ -1,7 +1,7 @@
 module Style.Container exposing (container)
 
 import Css
-import Theme exposing (useDevice, useWidth)
+import Style.Theme exposing (useDevice, useWidth)
 
 
 container : Css.Style

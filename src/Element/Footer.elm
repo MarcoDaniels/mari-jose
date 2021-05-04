@@ -7,7 +7,7 @@ import Element.Link exposing (link)
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Style.Container exposing (container)
-import Theme exposing (useColorTheme)
+import Style.Theme exposing (useColorTheme)
 
 
 footer : Footer -> Element

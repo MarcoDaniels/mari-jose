@@ -9,7 +9,7 @@ import Html exposing (Html)
 import Html.Styled
 import Html.Styled.Attributes
 import Style.Container exposing (container)
-import Theme exposing (useTheme)
+import Style.Theme exposing (useTheme)
 
 
 contentView : Model -> Content -> Html Msg

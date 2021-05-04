@@ -6,7 +6,7 @@ import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Is exposing (is)
 import Style.Underline exposing (underlineCenter)
-import Theme exposing (ThemeUse, useColorTheme, useDevice)
+import Style.Theme exposing (ThemeUse, useColorTheme, useDevice)
 
 
 link : ThemeUse (String -> StyledElement)
