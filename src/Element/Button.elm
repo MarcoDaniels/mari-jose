@@ -14,6 +14,7 @@ button =
             , Css.border3 (Css.px 1) Css.solid useColor.primary
             , Css.borderRadius <| Css.px 5
             , Css.padding3 (Css.px 2) (Css.px 6) (Css.px 1)
+            , Css.cursor Css.pointer
             ]
     , secondary = Html.styled Html.button []
     , tertiary = Html.styled Html.button []

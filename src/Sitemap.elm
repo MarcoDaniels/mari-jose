@@ -1,4 +1,4 @@
-module Sitemap exposing (..)
+module Sitemap exposing (sitemap)
 
 import Content.Decoder exposing (contentDecoder)
 import Dict
