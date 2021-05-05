@@ -12,6 +12,10 @@ type alias Model =
     { menuExpand : Bool }
 
 
+type alias Consent =
+    { accepted : Bool }
+
+
 type alias Element =
     Html Msg
 

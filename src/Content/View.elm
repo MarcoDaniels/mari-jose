@@ -2,6 +2,7 @@ module Content.View exposing (contentView)
 
 import Content.Type exposing (Content)
 import Context exposing (Model, Msg(..))
+import Element.Consent exposing (consent)
 import Element.Footer exposing (footer)
 import Element.Navigation exposing (navigation)
 import Element.Overlay exposing (overlay)
@@ -25,4 +26,5 @@ contentView model content =
             ]
         , footer content.settings.footer
         , overlay model.menuExpand (MenuExpand <| not model.menuExpand)
+        , consent { accepted = False } content.settings.cookie
         ]
