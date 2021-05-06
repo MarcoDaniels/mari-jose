@@ -6,6 +6,7 @@ import Css
 import Element.Button exposing (button)
 import Element.Empty exposing (emptyElement)
 import Element.Icon exposing (icon)
+import Element.Markdown exposing (markdown)
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Is exposing (is)
@@ -42,7 +43,7 @@ consent { accepted } { title, content } =
                         ]
                     ]
                     [ Html.text title, icon.cookie { size = "20", color = useColor.tertiary } ]
-                , Html.div [] [ Html.text content ] -- TODO: content is markdown
+                , markdown content
                 , Html.div
                     [ Html.css
                         [ Css.marginTop <| Css.px 10
