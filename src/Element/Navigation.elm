@@ -1,6 +1,6 @@
 module Element.Navigation exposing (navigation)
 
-import Content.Type exposing (Navigation)
+import Data.Type exposing (Navigation)
 import Context exposing (Element, Msg(..), StyledElement)
 import Css
 import Element.Button exposing (button)

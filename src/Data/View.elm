@@ -1,7 +1,7 @@
-module Content.View exposing (contentView)
+module Data.View exposing (dataView)
 
-import Content.Type exposing (Content)
 import Context exposing (Model, Msg(..))
+import Data.Type exposing (Data)
 import Element.Consent exposing (consent)
 import Element.Footer exposing (footer)
 import Element.Navigation exposing (navigation)
@@ -13,18 +13,16 @@ import Style.Container exposing (container)
 import Style.Theme exposing (useTheme)
 
 
-contentView : Model -> Content -> Html Msg
-contentView model content =
+dataView : Model -> Data -> Html Msg
+dataView model data =
     useTheme
-        [ navigation content.settings.navigation model.menuExpand (MenuOp <| not model.menuExpand)
+        [ navigation data.settings.navigation model.menuExpand (MenuOp <| not model.menuExpand)
         , Html.Styled.article
             [ Html.Styled.Attributes.id "content"
             , Html.Styled.Attributes.css [ container ]
             ]
-            [ Html.Styled.text content.collection
-            , Html.Styled.h1 [] [ Html.Styled.text content.collection ]
-            ]
-        , footer content.settings.footer
+            [ Html.Styled.text "none" ]
+        , footer data.settings.footer
         , overlay model.menuExpand (MenuOp <| not model.menuExpand)
-        , consent model.consent content.settings.cookie
+        , consent model.consent data.settings.cookie
         ]

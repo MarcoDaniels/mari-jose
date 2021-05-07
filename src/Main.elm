@@ -1,9 +1,9 @@
 port module Main exposing (..)
 
 import Color
-import Content.Decoder exposing (contentDecoder)
-import Content.Type exposing (Content)
-import Content.View exposing (contentView)
+import Data.Decoder exposing (dataDecoder)
+import Data.Type exposing (Data)
+import Data.View exposing (dataView)
 import Context exposing (Consent, ConsentMsg(..), Model, Msg(..))
 import Metadata exposing (Metadata, metadataDecoder)
 import OptimizedDecoder exposing (decoder, errorToString)
@@ -23,14 +23,14 @@ port consentRead : (Consent -> msg) -> Sub msg
 port consentWrite : Consent -> Cmd msg
 
 
-main : Pages.Platform.Program Model Msg Metadata Content Pages.PathKey
+main : Pages.Platform.Program Model Msg Metadata Data Pages.PathKey
 main =
     Pages.Platform.init
         { init = \_ -> ( { consent = { accepted = True }, menuExpand = False }, Cmd.none )
         , view =
             \_ { frontmatter, path } ->
                 StaticHttp.succeed
-                    { view = \model content -> { title = content.data.title, body = contentView model content }
+                    { view = \model data -> { title = data.title, body = dataView model data }
                     , head = seo frontmatter path
                     }
         , update =
@@ -55,7 +55,7 @@ main =
               , metadata = decoder metadataDecoder
               , body =
                     \rawContent ->
-                        case contentDecoder rawContent of
+                        case dataDecoder rawContent of
                             Ok content ->
                                 Ok content
 
