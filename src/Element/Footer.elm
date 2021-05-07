@@ -1,6 +1,6 @@
 module Element.Footer exposing (footer)
 
-import Content.Type exposing (Footer)
+import Data.Type exposing (Footer)
 import Context exposing (Element)
 import Css
 import Element.Link exposing (link)

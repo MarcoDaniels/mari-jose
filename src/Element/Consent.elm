@@ -1,6 +1,6 @@
 module Element.Consent exposing (consent)
 
-import Content.Type exposing (CookieBanner)
+import Data.Type exposing (CookieBanner)
 import Context exposing (Consent, ConsentMsg(..), Element, Msg(..))
 import Css
 import Element.Button exposing (button)
