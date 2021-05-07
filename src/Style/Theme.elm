@@ -1,12 +1,11 @@
 module Style.Theme exposing (DeviceUse, ThemeUse, useColor, useColorTheme, useDevice, useTheme, useWidth)
 
-import Context exposing (Msg)
+import Context exposing (Element, HtmlElement, Msg)
 import Css
 import Css.Global
 import Css.Media
-import Html exposing (Html)
-import Html.Styled
-import Html.Styled.Attributes exposing (css)
+import Html.Styled as Html
+import Html.Styled.Attributes as Html
 
 
 type alias DeviceUse t =
@@ -68,7 +67,7 @@ useColorTheme =
     }
 
 
-globalStyle : List (Html.Styled.Html Msg)
+globalStyle : List Element
 globalStyle =
     [ Css.Global.global
         [ Css.Global.body
@@ -84,14 +83,14 @@ globalStyle =
     ]
 
 
-useTheme : List (Html.Styled.Html Msg) -> Html Msg
+useTheme : List Element -> HtmlElement
 useTheme content =
-    Html.Styled.div
-        [ css
+    Html.div
+        [ Html.css
             [ Css.height <| Css.vh 100
             , Css.displayFlex
             , Css.flexDirection Css.column
             ]
         ]
         ([ globalStyle, content ] |> List.concat)
-        |> Html.Styled.toUnstyled
+        |> Html.toUnstyled

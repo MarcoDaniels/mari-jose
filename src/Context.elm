@@ -1,5 +1,6 @@
 module Context exposing (..)
 
+import Html as BaseHtml
 import Html.Styled exposing (Attribute, Html)
 
 
@@ -19,7 +20,11 @@ type alias Consent =
 
 
 type alias Model =
-    { consent: Consent, menuExpand : Bool }
+    { consent : Consent, menuExpand : Bool }
+
+
+type alias HtmlElement =
+    BaseHtml.Html Msg
 
 
 type alias Element =
