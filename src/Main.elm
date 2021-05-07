@@ -1,10 +1,10 @@
-module Main exposing (..)
+port module Main exposing (..)
 
 import Color
 import Content.Decoder exposing (contentDecoder)
 import Content.Type exposing (Content)
 import Content.View exposing (contentView)
-import Context exposing (Model, Msg(..))
+import Context exposing (Consent, ConsentMsg(..), Model, Msg(..))
 import Metadata exposing (Metadata, metadataDecoder)
 import OptimizedDecoder exposing (decoder, errorToString)
 import Pages exposing (images, internals, pages)
@@ -17,29 +17,39 @@ import Settings exposing (settings)
 import Sitemap exposing (sitemap)
 
 
+port consentRead : (Consent -> msg) -> Sub msg
+
+
+port consentWrite : Consent -> Cmd msg
+
+
 main : Pages.Platform.Program Model Msg Metadata Content Pages.PathKey
 main =
     Pages.Platform.init
-        { init = \maybeMetadata -> ( { menuExpand = False }, Cmd.none )
+        { init = \_ -> ( { consent = { accepted = True }, menuExpand = False }, Cmd.none )
         , view =
-            \listPath { frontmatter, path } ->
+            \_ { frontmatter, path } ->
                 StaticHttp.succeed
-                    { view =
-                        \model content ->
-                            { title = content.data.title
-                            , body = contentView model content
-                            }
+                    { view = \model content -> { title = content.data.title, body = contentView model content }
                     , head = seo frontmatter path
                     }
         , update =
             \msg model ->
                 case msg of
-                    MenuExpand expand ->
+                    MenuOp expand ->
                         ( { model | menuExpand = expand }, Cmd.none )
+
+                    ConsentOp consent ->
+                        case consent of
+                            ConsentRead state ->
+                                ( { model | consent = state }, Cmd.none )
+
+                            ConsentWrite ->
+                                ( { model | consent = { accepted = True } }, consentWrite { accepted = True } )
 
                     _ ->
                         ( model, Cmd.none )
-        , subscriptions = \metadata path model -> Sub.none
+        , subscriptions = \_ _ _ -> Sub.batch [ Sub.map ConsentOp (consentRead ConsentRead) ]
         , documents =
             [ { extension = "md"
               , metadata = decoder metadataDecoder
