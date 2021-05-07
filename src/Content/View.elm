@@ -16,7 +16,7 @@ import Style.Theme exposing (useTheme)
 contentView : Model -> Content -> Html Msg
 contentView model content =
     useTheme
-        [ navigation content.settings.navigation model.menuExpand (MenuExpand <| not model.menuExpand)
+        [ navigation content.settings.navigation model.menuExpand (MenuOp <| not model.menuExpand)
         , Html.Styled.article
             [ Html.Styled.Attributes.id "content"
             , Html.Styled.Attributes.css [ container ]
@@ -25,6 +25,6 @@ contentView model content =
             , Html.Styled.h1 [] [ Html.Styled.text content.collection ]
             ]
         , footer content.settings.footer
-        , overlay model.menuExpand (MenuExpand <| not model.menuExpand)
-        , consent { accepted = False } content.settings.cookie
+        , overlay model.menuExpand (MenuOp <| not model.menuExpand)
+        , consent model.consent content.settings.cookie
         ]

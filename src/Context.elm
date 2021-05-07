@@ -3,17 +3,23 @@ module Context exposing (..)
 import Html.Styled exposing (Attribute, Html)
 
 
+type ConsentMsg
+    = ConsentRead Consent
+    | ConsentWrite
+
+
 type Msg
     = NoOp
-    | MenuExpand Bool
-
-
-type alias Model =
-    { menuExpand : Bool }
+    | MenuOp Bool
+    | ConsentOp ConsentMsg
 
 
 type alias Consent =
     { accepted : Bool }
+
+
+type alias Model =
+    { consent: Consent, menuExpand : Bool }
 
 
 type alias Element =
