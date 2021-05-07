@@ -22,8 +22,8 @@ type Content
     = ContentMarkdown String
     | ContentAsset AssetContent
     | ContentHero HeroContent
-    | ContentRow (List RowContent)
     | ContentIframe IframeContent
+    | ContentRow (List RowContent)
     | ContentUnknown
 
 
@@ -40,18 +40,18 @@ type alias HeroContent =
     { asset : AssetContent, text : Maybe String }
 
 
-type RowContentValue
-    = RowContentMarkdown String
-    | RowContentAsset AssetContent
-    | RowContentUnknown
+type alias IframeContent =
+    { source : String, title : String, ratio : String }
 
 
 type alias RowContent =
     { field : Field, value : RowContentValue }
 
 
-type alias IframeContent =
-    { source : String, title : String, ratio : String }
+type RowContentValue
+    = RowContentMarkdown String
+    | RowContentAsset AssetContent
+    | RowContentUnknown
 
 
 type alias Settings =

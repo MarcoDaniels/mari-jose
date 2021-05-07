@@ -1,8 +1,8 @@
 module Element.Consent exposing (consent)
 
-import Data.Type exposing (CookieBanner)
 import Context exposing (Consent, ConsentMsg(..), Element, Msg(..))
 import Css
+import Data.Type exposing (CookieBanner)
 import Element.Button exposing (button)
 import Element.Empty exposing (emptyElement)
 import Element.Icon exposing (icon)
@@ -44,7 +44,7 @@ consent { accepted } { title, content } =
                         ]
                     ]
                     [ Html.text title, icon.cookie { size = "20", color = useColor.tertiary } ]
-                , markdown content
+                , Html.div [] <| markdown content
                 , Html.div
                     [ Html.css
                         [ Css.marginTop <| Css.px 10

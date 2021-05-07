@@ -6,17 +6,17 @@ import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Markdown.Block as Block
 import Markdown.Html
-import Markdown.Parser exposing (parse)
+import Markdown.Parser
 import Markdown.Renderer exposing (Renderer, render)
 
 
-markdown : String -> Element
+markdown : String -> List Element
 markdown input =
-    parse input
+    input
+        |> Markdown.Parser.parse
         |> Result.withDefault []
         |> render markdownRenderer
         |> Result.withDefault []
-        |> Html.div []
 
 
 textToId : String -> String
