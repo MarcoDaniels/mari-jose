@@ -1,11 +1,6 @@
-module Image exposing (imageAPI)
+module Image exposing (useImageAPI)
 
 
-imageAPI : String -> Maybe Int -> String
-imageAPI src maybeSrcSet =
-    case maybeSrcSet of
-        Just srcSet ->
-            "/image/api" ++ src ++ "?w=" ++ String.fromInt srcSet ++ "&o=1&q=60 " ++ String.fromInt srcSet ++ "w"
-
-        Nothing ->
-            "/image/api" ++ src ++ "?w=900&o=1&q=60"
+useImageAPI : String -> Int -> String
+useImageAPI src width =
+    "/image/api" ++ src ++ "?w=" ++ String.fromInt width ++ "&o=1&q=60"

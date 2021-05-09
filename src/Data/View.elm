@@ -5,6 +5,7 @@ import Data.Type exposing (Content(..), Data)
 import Element.Consent exposing (consent)
 import Element.Empty exposing (emptyElement)
 import Element.Footer exposing (footer)
+import Element.Hero exposing (hero)
 import Element.Markdown exposing (markdown)
 import Element.Navigation exposing (navigation)
 import Element.Overlay exposing (overlay)
@@ -33,7 +34,7 @@ dataView model data =
                                         Html.img [ Html.src a.path ] []
 
                                     ContentHero h ->
-                                        Html.div [] [ Html.text "hero" ]
+                                        hero h
 
                                     ContentIframe f ->
                                         Html.div [ Html.css [ container ] ] [ Html.text "frame" ]
