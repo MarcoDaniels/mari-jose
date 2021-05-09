@@ -2,7 +2,7 @@ module SEO exposing (seo)
 
 import Head
 import Head.Seo as Seo
-import Image exposing (imageAPI)
+import Image exposing (useImageAPI)
 import Metadata exposing (Metadata)
 import Pages exposing (images)
 import Pages.ImagePath as ImagePath
@@ -19,7 +19,7 @@ seo { title, description, image } path =
             { url =
                 case image of
                     Just img ->
-                        ImagePath.external (settings.baseURL ++ imageAPI img Nothing)
+                        ImagePath.external (settings.baseURL ++ useImageAPI img 900)
 
                     Nothing ->
                         images.iconPng
