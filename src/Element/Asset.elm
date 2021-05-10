@@ -8,7 +8,7 @@ import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Image exposing (useImageAPI)
 import Is exposing (is)
-import Style.Image exposing (imageBase)
+import Style.Image exposing (imageStyle)
 import Style.Theme exposing (DeviceUse, useWidth)
 
 
@@ -87,10 +87,10 @@ picture sizes content maybeStyles =
             , Html.attribute "loading" "lazy"
             , case maybeStyles of
                 Just styles ->
-                    Html.css ([ [ imageBase ], styles ] |> List.concat)
+                    Html.css ([ [ imageStyle ], styles ] |> List.concat)
 
                 Nothing ->
-                    Html.css [ imageBase ]
+                    Html.css [ imageStyle ]
             ]
             []
         ]

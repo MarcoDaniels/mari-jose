@@ -8,7 +8,7 @@ import Element.Empty exposing (emptyElement)
 import Element.Markdown exposing (markdown)
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
-import Style.Container exposing (container)
+import Style.Container exposing (containerStyle)
 import Style.Theme exposing (useColorTheme, useDevice)
 
 
@@ -33,7 +33,7 @@ hero content =
             Just md ->
                 Html.div
                     [ Html.css
-                        [ container
+                        [ containerStyle
                         , Css.position Css.absolute
                         , Css.top <| Css.px 0
                         , Css.bottom <| Css.px 0

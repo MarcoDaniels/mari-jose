@@ -11,8 +11,8 @@ import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Html
 import Html.Styled.Events as Html
 import Is exposing (is)
-import Style.Container exposing (container)
-import Style.Slide exposing (slideDown)
+import Style.Container exposing (containerStyle)
+import Style.Slide exposing (slideStyle)
 import Style.Theme exposing (useColor, useColorTheme, useDevice)
 
 
@@ -40,7 +40,7 @@ navigation data expanded onClick =
         []
         [ Html.div
             [ Html.css
-                [ container
+                [ containerStyle
                 , Css.displayFlex
                 , Css.justifyContent Css.spaceBetween
                 , useDevice.s [ Css.flexDirection Css.column ]
@@ -74,7 +74,7 @@ navigation data expanded onClick =
                 , Html.ul
                     [ Html.css
                         [ Css.displayFlex
-                        , useDevice.s [ slideDown expanded, Css.flexDirection Css.column ]
+                        , useDevice.s [ slideStyle expanded, Css.flexDirection Css.column ]
                         ]
                     ]
                     (data.menu
@@ -93,7 +93,7 @@ navigation data expanded onClick =
             , Html.nav
                 [ Html.css
                     [ useDevice.s
-                        [ slideDown expanded
+                        [ slideStyle expanded
                         , Css.displayFlex
                         , Css.justifyContent Css.center
                         ]

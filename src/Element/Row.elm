@@ -9,7 +9,8 @@ import Element.Empty exposing (emptyElement)
 import Element.Markdown exposing (markdown)
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
-import Style.Container exposing (container)
+import Style.Center exposing (centerStyle)
+import Style.Container exposing (containerStyle)
 import Style.Theme exposing (useDevice)
 
 
@@ -17,17 +18,13 @@ row : List RowContent -> Element
 row content =
     Html.div
         [ Html.css
-            [ container
-            , Css.displayFlex
-            , Css.justifyContent Css.center
-            , Css.alignItems Css.center
+            [ containerStyle
+            , centerStyle
             , useDevice.m [ Css.flexDirection Css.column ]
             , Css.Global.children
                 [ Css.Global.everything
                     [ Css.width <| Css.pct 50
-                    , Css.displayFlex
-                    , Css.justifyContent Css.center
-                    , Css.alignItems Css.center
+                    , centerStyle
                     ]
                 ]
             ]

@@ -13,7 +13,7 @@ import Element.Overlay exposing (overlay)
 import Element.Row exposing (row)
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
-import Style.Container exposing (container)
+import Style.Container exposing (containerStyle)
 import Style.Theme exposing (useTheme)
 
 
@@ -30,7 +30,7 @@ dataView model data =
                             (\content ->
                                 case content.value of
                                     ContentMarkdown markdownContent ->
-                                        Html.div [ Html.css [ container ] ] <| markdown markdownContent
+                                        Html.div [ Html.css [ containerStyle ] ] <| markdown markdownContent
 
                                     ContentAsset assetContent ->
                                         asset.default assetContent Nothing
@@ -42,7 +42,7 @@ dataView model data =
                                         row rowContent
 
                                     ContentIframe iframeContent ->
-                                        Html.div [ Html.css [ container ] ] [ Html.text "frame" ]
+                                        Html.div [ Html.css [ containerStyle ] ] [ Html.text "frame" ]
 
                                     _ ->
                                         emptyElement

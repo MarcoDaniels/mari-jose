@@ -1,10 +1,10 @@
-module Style.Image exposing (imageBase)
+module Style.Image exposing (imageStyle)
 
 import Css
 
 
-imageBase : Css.Style
-imageBase =
+imageStyle : Css.Style
+imageStyle =
     Css.batch
         [ Css.display Css.block
         , Css.maxWidth <| Css.pct 100

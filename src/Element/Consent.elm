@@ -11,7 +11,7 @@ import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Html.Styled.Events as Html
 import Is exposing (is)
-import Style.Container exposing (container)
+import Style.Container exposing (containerStyle)
 import Style.Theme exposing (useColor, useColorTheme)
 
 
@@ -35,7 +35,7 @@ consent { accepted } { title, content } =
                 , Css.boxShadow5 (Css.px 0) (Css.px -10) (Css.px 40) (Css.px -10) useColor.tertiary
                 ]
             ]
-            [ Html.div [ Html.css [ container ] ]
+            [ Html.div [ Html.css [ containerStyle ] ]
                 [ Html.h2
                     [ Html.css
                         [ Css.displayFlex
