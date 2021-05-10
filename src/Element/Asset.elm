@@ -7,17 +7,46 @@ import Data.Type exposing (AssetContent)
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Image exposing (useImageAPI)
+import Is exposing (is)
+import Style.Image exposing (imageBase)
 import Style.Theme exposing (DeviceUse, useWidth)
 
 
 type alias AssetElement t =
-    { default : t, hero : t }
+    { default : t, hero : t, row : Int -> t }
 
 
 asset : AssetElement (AssetContent -> Maybe (List Css.Style) -> Element)
 asset =
-    { default = picture { s = 500, m = 700, l = 900, xl = 1200 }
-    , hero = picture { s = 500, m = 700, l = 900, xl = 1200 }
+    { default =
+        \content maybeStyle ->
+            let
+                landscape =
+                    content.width > content.height
+            in
+            picture
+                (is landscape
+                    { s = 500, m = 700, l = 900, xl = 1200 }
+                    { s = 500, m = 700, l = 600, xl = 900 }
+                )
+                content
+                (is landscape
+                    maybeStyle
+                    (Just
+                        ([ Maybe.withDefault [] maybeStyle
+                         , [ Css.maxWidth <| Css.pct 50 ]
+                         ]
+                            |> List.concat
+                        )
+                    )
+                )
+    , hero =
+        picture
+            { s = 500, m = 700, l = 900, xl = 1400 }
+    , row =
+        \count ->
+            picture
+                { s = 500, m = 700, l = 1000 // count, xl = 1200 // count }
     }
 
 
@@ -58,10 +87,10 @@ picture sizes content maybeStyles =
             , Html.attribute "loading" "lazy"
             , case maybeStyles of
                 Just styles ->
-                    Html.css styles
+                    Html.css ([ [ imageBase ], styles ] |> List.concat)
 
                 Nothing ->
-                    Html.class ""
+                    Html.css [ imageBase ]
             ]
             []
         ]

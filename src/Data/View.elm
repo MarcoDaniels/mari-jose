@@ -2,6 +2,7 @@ module Data.View exposing (dataView)
 
 import Context exposing (HtmlElement, Model, Msg(..))
 import Data.Type exposing (Content(..), Data)
+import Element.Asset exposing (asset)
 import Element.Consent exposing (consent)
 import Element.Empty exposing (emptyElement)
 import Element.Footer exposing (footer)
@@ -9,6 +10,7 @@ import Element.Hero exposing (hero)
 import Element.Markdown exposing (markdown)
 import Element.Navigation exposing (navigation)
 import Element.Overlay exposing (overlay)
+import Element.Row exposing (row)
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Style.Container exposing (container)
@@ -27,20 +29,20 @@ dataView model data =
                         |> List.map
                             (\content ->
                                 case content.value of
-                                    ContentMarkdown md ->
-                                        Html.div [ Html.css [ container ] ] <| markdown md
+                                    ContentMarkdown markdownContent ->
+                                        Html.div [ Html.css [ container ] ] <| markdown markdownContent
 
-                                    ContentAsset a ->
-                                        Html.img [ Html.src a.path ] []
+                                    ContentAsset assetContent ->
+                                        asset.default assetContent Nothing
 
-                                    ContentHero h ->
-                                        hero h
+                                    ContentHero heroContent ->
+                                        hero heroContent
 
-                                    ContentIframe f ->
+                                    ContentRow rowContent ->
+                                        row rowContent
+
+                                    ContentIframe iframeContent ->
                                         Html.div [ Html.css [ container ] ] [ Html.text "frame" ]
-
-                                    ContentRow r ->
-                                        Html.div [ Html.css [ container ] ] [ Html.text "row" ]
 
                                     _ ->
                                         emptyElement
