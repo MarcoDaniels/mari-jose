@@ -1,11 +1,11 @@
-module Style.Underline exposing (underlineCenter)
+module Style.Underline exposing (underlineStyle)
 
 import Css
 import Css.Transitions as Transitions
 
 
-underlineCenter : Css.Style -> Css.Style
-underlineCenter themeColor =
+underlineStyle : Css.Style -> Css.Style
+underlineStyle themeColor =
     Css.batch
         [ Css.textDecoration Css.none
         , Css.position Css.relative

@@ -1,11 +1,11 @@
-module Style.Container exposing (container)
+module Style.Container exposing (containerStyle)
 
 import Css
 import Style.Theme exposing (useDevice, useWidth)
 
 
-container : Css.Style
-container =
+containerStyle : Css.Style
+containerStyle =
     Css.batch
         [ Css.maxWidth useWidth.xl
         , Css.margin2 (Css.px 0) Css.auto

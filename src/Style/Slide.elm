@@ -1,12 +1,12 @@
-module Style.Slide exposing (slideDown)
+module Style.Slide exposing (slideStyle)
 
 import Css
 import Css.Transitions as Transitions
 import Is exposing (is)
 
 
-slideDown : Bool -> Css.Style
-slideDown open =
+slideStyle : Bool -> Css.Style
+slideStyle open =
     Css.batch
         [ Css.margin <| Css.px 0
         , Css.overflow Css.hidden

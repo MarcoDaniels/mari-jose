@@ -6,7 +6,7 @@ import Css
 import Element.Link exposing (link)
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
-import Style.Container exposing (container)
+import Style.Container exposing (containerStyle)
 import Style.Theme exposing (useColorTheme)
 
 
@@ -19,7 +19,7 @@ footer data =
             , Css.marginTop Css.auto
             ]
         ]
-        [ Html.ul [ Html.css [ container, Css.displayFlex, Css.justifyContent Css.center ] ]
+        [ Html.ul [ Html.css [ containerStyle, Css.displayFlex, Css.justifyContent Css.center ] ]
             (data.links
                 |> List.map
                     (\item ->
