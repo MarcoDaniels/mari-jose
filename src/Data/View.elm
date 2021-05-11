@@ -7,6 +7,7 @@ import Element.Consent exposing (consent)
 import Element.Empty exposing (emptyElement)
 import Element.Footer exposing (footer)
 import Element.Hero exposing (hero)
+import Element.IFrame exposing (iframe)
 import Element.Markdown exposing (markdown)
 import Element.Navigation exposing (navigation)
 import Element.Overlay exposing (overlay)
@@ -42,7 +43,7 @@ dataView model data =
                                         row rowContent
 
                                     ContentIframe iframeContent ->
-                                        Html.div [ Html.css [ containerStyle ] ] [ Html.text "frame" ]
+                                        iframe iframeContent
 
                                     _ ->
                                         emptyElement
