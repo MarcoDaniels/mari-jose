@@ -24,6 +24,7 @@ row content =
             , Css.Global.children
                 [ Css.Global.everything
                     [ Css.width <| Css.pct 50
+                    , useDevice.m [ Css.width <| Css.pct 100 ]
                     , centerStyle
                     ]
                 ]
@@ -34,7 +35,16 @@ row content =
                 (\item ->
                     case item.value of
                         RowContentMarkdown markdownContent ->
-                            Html.div [] <| markdown markdownContent
+                            Html.div
+                                [ Html.css
+                                    [ Css.padding2 (Css.px 0) (Css.px 15)
+                                    , Css.firstChild [ Css.padding <| Css.px 0, Css.paddingRight <| Css.px 15 ]
+                                    , Css.lastChild [ Css.padding <| Css.px 0, Css.paddingLeft <| Css.px 15 ]
+                                    , useDevice.m [ Css.padding <| Css.px 0 ]
+                                    ]
+                                ]
+                            <|
+                                markdown markdownContent
 
                         RowContentAsset assetContent ->
                             asset.row (List.length content) assetContent Nothing
