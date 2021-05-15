@@ -13,6 +13,7 @@ type Msg
     = NoOp
     | MenuOp Bool
     | ConsentOp ConsentMsg
+    | OnPreviewUpdate String
 
 
 type alias Consent =

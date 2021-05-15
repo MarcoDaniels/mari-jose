@@ -1,12 +1,17 @@
 module Data.Type exposing (..)
 
 
+type alias PageData =
+    { data : Data
+    , settings : Settings
+    }
+
+
 type alias Data =
     { title : String
     , description : String
     , url : String
     , content : Maybe (List DataContent)
-    , settings : Settings
     }
 
 

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="../">
+    <meta charset="utf-8"/>
+    <title>mari'josé preview</title>
+    <meta name="robots" content="noindex,nofollow" />
+</head>
+<body>
+<div id="preview"></div>
+<script src="./preview.js"></script>
+<script type="text/javascript">
+    const app = Elm.Preview.init({
+        node: document.getElementById('preview')
+    })
+
+    window.addEventListener('message', function (event) {
+        app.ports.updatePayload.send(JSON.stringify(event.data.entry))
+    })
+</script>
+</body>
+</html>

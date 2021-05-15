@@ -1,6 +1,6 @@
 module Sitemap exposing (sitemap)
 
-import Data.Decoder exposing (dataDecoder)
+import Data.Decoder exposing (pageDataDecoder)
 import Dict
 import Metadata exposing (Metadata)
 import Pages
@@ -42,9 +42,9 @@ sitemap data =
           , data
                 |> List.map
                     (\item ->
-                        case dataDecoder item.body of
+                        case pageDataDecoder item.body of
                             Ok content ->
-                                sitemapItem (settings.baseURL ++ content.url) "0.7"
+                                sitemapItem (settings.baseURL ++ content.data.url) "0.7"
 
                             Err _ ->
                                 Xml.Encode.null

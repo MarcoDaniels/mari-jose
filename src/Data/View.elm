@@ -1,7 +1,7 @@
-module Data.View exposing (dataView)
+module Data.View exposing (dataView, dataContent)
 
-import Context exposing (HtmlElement, Model, Msg(..))
-import Data.Type exposing (Content(..), Data)
+import Context exposing (Element, HtmlElement, Model, Msg(..))
+import Data.Type exposing (Content(..), Data, PageData)
 import Element.Asset exposing (asset)
 import Element.Consent exposing (consent)
 import Element.Empty exposing (emptyElement)
@@ -18,41 +18,46 @@ import Style.Container exposing (containerStyle)
 import Style.Theme exposing (useTheme)
 
 
-dataView : Model -> Data -> HtmlElement
-dataView model data =
+dataContent : Data -> Element
+dataContent data =
+    Html.article
+        [ Html.id "content" ]
+        (case data.content of
+            Just cont ->
+                cont
+                    |> List.map
+                        (\content ->
+                            case content.value of
+                                ContentMarkdown markdownContent ->
+                                    Html.div [ Html.css [ containerStyle ] ] <| markdown markdownContent
+
+                                ContentAsset assetContent ->
+                                    asset.default assetContent Nothing
+
+                                ContentHero heroContent ->
+                                    hero heroContent
+
+                                ContentRow rowContent ->
+                                    row rowContent
+
+                                ContentIframe iframeContent ->
+                                    iframe iframeContent
+
+                                _ ->
+                                    emptyElement
+                        )
+
+            Nothing ->
+                [ emptyElement ]
+        )
+
+
+dataView : Model -> PageData -> HtmlElement
+dataView model pageData =
     useTheme
-        [ navigation data.settings.navigation model.menuExpand (MenuOp <| not model.menuExpand)
-        , Html.article
-            [ Html.id "content" ]
-            (case data.content of
-                Just cont ->
-                    cont
-                        |> List.map
-                            (\content ->
-                                case content.value of
-                                    ContentMarkdown markdownContent ->
-                                        Html.div [ Html.css [ containerStyle ] ] <| markdown markdownContent
-
-                                    ContentAsset assetContent ->
-                                        asset.default assetContent Nothing
-
-                                    ContentHero heroContent ->
-                                        hero heroContent
-
-                                    ContentRow rowContent ->
-                                        row rowContent
-
-                                    ContentIframe iframeContent ->
-                                        iframe iframeContent
-
-                                    _ ->
-                                        emptyElement
-                            )
-
-                Nothing ->
-                    [ emptyElement ]
-            )
-        , footer data.settings.footer
+        [ navigation pageData.settings.navigation model.menuExpand (MenuOp <| not model.menuExpand)
+        , dataContent pageData.data
+        , footer pageData.settings.footer
         , overlay model.menuExpand (MenuOp <| not model.menuExpand)
-        , consent model.consent data.settings.cookie
+        , consent model.consent pageData.settings.cookie
         ]
