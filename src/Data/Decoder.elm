@@ -1,4 +1,4 @@
-module Data.Decoder exposing (dataDecoder)
+module Data.Decoder exposing (dataDecoder, pageDataDecoder)
 
 import Data.Type
 import OptimizedDecoder exposing (Decoder, Error, andThen, decodeString, field, int, list, maybe, string, succeed)
@@ -119,14 +119,20 @@ dataContentDecoder =
             )
 
 
-dataDecoder : String -> Result Error Data.Type.Data
-dataDecoder input =
+dataDecoder : Decoder Data.Type.Data
+dataDecoder =
+    succeed Data.Type.Data
+        |> required "title" string
+        |> required "description" string
+        |> required "url" string
+        |> required "content" (maybe (list dataContentDecoder))
+
+
+pageDataDecoder : String -> Result Error Data.Type.PageData
+pageDataDecoder input =
     decodeString
-        (succeed Data.Type.Data
-            |> requiredAt [ "data", "title" ] string
-            |> requiredAt [ "data", "description" ] string
-            |> requiredAt [ "data", "url" ] string
-            |> requiredAt [ "data", "content" ] (maybe (list dataContentDecoder))
+        (succeed Data.Type.PageData
+            |> required "data" dataDecoder
             |> required "settings" settingsDecoder
         )
         input
