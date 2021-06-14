@@ -2,7 +2,6 @@ module Element.Row exposing (..)
 
 import Context exposing (Element)
 import Css
-import Css.Global
 import Data.Type exposing (RowContent, RowContentValue(..))
 import Element.Asset exposing (asset)
 import Element.Empty exposing (emptyElement)
@@ -14,6 +13,16 @@ import Style.Container exposing (containerStyle)
 import Style.Theme exposing (useDevice)
 
 
+rowItem : Css.Style
+rowItem =
+    Css.batch
+        [ Css.width <| Css.pct 50
+        , useDevice.m [ Css.width <| Css.pct 100 ]
+        , centerStyle
+        , Css.flexDirection Css.column
+        ]
+
+
 row : List RowContent -> Element
 row content =
     Html.div
@@ -21,13 +30,6 @@ row content =
             [ containerStyle
             , centerStyle
             , useDevice.m [ Css.flexDirection Css.column ]
-            , Css.Global.children
-                [ Css.Global.everything
-                    [ Css.width <| Css.pct 50
-                    , useDevice.m [ Css.width <| Css.pct 100 ]
-                    , centerStyle
-                    ]
-                ]
             ]
         ]
         (content
@@ -37,7 +39,8 @@ row content =
                         RowContentMarkdown markdownContent ->
                             Html.div
                                 [ Html.css
-                                    [ Css.padding2 (Css.px 0) (Css.px 15)
+                                    [ rowItem
+                                    , Css.padding2 (Css.px 0) (Css.px 15)
                                     , Css.firstChild [ Css.padding <| Css.px 0, Css.paddingRight <| Css.px 15 ]
                                     , Css.lastChild [ Css.padding <| Css.px 0, Css.paddingLeft <| Css.px 15 ]
                                     , useDevice.m [ Css.padding <| Css.px 0 ]
@@ -47,7 +50,9 @@ row content =
                                 markdown markdownContent
 
                         RowContentAsset assetContent ->
-                            asset.row (List.length content) assetContent Nothing
+                            Html.div
+                                [ Html.css [ rowItem ] ]
+                                [ asset.row (List.length content) assetContent Nothing ]
 
                         RowContentUnknown ->
                             emptyElement

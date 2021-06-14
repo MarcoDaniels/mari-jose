@@ -1,4 +1,4 @@
-module Data.View exposing (dataView, dataContent)
+module Data.View exposing (dataContent, dataView)
 
 import Context exposing (Element, HtmlElement, Model, Msg(..))
 import Data.Type exposing (Content(..), Data, PageData)
