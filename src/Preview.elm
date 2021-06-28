@@ -34,12 +34,7 @@ main =
 
                         Nothing ->
                             Html.div
-                                [ Html.css
-                                    [ containerStyle
-                                    , centerStyle
-                                    , Css.flexDirection Css.column
-                                    ]
-                                ]
+                                [ Html.css [ containerStyle, centerStyle.column ] ]
                                 [ Html.h1 [] [ Html.text "Ooops!" ]
                                 , Html.em [] [ Html.text "Esta página apenas deve ser usada no contexto da CMS." ]
                                 , Html.em [] [ Html.text "Por favor contacte o seu webmaster." ]
