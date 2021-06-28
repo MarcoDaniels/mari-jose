@@ -18,8 +18,7 @@ rowItem =
     Css.batch
         [ Css.width <| Css.pct 50
         , useDevice.m [ Css.width <| Css.pct 100 ]
-        , centerStyle
-        , Css.flexDirection Css.column
+        , centerStyle.column
         ]
 
 
@@ -28,7 +27,7 @@ row content =
     Html.div
         [ Html.css
             [ containerStyle
-            , centerStyle
+            , centerStyle.inline
             , useDevice.m [ Css.flexDirection Css.column ]
             ]
         ]
