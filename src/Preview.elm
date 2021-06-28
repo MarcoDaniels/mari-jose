@@ -2,11 +2,15 @@ port module Preview exposing (..)
 
 import Browser
 import Context exposing (Msg(..))
+import Css
 import Data.Decoder exposing (dataDecoder)
 import Data.Type exposing (Data)
 import Data.View exposing (dataContent)
 import Html.Styled as Html
+import Html.Styled.Attributes as Html
 import OptimizedDecoder exposing (decodeString)
+import Style.Center exposing (centerStyle)
+import Style.Container exposing (containerStyle)
 import Style.Theme exposing (useTheme)
 
 
@@ -29,12 +33,22 @@ main =
                             dataContent data
 
                         Nothing ->
-                            Html.div [] [ Html.text "error" ]
+                            Html.div
+                                [ Html.css
+                                    [ containerStyle
+                                    , centerStyle
+                                    , Css.flexDirection Css.column
+                                    ]
+                                ]
+                                [ Html.h1 [] [ Html.text "Ooops!" ]
+                                , Html.em [] [ Html.text "Esta página apenas deve ser usada no contexto da CMS." ]
+                                , Html.em [] [ Html.text "Por favor contacte o seu webmaster." ]
+                                ]
                     ]
         , update =
             \msg model ->
                 case msg of
-                    OnPreviewUpdate payload ->
+                    PreviewOp payload ->
                         ( case decodeString dataDecoder payload of
                             Ok content ->
                                 { data = Just content }
@@ -46,5 +60,5 @@ main =
 
                     _ ->
                         ( model, Cmd.none )
-        , subscriptions = \_ -> updatePayload OnPreviewUpdate
+        , subscriptions = \_ -> updatePayload PreviewOp
         }

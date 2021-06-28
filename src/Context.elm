@@ -10,10 +10,9 @@ type ConsentMsg
 
 
 type Msg
-    = NoOp
-    | MenuOp Bool
+    = MenuOp Bool
     | ConsentOp ConsentMsg
-    | OnPreviewUpdate String
+    | PreviewOp String
 
 
 type alias Consent =
