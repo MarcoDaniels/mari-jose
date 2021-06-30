@@ -5,8 +5,8 @@ import Css
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Is exposing (is)
-import Style.Underline exposing (underlineStyle)
 import Style.Theme exposing (ThemeUse, useColorTheme, useDevice)
+import Style.Underline exposing (underlineStyle)
 
 
 link : ThemeUse (String -> StyledElement)
@@ -19,7 +19,7 @@ link =
     , secondary =
         \href attributes ->
             Html.styled Html.a
-                [ useColorTheme.tertiary, underlineStyle useColorTheme.primary ]
+                [ useColorTheme.primary ]
                 (handleHref href attributes)
     , tertiary =
         \href attributes ->

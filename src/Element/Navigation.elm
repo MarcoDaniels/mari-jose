@@ -1,8 +1,8 @@
 module Element.Navigation exposing (navigation)
 
-import Data.Type exposing (Navigation)
 import Context exposing (Element, Msg(..), StyledElement)
 import Css
+import Data.Type exposing (Navigation)
 import Element.Button exposing (button)
 import Element.Empty exposing (emptyElement)
 import Element.Icon exposing (icon)
@@ -10,7 +10,9 @@ import Element.Link exposing (link)
 import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Html
 import Html.Styled.Events as Html
+import Image exposing (useImageAPI)
 import Is exposing (is)
+import Settings exposing (settings)
 import Style.Container exposing (containerStyle)
 import Style.Slide exposing (slideStyle)
 import Style.Theme exposing (useColor, useColorTheme, useDevice)
@@ -19,19 +21,20 @@ import Style.Theme exposing (useColor, useColorTheme, useDevice)
 wrapper : StyledElement
 wrapper =
     Html.styled Html.header
-        [ useColorTheme.tertiary
+        [ useColorTheme.primary
         , Css.position Css.sticky
         , Css.top <| Css.px 0
         , Css.left <| Css.px 0
         , Css.right <| Css.px 0
         , Css.padding2 (Css.px 10) (Css.px 0)
         , Css.zIndex <| Css.int 2
+        , Css.borderBottom3 (Css.px 3) Css.solid useColor.tertiary
         ]
 
 
 listItem : StyledElement
 listItem =
-    Html.styled Html.li [ useDevice.s [ Css.marginTop <| Css.px 12 ] ]
+    Html.styled Html.li [ Css.padding <| Css.px 10, useDevice.s [ Css.marginTop <| Css.px 12 ] ]
 
 
 navigation : Navigation -> Bool -> Msg -> Element
@@ -43,10 +46,17 @@ navigation data expanded onClick =
                 [ containerStyle
                 , Css.displayFlex
                 , Css.justifyContent Css.spaceBetween
-                , useDevice.s [ Css.flexDirection Css.column ]
+                , Css.alignItems Css.center
+                , useDevice.s [ Css.flexDirection Css.column, Css.alignItems Css.stretch ]
                 ]
             ]
-            [ Html.nav [ Html.css [ Css.displayFlex, useDevice.s [ Css.flexDirection Css.column ] ] ]
+            [ Html.nav
+                [ Html.css
+                    [ Css.displayFlex
+                    , Css.alignItems Css.center
+                    , useDevice.s [ Css.flexDirection Css.column , Css.alignItems Css.stretch]
+                    ]
+                ]
                 [ Html.ul []
                     [ Html.li
                         [ Html.css
@@ -57,10 +67,10 @@ navigation data expanded onClick =
                                 ]
                             ]
                         ]
-                        [ link.tertiary
+                        [ link.secondary
                             data.brand.url
                             []
-                            [ Html.text data.brand.text ]
+                            [ Html.img [ Html.src (useImageAPI settings.image 110) ] [] ]
                         , button.primary
                             [ Html.onClick onClick
                             , Html.css [ Css.display Css.none, useDevice.s [ Css.display Css.block ] ]
@@ -82,7 +92,7 @@ navigation data expanded onClick =
                             (\item ->
                                 listItem
                                     []
-                                    [ link.tertiary
+                                    [ link.primary
                                         item.url
                                         []
                                         [ Html.text item.text ]
@@ -104,7 +114,7 @@ navigation data expanded onClick =
                         |> List.map
                             (\item ->
                                 listItem []
-                                    [ link.tertiary
+                                    [ link.primary
                                         item.url
                                         []
                                         [ case String.toLower item.text of
