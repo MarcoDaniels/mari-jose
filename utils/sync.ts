@@ -45,6 +45,7 @@ type Settings = {
     title: string
     description: string
     baseURL: string
+    image: string
 }
 
 const createContentFile = (url: string, frontmatter: Metadata, data: Data) => {
@@ -69,7 +70,14 @@ const createElmSettings = (data: Settings) => {
 
 settings =
     { ${Object.entries(data)
-        .map(([key, value]) => `${key} = "${value}"`)
+        .map(([key, value]) => {
+            switch (typeof value) {
+                case 'object': // is asset
+                    return `${key} = "${(value as any).path}"`
+                default:
+                    return `${key} = "${value}"`
+            }
+        })
         .join('\n    , ')}
     }
 `
