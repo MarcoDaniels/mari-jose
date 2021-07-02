@@ -15,7 +15,7 @@ import Is exposing (is)
 import Settings exposing (settings)
 import Style.Container exposing (containerStyle)
 import Style.Slide exposing (slideStyle)
-import Style.Theme exposing (useColor, useColorTheme, useDevice)
+import Style.Theme exposing (useColor, useColorTheme, useDevice, useTypography)
 
 
 wrapper : StyledElement
@@ -34,7 +34,13 @@ wrapper =
 
 listItem : StyledElement
 listItem =
-    Html.styled Html.li [ Css.padding <| Css.px 10, useDevice.s [ Css.marginTop <| Css.px 12 ] ]
+    Html.styled Html.li
+        [ Css.paddingLeft <| Css.px 20
+        , useDevice.s
+            [ Css.marginTop <| Css.px 12
+            , Css.paddingLeft <| Css.px 10
+            ]
+        ]
 
 
 navigation : Navigation -> Bool -> Msg -> Element
@@ -54,7 +60,8 @@ navigation data expanded onClick =
                 [ Html.css
                     [ Css.displayFlex
                     , Css.alignItems Css.center
-                    , useDevice.s [ Css.flexDirection Css.column , Css.alignItems Css.stretch]
+                    , useTypography.l
+                    , useDevice.s [ Css.flexDirection Css.column, Css.alignItems Css.stretch ]
                     ]
                 ]
                 [ Html.ul []
@@ -69,10 +76,12 @@ navigation data expanded onClick =
                         ]
                         [ link.secondary
                             data.brand.url
-                            []
-                            [ Html.img [ Html.src (useImageAPI settings.image 110) ] [] ]
+                            [ Html.attribute "aria-label" settings.title ]
+                            [ Html.img [ Html.src (useImageAPI settings.image 110), Html.alt settings.title ] [] ]
                         , button.primary
                             [ Html.onClick onClick
+                            , Html.attribute "aria-expanded" (is expanded "false" "true")
+                            , Html.attribute "aria-label" "expand"
                             , Html.css [ Css.display Css.none, useDevice.s [ Css.display Css.block ] ]
                             ]
                             [ is expanded
@@ -92,7 +101,7 @@ navigation data expanded onClick =
                             (\item ->
                                 listItem
                                     []
-                                    [ link.primary
+                                    [ link.secondary
                                         item.url
                                         []
                                         [ Html.text item.text ]
@@ -114,12 +123,12 @@ navigation data expanded onClick =
                         |> List.map
                             (\item ->
                                 listItem []
-                                    [ link.primary
+                                    [ link.secondary
                                         item.url
-                                        []
+                                        [ Html.attribute "aria-label" item.text ]
                                         [ case String.toLower item.text of
                                             "facebook" ->
-                                                icon.facebook { size = "12", color = useColor.primary }
+                                                icon.facebook { size = "14", color = useColor.primary }
 
                                             _ ->
                                                 emptyElement

@@ -2,8 +2,9 @@ module Element.Icon exposing (icon)
 
 import Context exposing (Element)
 import Css
+import Html.Styled.Attributes as Html
 import Svg.Styled as Svg
-import Svg.Styled.Attributes as SvgAttributes
+import Svg.Styled.Attributes as SvgAttr
 
 
 type alias IconSettings =
@@ -46,5 +47,5 @@ type alias SvgSettings =
 
 drawSVG : SvgSettings -> IconSettings -> Element
 drawSVG { view, draw } { size, color } =
-    Svg.svg [ SvgAttributes.viewBox view, SvgAttributes.width size, SvgAttributes.height size ]
-        [ Svg.path [ SvgAttributes.fill color.value, SvgAttributes.d draw ] [] ]
+    Svg.svg [ Html.attribute "aria-hidden" "true", SvgAttr.viewBox view, SvgAttr.width size, SvgAttr.height size ]
+        [ Svg.path [ SvgAttr.fill color.value, SvgAttr.d draw ] [] ]
