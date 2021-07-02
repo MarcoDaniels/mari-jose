@@ -35,7 +35,7 @@ wrapper =
 listItem : StyledElement
 listItem =
     Html.styled Html.li
-        [ Css.paddingLeft <| Css.px 20
+        [ Css.paddingLeft <| Css.px 25
         , useDevice.s
             [ Css.marginTop <| Css.px 12
             , Css.paddingLeft <| Css.px 10
@@ -77,7 +77,7 @@ navigation data expanded onClick =
                         [ link.secondary
                             data.brand.url
                             [ Html.attribute "aria-label" settings.title ]
-                            [ Html.img [ Html.src (useImageAPI settings.image 110), Html.alt settings.title ] [] ]
+                            [ Html.img [ Html.src (useImageAPI settings.image 150), Html.alt settings.title ] [] ]
                         , button.primary
                             [ Html.onClick onClick
                             , Html.attribute "aria-expanded" (is expanded "false" "true")

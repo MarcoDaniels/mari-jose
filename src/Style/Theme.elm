@@ -73,13 +73,18 @@ useTypography =
     , m =
         Css.batch
             [ Css.fontSize <| Css.px 14
+            , Css.lineHeight <| Css.num 1.4
             , Css.margin3 (Css.px 0) (Css.px 0) (Css.px 10)
             ]
     , l =
-        Css.batch [ Css.fontSize <| Css.px 20 ]
+        Css.batch
+            [ Css.fontSize <| Css.px 17
+            , Css.fontWeight <| Css.int 300
+            ]
     , xl =
         Css.batch
             [ Css.fontSize <| Css.px 50
+            , Css.fontWeight <| Css.int 400
             , Css.marginTop <| Css.px 10
             , Css.marginBottom <| Css.px 10
             , useColorTheme.secondary
@@ -93,6 +98,7 @@ globalStyle =
         [ Css.Global.body
             [ Css.margin <| Css.px 0
             , Css.padding <| Css.px 0
+            , Css.fontFamilies [ "Helvetica Neue", "Helvetica", "Arial", "sans-serif" ]
             ]
         , Css.Global.ul
             [ Css.margin <| Css.px 0
