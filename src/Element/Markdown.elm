@@ -1,6 +1,7 @@
 module Element.Markdown exposing (markdown)
 
 import Context exposing (Element, Msg)
+import Css
 import Element.Link exposing (link)
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
@@ -8,6 +9,7 @@ import Markdown.Block as Block
 import Markdown.Html
 import Markdown.Parser
 import Markdown.Renderer exposing (Renderer, render)
+import Style.Theme exposing (useColorTheme, useTypography)
 
 
 markdown : String -> List Element
@@ -32,7 +34,11 @@ markdownRenderer =
         \{ level, rawText, children } ->
             case level of
                 Block.H1 ->
-                    Html.h1 [ Html.id (textToId rawText) ] children
+                    Html.h1
+                        [ Html.id (textToId rawText)
+                        , Html.css [ useTypography.xl ]
+                        ]
+                        children
 
                 Block.H2 ->
                     Html.h2 [ Html.id (textToId rawText) ] children
@@ -56,13 +62,13 @@ markdownRenderer =
 
                 Nothing ->
                     link.primary att.destination [] content
-    , paragraph = Html.p []
+    , paragraph = Html.p [ Html.css [ useTypography.m ] ]
     , text = \content -> Html.text content
-    , blockQuote = Html.blockquote []
+    , blockQuote = Html.blockquote [ Html.css [ Css.marginLeft <| Css.px 10, Css.fontStyle Css.italic ] ]
     , hardLineBreak = Html.br [] []
     , html = Markdown.Html.oneOf []
     , strong = Html.strong []
-    , emphasis = Html.em []
+    , emphasis = Html.em [ Html.css [ useColorTheme.secondary ] ]
     , codeSpan = \content -> Html.code [] [ Html.text content ]
     , strikethrough = Html.del []
     , thematicBreak = Html.hr [] []

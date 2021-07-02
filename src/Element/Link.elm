@@ -14,12 +14,12 @@ link =
     { primary =
         \href attributes ->
             Html.styled Html.a
-                [ useColorTheme.primary, underlineStyle useColorTheme.secondary ]
+                [ useColorTheme.primary, underlineStyle useColorTheme.tertiary ]
                 (handleHref href attributes)
     , secondary =
         \href attributes ->
             Html.styled Html.a
-                [ useColorTheme.primary ]
+                [ useColorTheme.primary, Css.textDecoration Css.none ]
                 (handleHref href attributes)
     , tertiary =
         \href attributes ->

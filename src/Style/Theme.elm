@@ -1,4 +1,4 @@
-module Style.Theme exposing (DeviceUse, ThemeUse, useColor, useColorTheme, useDevice, useTheme, useWidth)
+module Style.Theme exposing (ShirtSizes, ThemeUse, useColor, useColorTheme, useDevice, useTheme, useTypography, useWidth)
 
 import Context exposing (Element, HtmlElement, Msg)
 import Css
@@ -8,16 +8,16 @@ import Html.Styled as Html
 import Html.Styled.Attributes as Html
 
 
-type alias DeviceUse t =
+type alias ShirtSizes t =
     { s : t, m : t, l : t, xl : t }
 
 
-useWidth : DeviceUse Css.Px
+useWidth : ShirtSizes Css.Px
 useWidth =
     { s = Css.px 550, m = Css.px 750, l = Css.px 1000, xl = Css.px 1200 }
 
 
-useDevice : DeviceUse (List Css.Style -> Css.Style)
+useDevice : ShirtSizes (List Css.Style -> Css.Style)
 useDevice =
     { s = Css.Media.withMedia [ Css.Media.all [ Css.Media.maxWidth useWidth.s ] ]
     , m = Css.Media.withMedia [ Css.Media.all [ Css.Media.maxWidth useWidth.m ] ]
@@ -54,7 +54,7 @@ useColorTheme =
             ]
     , secondary =
         Css.batch
-            [ Css.backgroundColor useColor.secondary
+            [ Css.backgroundColor useColor.primary
             , Css.color useColor.tertiary
             , setSVGColor useColor.tertiary
             ]
@@ -63,6 +63,26 @@ useColorTheme =
             [ Css.backgroundColor useColor.tertiary
             , Css.color useColor.primary
             , setSVGColor useColor.primary
+            ]
+    }
+
+
+useTypography : ShirtSizes Css.Style
+useTypography =
+    { s = Css.batch []
+    , m =
+        Css.batch
+            [ Css.fontSize <| Css.px 14
+            , Css.margin3 (Css.px 0) (Css.px 0) (Css.px 10)
+            ]
+    , l =
+        Css.batch [ Css.fontSize <| Css.px 20 ]
+    , xl =
+        Css.batch
+            [ Css.fontSize <| Css.px 50
+            , Css.marginTop <| Css.px 10
+            , Css.marginBottom <| Css.px 10
+            , useColorTheme.secondary
             ]
     }
 

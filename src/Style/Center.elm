@@ -9,13 +9,12 @@ centerStyle =
         Css.batch
             [ Css.displayFlex
             , Css.justifyContent Css.center
-            , Css.alignItems Css.center
+            , Css.flexDirection Css.row
             ]
     , column =
         Css.batch
             [ Css.displayFlex
             , Css.justifyContent Css.center
-            , Css.alignItems Css.center
             , Css.flexDirection Css.column
             ]
     }

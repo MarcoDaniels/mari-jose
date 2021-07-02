@@ -9,7 +9,7 @@ import Html.Styled.Attributes as Html
 import Image exposing (useImageAPI)
 import Is exposing (is)
 import Style.Image exposing (imageStyle)
-import Style.Theme exposing (DeviceUse, useWidth)
+import Style.Theme exposing (ShirtSizes, useWidth)
 
 
 type alias AssetElement t =
@@ -50,7 +50,7 @@ asset =
     }
 
 
-picture : DeviceUse Int -> AssetContent -> Maybe (List Css.Style) -> Element
+picture : ShirtSizes Int -> AssetContent -> Maybe (List Css.Style) -> Element
 picture sizes content maybeStyles =
     Html.node "picture"
         []
