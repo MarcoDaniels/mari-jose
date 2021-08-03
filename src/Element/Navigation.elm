@@ -7,7 +7,7 @@ import Element.Button exposing (button)
 import Element.Empty exposing (emptyElement)
 import Element.Icon exposing (icon)
 import Element.Link exposing (link)
-import Html.Styled as Html exposing (Html)
+import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Html.Styled.Events as Html
 import Image exposing (useImageAPI)

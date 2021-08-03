@@ -1,6 +1,6 @@
 module Style.Theme exposing (ShirtSizes, ThemeUse, useColor, useColorTheme, useDevice, useTheme, useTypography, useWidth)
 
-import Context exposing (Element, HtmlElement, Msg)
+import Context exposing (Element, HtmlElement)
 import Css
 import Css.Global
 import Css.Media

@@ -1,6 +1,6 @@
 module Element.Markdown exposing (markdown)
 
-import Context exposing (Element, Msg)
+import Context exposing (Element)
 import Css
 import Element.Link exposing (link)
 import Html.Styled as Html

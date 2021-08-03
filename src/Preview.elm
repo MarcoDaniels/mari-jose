@@ -2,7 +2,6 @@ port module Preview exposing (..)
 
 import Browser
 import Context exposing (Msg(..))
-import Css
 import Data.Decoder exposing (dataDecoder)
 import Data.Type exposing (Data)
 import Data.View exposing (dataContent)
