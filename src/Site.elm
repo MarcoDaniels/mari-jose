@@ -4,7 +4,7 @@ import DataSource
 import Head
 import Pages.Manifest as Manifest
 import SiteConfig exposing (SiteConfig)
-import Path exposing (Path)
+import Path
 
 
 type alias Data =
