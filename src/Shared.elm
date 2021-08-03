@@ -86,15 +86,12 @@ data =
 
 view :
     Data
-    ->
-        { path : Path
-        , route : Maybe Route
-        }
+    -> { path : Path, route : Maybe Route }
     -> Model
     -> (Msg -> msg)
     -> View msg
     -> { body : Html msg, title : String }
-view _ _ _ _ pageView =
+view sharedData page model toMsg pageView =
     { body = Html.div [] pageView.body
     , title = pageView.title
     }
