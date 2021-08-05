@@ -1,5 +1,6 @@
 module Page.SPLAT__ exposing (..)
 
+import Api exposing (routes)
 import DataSource exposing (DataSource)
 import DataSource.Http
 import Head
@@ -37,18 +38,46 @@ page =
         |> Page.buildNoState { view = view }
 
 
-fixURL : String -> List String
-fixURL str =
-    case str of
+routes : DataSource (List RouteParams)
+routes =
+    fullData |> DataSource.map (List.map (\item -> { splat = item.url }))
+
+
+type alias Data =
+    { title : String, url : List String }
+
+
+data : RouteParams -> DataSource Data
+data route =
+    fullData
+        |> DataSource.map (List.filter (\item -> item.url == route.splat))
+        |> DataSource.map
+            (\maybeItem ->
+                case List.head maybeItem of
+                    Just item ->
+                        item
+
+                    Nothing ->
+                        { title = "", url = [ "" ] }
+            )
+
+
+handleURL : String -> List String
+handleURL url =
+    case url of
         "/" ->
             []
 
         _ ->
-            is (String.startsWith "/" str) [ String.dropLeft 1 str ] [ String.dropLeft 0 str ]
+            is (String.startsWith "/" url) [ String.dropLeft 1 url ] [ url ]
 
 
-routes : DataSource (List RouteParams)
-routes =
+
+-- TODO : extract as cockpit module
+
+
+fullData : DataSource (List Data)
+fullData =
     DataSource.Http.request
         (Secrets.succeed
             (\url token entry ->
@@ -64,21 +93,15 @@ routes =
         )
         (Decoder.map identity <|
             Decoder.field "entries" <|
-                Decoder.list <|
-                    Decoder.map RouteParams <|
-                        Decoder.map fixURL <|
-                            Decoder.field "url" Decoder.string
+                Decoder.list
+                    (Decoder.succeed Data
+                        |> Decoder.required "title" Decoder.string
+                        |> Decoder.required "url" (Decoder.string |> Decoder.map handleURL)
+                    )
         )
 
 
-data : RouteParams -> DataSource Data
-data _ =
-    DataSource.succeed ()
-
-
-head :
-    StaticPayload Data RouteParams
-    -> List Head.Tag
+head : StaticPayload Data RouteParams -> List Head.Tag
 head static =
     Seo.summary
         { canonicalUrlOverride = Nothing
@@ -96,14 +119,10 @@ head static =
         |> Seo.website
 
 
-type alias Data =
-    ()
-
-
 view :
     Maybe PageUrl
     -> Shared.Model
     -> StaticPayload Data RouteParams
     -> View Msg
 view maybeUrl sharedModel static =
-    View.placeholder "Index"
+    View.placeholder static.data.title
