@@ -3,9 +3,9 @@ module Shared exposing (Data, Model, Msg(..), SharedMsg(..), template)
 import Browser.Navigation
 import Cockpit exposing (singletonEntry)
 import DataSource
-import Html exposing (Html)
-import Html.Styled as Styled
-import Html.Styled.Attributes as Styled
+import Html as ElmHtml
+import Html.Styled as Html
+import Html.Styled.Attributes as Html
 import OptimizedDecoder as Decoder exposing (Decoder)
 import OptimizedDecoder.Pipeline as Decoder
 import Pages.Flags
@@ -159,26 +159,26 @@ view :
     -> Model
     -> (Msg -> msg)
     -> View msg
-    -> { body : Html msg, title : String }
+    -> { body : ElmHtml.Html msg, title : String }
 view sharedData page model toMsg pageView =
     { body =
-        Styled.div []
-            [ Styled.nav []
-                [ Styled.a
-                    [ Styled.href sharedData.navigation.brand.url ]
-                    [ Styled.text sharedData.navigation.brand.text ]
-                , Styled.div []
+        Html.div []
+            [ Html.nav []
+                [ Html.a
+                    [ Html.href sharedData.navigation.brand.url ]
+                    [ Html.text sharedData.navigation.brand.text ]
+                , Html.div []
                     (sharedData.navigation.menu
                         |> List.map
                             (\item ->
-                                Styled.div []
-                                    [ Styled.a [ Styled.href item.url ] [ Styled.text item.text ] ]
+                                Html.div []
+                                    [ Html.a [ Html.href item.url ] [ Html.text item.text ] ]
                             )
                     )
                 ]
-            , Styled.article [] pageView.body
-            , Styled.footer [] [ Styled.text "footer here" ]
+            , Html.article [] pageView.body
+            , Html.footer [] [ Html.text "footer here" ]
             ]
-            |> Styled.toUnstyled
+            |> Html.toUnstyled
     , title = pageView.title
     }
