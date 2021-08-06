@@ -2,9 +2,7 @@ module Data.Type exposing (..)
 
 
 type alias PageData =
-    { data : Data
-    , settings : Settings
-    }
+    { data : Data }
 
 
 type alias Data =
@@ -57,37 +55,3 @@ type RowContentValue
     = RowContentMarkdown String
     | RowContentAsset AssetContent
     | RowContentUnknown
-
-
-type alias SiteSettings =
-    { title : String
-    , description : String
-    , baseURL : String
-    }
-
-
-type alias Settings =
-    { navigation : Navigation
-    , footer : Footer
-    , cookie : CookieBanner
-    , site : SiteSettings
-    }
-
-
-type alias Link =
-    { text : String, url : String }
-
-
-type alias Navigation =
-    { brand : Link
-    , menu : List Link
-    , social : List Link
-    }
-
-
-type alias Footer =
-    { links : List Link }
-
-
-type alias CookieBanner =
-    { title : String, content : String }

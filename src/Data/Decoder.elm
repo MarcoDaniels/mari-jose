@@ -1,46 +1,8 @@
-module Data.Decoder exposing (dataDecoder, pageDataDecoder, settingsDecoder)
+module Data.Decoder exposing (dataDecoder, pageDataDecoder)
 
 import Data.Type
 import OptimizedDecoder exposing (Decoder, Error, andThen, decodeString, field, int, list, maybe, string, succeed)
 import OptimizedDecoder.Pipeline exposing (custom, optional, required, requiredAt)
-
-
-linkDecoder : Decoder Data.Type.Link
-linkDecoder =
-    succeed Data.Type.Link |> required "title" string |> required "url" string
-
-
-linkValueDecoder : Decoder Data.Type.Link
-linkValueDecoder =
-    succeed Data.Type.Link
-        |> requiredAt [ "value", "title" ] string
-        |> requiredAt [ "value", "url" ] string
-
-
-settingsDecoder : Decoder Data.Type.Settings
-settingsDecoder =
-    succeed Data.Type.Settings
-        |> required "navigation"
-            (succeed Data.Type.Navigation
-                |> required "brand" linkDecoder
-                |> required "menu" (list linkValueDecoder)
-                |> required "social" (list linkValueDecoder)
-            )
-        |> required "footer"
-            (succeed Data.Type.Footer
-                |> required "links" (list linkValueDecoder)
-            )
-        |> required "cookie"
-            (succeed Data.Type.CookieBanner
-                |> required "title" string
-                |> required "content" string
-            )
-        |> required "site"
-            (succeed Data.Type.SiteSettings
-                |> required "title" string
-                |> required "description" string
-                |> required "baseURL" string
-            )
 
 
 fieldDecoder : Decoder Data.Type.Field
@@ -139,6 +101,5 @@ pageDataDecoder input =
     decodeString
         (succeed Data.Type.PageData
             |> required "data" dataDecoder
-            |> required "settings" settingsDecoder
         )
         input
