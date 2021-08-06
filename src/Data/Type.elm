@@ -59,10 +59,18 @@ type RowContentValue
     | RowContentUnknown
 
 
+type alias SiteSettings =
+    { title : String
+    , description : String
+    , baseURL : String
+    }
+
+
 type alias Settings =
     { navigation : Navigation
     , footer : Footer
     , cookie : CookieBanner
+    , site : SiteSettings
     }
 
 

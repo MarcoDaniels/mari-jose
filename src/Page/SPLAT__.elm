@@ -1,16 +1,15 @@
-module Page.SPLAT__ exposing (..)
+module Page.SPLAT__ exposing (Data, Model, Msg, page)
 
-import Api exposing (routes)
+import Cockpit exposing (collectionEntries)
 import DataSource exposing (DataSource)
-import DataSource.Http
 import Head
 import Head.Seo as Seo
+import Html
 import Is exposing (is)
 import OptimizedDecoder as Decoder
 import OptimizedDecoder.Pipeline as Decoder
 import Page exposing (Page, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
-import Pages.Secrets as Secrets
 import Pages.Url
 import Shared
 import View exposing (View)
@@ -40,7 +39,7 @@ page =
 
 routes : DataSource (List RouteParams)
 routes =
-    fullData |> DataSource.map (List.map (\item -> { splat = item.url }))
+    pageData |> DataSource.map (List.map (\item -> { splat = item.url }))
 
 
 type alias Data =
@@ -49,7 +48,7 @@ type alias Data =
 
 data : RouteParams -> DataSource Data
 data route =
-    fullData
+    pageData
         |> DataSource.map (List.filter (\item -> item.url == route.splat))
         |> DataSource.map
             (\maybeItem ->
@@ -72,25 +71,9 @@ handleURL url =
             is (String.startsWith "/" url) [ String.dropLeft 1 url ] [ url ]
 
 
-
--- TODO : extract as cockpit module
-
-
-fullData : DataSource (List Data)
-fullData =
-    DataSource.Http.request
-        (Secrets.succeed
-            (\url token entry ->
-                { url = url ++ "/collections/entries/" ++ entry ++ "?populate=0"
-                , method = "GET"
-                , headers = [ ( "Cockpit-Token", token ) ]
-                , body = DataSource.Http.emptyBody
-                }
-            )
-            |> Secrets.with "COCKPIT_API_URL"
-            |> Secrets.with "COCKPIT_API_TOKEN"
-            |> Secrets.with "COCKPIT_ENTRY"
-        )
+pageData : DataSource (List Data)
+pageData =
+    collectionEntries "marijosePage"
         (Decoder.map identity <|
             Decoder.field "entries" <|
                 Decoder.list
@@ -125,4 +108,6 @@ view :
     -> StaticPayload Data RouteParams
     -> View Msg
 view maybeUrl sharedModel static =
-    View.placeholder static.data.title
+    { title = static.data.title
+    , body = [ Html.text static.data.title ]
+    }

@@ -1,4 +1,4 @@
-module Data.Decoder exposing (dataDecoder, pageDataDecoder)
+module Data.Decoder exposing (dataDecoder, pageDataDecoder, settingsDecoder)
 
 import Data.Type
 import OptimizedDecoder exposing (Decoder, Error, andThen, decodeString, field, int, list, maybe, string, succeed)
@@ -34,6 +34,12 @@ settingsDecoder =
             (succeed Data.Type.CookieBanner
                 |> required "title" string
                 |> required "content" string
+            )
+        |> required "site"
+            (succeed Data.Type.SiteSettings
+                |> required "title" string
+                |> required "description" string
+                |> required "baseURL" string
             )
 
 

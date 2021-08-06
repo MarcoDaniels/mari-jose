@@ -12,7 +12,6 @@ import Html.Styled.Attributes as Html
 import Html.Styled.Events as Html
 import Image exposing (useImageAPI)
 import Is exposing (is)
-import Settings exposing (settings)
 import Style.Container exposing (containerStyle)
 import Style.Slide exposing (slideStyle)
 import Style.Theme exposing (useColor, useColorTheme, useDevice, useTypography)

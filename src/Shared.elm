@@ -1,8 +1,12 @@
 module Shared exposing (Data, Model, Msg(..), SharedMsg(..), template)
 
 import Browser.Navigation
+import Cockpit exposing (singletonEntry)
+import Data.Decoder exposing (settingsDecoder)
+import Data.Type
 import DataSource
 import Html exposing (Html)
+import Html.Attributes as Html
 import Pages.Flags
 import Pages.PageUrl exposing (PageUrl)
 import Path exposing (Path)
@@ -31,8 +35,15 @@ type Msg
     | SharedMsg SharedMsg
 
 
+type alias SiteData =
+    { title : String
+    , description : String
+    , baseURL : String
+    }
+
+
 type alias Data =
-    ()
+    Data.Type.Settings
 
 
 type SharedMsg
@@ -40,8 +51,7 @@ type SharedMsg
 
 
 type alias Model =
-    { showMobileMenu : Bool
-    }
+    ()
 
 
 init :
@@ -59,16 +69,14 @@ init :
             }
     -> ( Model, Cmd Msg )
 init _ _ _ =
-    ( { showMobileMenu = False }
-    , Cmd.none
-    )
+    ( (), Cmd.none )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         OnPageChange _ ->
-            ( { model | showMobileMenu = False }, Cmd.none )
+            ( model, Cmd.none )
 
         SharedMsg _ ->
             ( model, Cmd.none )
@@ -81,7 +89,7 @@ subscriptions _ _ =
 
 data : DataSource.DataSource Data
 data =
-    DataSource.succeed ()
+    singletonEntry "marijoseSettings" settingsDecoder
 
 
 view :
@@ -92,6 +100,23 @@ view :
     -> View msg
     -> { body : Html msg, title : String }
 view sharedData page model toMsg pageView =
-    { body = Html.div [] pageView.body
+    { body =
+        Html.div []
+            [ Html.nav []
+                [ Html.a
+                    [ Html.href sharedData.navigation.brand.url ]
+                    [ Html.text sharedData.navigation.brand.text ]
+                , Html.div []
+                    (sharedData.navigation.menu
+                        |> List.map
+                            (\item ->
+                                Html.div []
+                                    [ Html.a [ Html.href item.url ] [ Html.text item.text ] ]
+                            )
+                    )
+                ]
+            , Html.article [] pageView.body
+            , Html.footer [] [ Html.text "footer here" ]
+            ]
     , title = pageView.title
     }
