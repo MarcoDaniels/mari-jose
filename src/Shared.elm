@@ -2,11 +2,12 @@ module Shared exposing (Data, Model, Msg(..), SharedMsg(..), template)
 
 import Browser.Navigation
 import Cockpit exposing (singletonEntry)
-import Data.Decoder exposing (settingsDecoder)
-import Data.Type
 import DataSource
 import Html exposing (Html)
-import Html.Attributes as Html
+import Html.Styled as Styled
+import Html.Styled.Attributes as Styled
+import OptimizedDecoder as Decoder exposing (Decoder)
+import OptimizedDecoder.Pipeline as Decoder
 import Pages.Flags
 import Pages.PageUrl exposing (PageUrl)
 import Path exposing (Path)
@@ -35,15 +36,38 @@ type Msg
     | SharedMsg SharedMsg
 
 
-type alias SiteData =
+type alias SiteBase =
     { title : String
     , description : String
     , baseURL : String
     }
 
 
+type alias Link =
+    { text : String, url : String }
+
+
+type alias Navigation =
+    { brand : Link
+    , menu : List Link
+    , social : List Link
+    }
+
+
+type alias Footer =
+    { links : List Link }
+
+
+type alias CookieBanner =
+    { title : String, content : String }
+
+
 type alias Data =
-    Data.Type.Settings
+    { navigation : Navigation
+    , footer : Footer
+    , cookie : CookieBanner
+    , site : SiteBase
+    }
 
 
 type SharedMsg
@@ -87,9 +111,46 @@ subscriptions _ _ =
     Sub.none
 
 
+linkDecoder : Decoder Link
+linkDecoder =
+    Decoder.succeed Link
+        |> Decoder.required "title" Decoder.string
+        |> Decoder.required "url" Decoder.string
+
+
+linkValueDecoder : Decoder Link
+linkValueDecoder =
+    Decoder.succeed Link
+        |> Decoder.requiredAt [ "value", "title" ] Decoder.string
+        |> Decoder.requiredAt [ "value", "url" ] Decoder.string
+
+
 data : DataSource.DataSource Data
 data =
-    singletonEntry "marijoseSettings" settingsDecoder
+    singletonEntry "marijoseSettings"
+        (Decoder.succeed Data
+            |> Decoder.required "navigation"
+                (Decoder.succeed Navigation
+                    |> Decoder.required "brand" linkDecoder
+                    |> Decoder.required "menu" (Decoder.list linkValueDecoder)
+                    |> Decoder.required "social" (Decoder.list linkValueDecoder)
+                )
+            |> Decoder.required "footer"
+                (Decoder.succeed Footer
+                    |> Decoder.required "links" (Decoder.list linkValueDecoder)
+                )
+            |> Decoder.required "cookie"
+                (Decoder.succeed CookieBanner
+                    |> Decoder.required "title" Decoder.string
+                    |> Decoder.required "content" Decoder.string
+                )
+            |> Decoder.required "site"
+                (Decoder.succeed SiteBase
+                    |> Decoder.required "title" Decoder.string
+                    |> Decoder.required "description" Decoder.string
+                    |> Decoder.required "baseURL" Decoder.string
+                )
+        )
 
 
 view :
@@ -101,22 +162,23 @@ view :
     -> { body : Html msg, title : String }
 view sharedData page model toMsg pageView =
     { body =
-        Html.div []
-            [ Html.nav []
-                [ Html.a
-                    [ Html.href sharedData.navigation.brand.url ]
-                    [ Html.text sharedData.navigation.brand.text ]
-                , Html.div []
+        Styled.div []
+            [ Styled.nav []
+                [ Styled.a
+                    [ Styled.href sharedData.navigation.brand.url ]
+                    [ Styled.text sharedData.navigation.brand.text ]
+                , Styled.div []
                     (sharedData.navigation.menu
                         |> List.map
                             (\item ->
-                                Html.div []
-                                    [ Html.a [ Html.href item.url ] [ Html.text item.text ] ]
+                                Styled.div []
+                                    [ Styled.a [ Styled.href item.url ] [ Styled.text item.text ] ]
                             )
                     )
                 ]
-            , Html.article [] pageView.body
-            , Html.footer [] [ Html.text "footer here" ]
+            , Styled.article [] pageView.body
+            , Styled.footer [] [ Styled.text "footer here" ]
             ]
+            |> Styled.toUnstyled
     , title = pageView.title
     }

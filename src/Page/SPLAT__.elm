@@ -1,10 +1,12 @@
 module Page.SPLAT__ exposing (Data, Model, Msg, page)
 
 import Cockpit exposing (collectionEntries)
+import Css
 import DataSource exposing (DataSource)
 import Head
 import Head.Seo as Seo
-import Html
+import Html.Styled as Html
+import Html.Styled.Attributes as Html
 import Is exposing (is)
 import OptimizedDecoder as Decoder
 import OptimizedDecoder.Pipeline as Decoder
@@ -109,5 +111,9 @@ view :
     -> View Msg
 view maybeUrl sharedModel static =
     { title = static.data.title
-    , body = [ Html.text static.data.title ]
+    , body =
+        [ Html.div
+            [ Html.css [ Css.textDecoration Css.underline ] ]
+            [ Html.text static.data.title ]
+        ]
     }
