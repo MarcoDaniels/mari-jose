@@ -3,8 +3,8 @@ module Site exposing (config)
 import DataSource
 import Head
 import Pages.Manifest as Manifest
-import SiteConfig exposing (SiteConfig)
 import Path
+import SiteConfig exposing (SiteConfig)
 
 
 type alias Data =
@@ -14,7 +14,7 @@ type alias Data =
 config : SiteConfig Data
 config =
     { data = data
-    , canonicalUrl = "https://elm-pages.com"
+    , canonicalUrl = "https://example.com"
     , manifest = manifest
     , head = head
     }
@@ -27,8 +27,7 @@ data =
 
 head : Data -> List Head.Tag
 head _ =
-    [ Head.sitemapLink "/sitemap.xml"
-    ]
+    [ Head.sitemapLink "/sitemap.xml" ]
 
 
 manifest : Data -> Manifest.Config
