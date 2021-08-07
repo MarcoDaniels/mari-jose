@@ -1,16 +1,18 @@
-module Element.Footer exposing (footer)
+module Element.Footer exposing (Footer, footer)
 
-import Context exposing (Element)
 import Css
-import Data.Type exposing (Footer)
-import Element.Link exposing (link)
+import Element.Link exposing (Link, link)
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Style.Container exposing (containerStyle)
 import Style.Theme exposing (useColor, useColorTheme)
 
 
-footer : Footer -> Element
+type alias Footer =
+    { links : List Link }
+
+
+footer : Footer -> Html.Html msg
 footer data =
     Html.footer
         [ Html.css

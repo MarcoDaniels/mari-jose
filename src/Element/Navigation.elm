@@ -1,12 +1,11 @@
-module Element.Navigation exposing (navigation)
+module Element.Navigation exposing (Navigation, navigation)
 
-import Context exposing (Element, Msg(..), StyledElement)
+import Context exposing (StyledElement)
 import Css
-import Data.Type exposing (Navigation)
 import Element.Button exposing (button)
 import Element.Empty exposing (emptyElement)
 import Element.Icon exposing (icon)
-import Element.Link exposing (link)
+import Element.Link exposing (Link, link)
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Html.Styled.Events as Html
@@ -17,7 +16,14 @@ import Style.Slide exposing (slideStyle)
 import Style.Theme exposing (useColor, useColorTheme, useDevice, useTypography)
 
 
-wrapper : StyledElement
+type alias Navigation =
+    { brand : Link
+    , menu : List Link
+    , social : List Link
+    }
+
+
+wrapper : StyledElement msg
 wrapper =
     Html.styled Html.header
         [ useColorTheme.primary
@@ -31,7 +37,7 @@ wrapper =
         ]
 
 
-listItem : StyledElement
+listItem : StyledElement msg
 listItem =
     Html.styled Html.li
         [ Css.paddingLeft <| Css.px 25
@@ -42,8 +48,12 @@ listItem =
         ]
 
 
-navigation : Navigation -> Bool -> Msg -> Element
-navigation data expanded onClick =
+type alias Site =
+    { title : String, image : String }
+
+
+navigation : Navigation -> Site -> Bool -> msg -> Html.Html msg
+navigation data site expanded onClick =
     wrapper
         []
         [ Html.div
@@ -75,8 +85,8 @@ navigation data expanded onClick =
                         ]
                         [ link.secondary
                             data.brand.url
-                            [ Html.attribute "aria-label" settings.title ]
-                            [ Html.img [ Html.src (useImageAPI settings.image 150), Html.alt settings.title ] [] ]
+                            [ Html.attribute "aria-label" site.title ]
+                            [ Html.img [ Html.src (useImageAPI site.image 150), Html.alt site.title ] [] ]
                         , button.primary
                             [ Html.onClick onClick
                             , Html.attribute "aria-expanded" (is expanded "false" "true")

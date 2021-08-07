@@ -6,7 +6,7 @@ import Html.Styled as Html
 import Style.Theme exposing (ThemeUse, useColor, useColorTheme)
 
 
-button : ThemeUse StyledElement
+button : ThemeUse (StyledElement msg)
 button =
     { primary =
         Html.styled Html.button

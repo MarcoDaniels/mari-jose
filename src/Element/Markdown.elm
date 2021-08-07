@@ -1,6 +1,5 @@
 module Element.Markdown exposing (markdown)
 
-import Context exposing (Element)
 import Css
 import Element.Link exposing (link)
 import Html.Styled as Html
@@ -12,7 +11,7 @@ import Markdown.Renderer exposing (Renderer, render)
 import Style.Theme exposing (useColorTheme, useTypography)
 
 
-markdown : String -> List Element
+markdown : String -> List (Html.Html msg)
 markdown input =
     input
         |> Markdown.Parser.parse
@@ -28,7 +27,7 @@ textToId text =
         |> String.toLower
 
 
-markdownRenderer : Renderer Element
+markdownRenderer : Renderer (Html.Html msg)
 markdownRenderer =
     { heading =
         \{ level, rawText, children } ->
