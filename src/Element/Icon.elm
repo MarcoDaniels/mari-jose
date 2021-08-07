@@ -1,7 +1,7 @@
 module Element.Icon exposing (icon)
 
-import Context exposing (Element)
 import Css
+import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Svg.Styled as Svg
 import Svg.Styled.Attributes as SvgAttr
@@ -12,10 +12,10 @@ type alias IconSettings =
 
 
 icon :
-    { facebook : IconSettings -> Element
-    , burger : IconSettings -> Element
-    , close : IconSettings -> Element
-    , cookie : IconSettings -> Element
+    { facebook : IconSettings -> Html.Html msg
+    , burger : IconSettings -> Html.Html msg
+    , close : IconSettings -> Html.Html msg
+    , cookie : IconSettings -> Html.Html msg
     }
 icon =
     { facebook =
@@ -45,7 +45,7 @@ type alias SvgSettings =
     { view : String, draw : String }
 
 
-drawSVG : SvgSettings -> IconSettings -> Element
+drawSVG : SvgSettings -> IconSettings -> Html.Html msg
 drawSVG { view, draw } { size, color } =
     Svg.svg [ Html.attribute "aria-hidden" "true", SvgAttr.viewBox view, SvgAttr.width size, SvgAttr.height size ]
         [ Svg.path [ SvgAttr.fill color.value, SvgAttr.d draw ] [] ]

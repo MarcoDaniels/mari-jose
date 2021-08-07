@@ -45,7 +45,7 @@ routes =
 
 
 type alias Data =
-    { title : String, url : List String }
+    { url : List String, title : String }
 
 
 data : RouteParams -> DataSource Data
@@ -63,16 +63,6 @@ data route =
             )
 
 
-handleURL : String -> List String
-handleURL url =
-    case url of
-        "/" ->
-            []
-
-        _ ->
-            is (String.startsWith "/" url) [ String.dropLeft 1 url ] [ url ]
-
-
 pageData : DataSource (List Data)
 pageData =
     collectionEntries "marijosePage"
@@ -80,8 +70,19 @@ pageData =
             Decoder.field "entries" <|
                 Decoder.list
                     (Decoder.succeed Data
+                        |> Decoder.required "url"
+                            (Decoder.string
+                                |> Decoder.map
+                                    (\url ->
+                                        case url of
+                                            "/" ->
+                                                []
+
+                                            _ ->
+                                                is (String.startsWith "/" url) [ String.dropLeft 1 url ] [ url ]
+                                    )
+                            )
                         |> Decoder.required "title" Decoder.string
-                        |> Decoder.required "url" (Decoder.string |> Decoder.map handleURL)
                     )
         )
 

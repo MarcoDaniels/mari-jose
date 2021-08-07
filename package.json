@@ -16,7 +16,8 @@
     "start": "elm-pages dev",
     "build": "elm-pages build",
     "serve": "COCKPIT_MODE=serve ts-node utils/serve.ts",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "elm-pages": "elm-pages"
   },
   "dependencies": {
     "cockpit-http-client": "1.0.1",

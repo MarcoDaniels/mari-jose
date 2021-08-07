@@ -1,8 +1,6 @@
-module Element.Consent exposing (consent)
+module Element.Consent exposing (Consent, CookieBanner, consent)
 
-import Context exposing (Consent, ConsentMsg(..), Element, Msg(..))
 import Css
-import Data.Type exposing (CookieBanner)
 import Element.Button exposing (button)
 import Element.Empty exposing (emptyElement)
 import Element.Icon exposing (icon)
@@ -15,8 +13,16 @@ import Style.Container exposing (containerStyle)
 import Style.Theme exposing (useColor, useColorTheme)
 
 
-consent : Consent -> CookieBanner -> Element
-consent { accepted } { title, content } =
+type alias Consent =
+    { accepted : Bool }
+
+
+type alias CookieBanner =
+    { title : String, content : String }
+
+
+consent : Consent -> CookieBanner -> msg -> Html.Html msg
+consent { accepted } { title, content } onClick =
     is accepted
         emptyElement
         (Html.div
@@ -53,7 +59,8 @@ consent { accepted } { title, content } =
                         ]
                     ]
                     [ button.primary
-                        [ Html.onClick (ConsentOp <| ConsentWrite), Html.css [ Css.padding <| Css.px 10 ] ]
+                        -- [ Html.onClick (ConsentOp <| ConsentWrite), Html.css [ Css.padding <| Css.px 10 ] ]
+                        [ Html.onClick onClick, Html.css [ Css.padding <| Css.px 10 ] ]
                         [ Html.text "Aceitar Cookies" ]
                     ]
                 ]

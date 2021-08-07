@@ -1,4 +1,4 @@
-module Element.Link exposing (link)
+module Element.Link exposing (Link, link)
 
 import Context exposing (StyledElement)
 import Css
@@ -9,7 +9,15 @@ import Style.Theme exposing (ThemeUse, useColorTheme, useDevice)
 import Style.Underline exposing (underlineStyle)
 
 
-link : ThemeUse (String -> StyledElement)
+type alias Link =
+    { text : String, url : String }
+
+
+
+-- TODO: refactor link to be of link type extending a "type" (image, icon, text")
+
+
+link : ThemeUse (String -> StyledElement msg)
 link =
     { primary =
         \href attributes ->
