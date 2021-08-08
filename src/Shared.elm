@@ -1,12 +1,13 @@
-module Shared exposing (Data, Model, Msg(..), SharedMsg(..), template)
+port module Shared exposing (Data, Model, Msg(..), template)
 
 import Browser.Navigation
 import Cockpit exposing (singletonEntry)
 import DataSource
-import Element.Consent exposing (CookieBanner)
+import Element.Consent exposing (Consent, CookieBanner, consent)
 import Element.Footer exposing (Footer, footer)
 import Element.Link exposing (Link)
 import Element.Navigation exposing (Navigation, navigation)
+import Element.Overlay exposing (overlay)
 import Html as ElmHtml
 import Html.Styled as Html
 import OptimizedDecoder as Decoder exposing (Decoder)
@@ -20,6 +21,12 @@ import Style.Theme exposing (useTheme)
 import View exposing (View)
 
 
+port consentRead : (Consent -> msg) -> Sub msg
+
+
+port consentWrite : Consent -> Cmd msg
+
+
 template : SharedTemplate Msg Model Data msg
 template =
     { init = init
@@ -31,6 +38,11 @@ template =
     }
 
 
+type ConsentMsg
+    = ConsentRead Consent
+    | ConsentWrite
+
+
 type Msg
     = OnPageChange
         { path : Path
@@ -38,7 +50,7 @@ type Msg
         , fragment : Maybe String
         }
     | MenuOp Bool
-    | SharedMsg SharedMsg
+    | ConsentOp ConsentMsg
 
 
 
@@ -60,12 +72,12 @@ type alias Data =
     }
 
 
-type SharedMsg
-    = NoOp
+type alias Consent =
+    { accepted : Bool }
 
 
 type alias Model =
-    { menuExpand : Bool }
+    { consent : Consent, menuExpand : Bool }
 
 
 init :
@@ -83,7 +95,7 @@ init :
             }
     -> ( Model, Cmd Msg )
 init _ _ _ =
-    ( { menuExpand = False }, Cmd.none )
+    ( { consent = { accepted = True }, menuExpand = False }, Cmd.none )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -95,13 +107,18 @@ update msg model =
         MenuOp expand ->
             ( { model | menuExpand = expand }, Cmd.none )
 
-        SharedMsg _ ->
-            ( model, Cmd.none )
+        ConsentOp consent ->
+            case consent of
+                ConsentRead state ->
+                    ( { model | consent = state }, Cmd.none )
+
+                ConsentWrite ->
+                    ( { model | consent = { accepted = True } }, consentWrite { accepted = True } )
 
 
 subscriptions : Path -> Model -> Sub Msg
 subscriptions _ _ =
-    Sub.none
+    Sub.batch [ Sub.map ConsentOp (consentRead ConsentRead) ]
 
 
 data : DataSource.DataSource Data
@@ -127,8 +144,15 @@ view sharedData page model toMsg pageView =
                 |> Html.map toMsg
             , Html.article [] pageView.body
             , footer sharedData.footer
-
-            -- TODO: implement cookie consent
+            , overlay
+                model.menuExpand
+                (MenuOp <| not model.menuExpand)
+                |> Html.map toMsg
+            , consent
+                model.consent
+                sharedData.cookie
+                (ConsentOp <| ConsentWrite)
+                |> Html.map toMsg
             ]
     , title = pageView.title
     }

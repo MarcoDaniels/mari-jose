@@ -59,7 +59,6 @@ consent { accepted } { title, content } onClick =
                         ]
                     ]
                     [ button.primary
-                        -- [ Html.onClick (ConsentOp <| ConsentWrite), Html.css [ Css.padding <| Css.px 10 ] ]
                         [ Html.onClick onClick, Html.css [ Css.padding <| Css.px 10 ] ]
                         [ Html.text "Aceitar Cookies" ]
                     ]
