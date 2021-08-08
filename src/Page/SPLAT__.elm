@@ -74,6 +74,7 @@ pageData =
                             (Decoder.string
                                 |> Decoder.map
                                     (\url ->
+                                        -- TODO: check for empty string
                                         case url of
                                             "/" ->
                                                 []

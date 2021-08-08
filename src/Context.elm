@@ -3,31 +3,16 @@ module Context exposing (..)
 import Html.Styled as Html
 
 
-type ConsentMsg
-    = ConsentRead Consent
-    | ConsentWrite
+
+-- TODO move to Element -> replace element to Html.Html
 
 
-type Msg
-    = MenuOp Bool
-    | ConsentOp ConsentMsg
-    | PreviewOp String
-
-
-type alias Consent =
-    { accepted : Bool }
-
-
-type alias Model =
-    { consent : Consent, menuExpand : Bool }
+type alias Element msg =
+    Html.Html msg
 
 
 
---TODO replace element to Html.Html
-
-
-type alias Element =
-    Html.Html Msg
+-- TODO: move it to Elment -> ElementStyled
 
 
 type alias StyledElement msg =
