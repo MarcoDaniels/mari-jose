@@ -1,21 +1,17 @@
 port module Shared exposing (Data, Model, Msg(..), template)
 
 import Browser.Navigation
-import Cockpit exposing (singletonEntry)
-import DataSource
 import Element.Consent exposing (Consent, CookieBanner, consent)
 import Element.Footer exposing (Footer, footer)
-import Element.Link exposing (Link)
 import Element.Navigation exposing (Navigation, navigation)
 import Element.Overlay exposing (overlay)
 import Html as ElmHtml
 import Html.Styled as Html
-import OptimizedDecoder as Decoder exposing (Decoder)
-import OptimizedDecoder.Pipeline as Decoder
 import Pages.Flags
 import Pages.PageUrl exposing (PageUrl)
 import Path exposing (Path)
 import Route exposing (Route)
+import Settings exposing (Settings, settingsData)
 import SharedTemplate exposing (SharedTemplate)
 import Style.Theme exposing (useTheme)
 import View exposing (View)
@@ -32,7 +28,7 @@ template =
     { init = init
     , update = update
     , view = view
-    , data = data
+    , data = settingsData
     , subscriptions = subscriptions
     , onPageChange = Just OnPageChange
     }
@@ -53,23 +49,8 @@ type Msg
     | ConsentOp ConsentMsg
 
 
-
--- TODO: where does Site type live?
-
-
-type alias Site =
-    { title : String
-    , description : String
-    , baseURL : String
-    }
-
-
 type alias Data =
-    { navigation : Navigation
-    , footer : Footer
-    , cookie : CookieBanner
-    , site : Site
-    }
+    Settings
 
 
 type alias Consent =
@@ -121,20 +102,16 @@ subscriptions _ _ =
     Sub.batch [ Sub.map ConsentOp (consentRead ConsentRead) ]
 
 
-data : DataSource.DataSource Data
-data =
-    singletonEntry "marijoseSettings" dataDecoder
-
-
 view :
     Data
     -> { path : Path, route : Maybe Route }
     -> Model
     -> (Msg -> msg)
     -> View msg
-    -> { body : ElmHtml.Html msg, title : String }
+    -> { title : String, body : ElmHtml.Html msg }
 view sharedData page model toMsg pageView =
-    { body =
+    { title = pageView.title
+    , body =
         useTheme
             [ navigation
                 sharedData.navigation
@@ -154,42 +131,4 @@ view sharedData page model toMsg pageView =
                 (ConsentOp <| ConsentWrite)
                 |> Html.map toMsg
             ]
-    , title = pageView.title
     }
-
-
-linkValueDecoder : Decoder Link
-linkValueDecoder =
-    Decoder.succeed Link
-        |> Decoder.requiredAt [ "value", "title" ] Decoder.string
-        |> Decoder.requiredAt [ "value", "url" ] Decoder.string
-
-
-dataDecoder : Decoder Data
-dataDecoder =
-    Decoder.succeed Data
-        |> Decoder.required "navigation"
-            (Decoder.succeed Navigation
-                |> Decoder.required "brand"
-                    (Decoder.succeed Link
-                        |> Decoder.required "title" Decoder.string
-                        |> Decoder.required "url" Decoder.string
-                    )
-                |> Decoder.required "menu" (Decoder.list linkValueDecoder)
-                |> Decoder.required "social" (Decoder.list linkValueDecoder)
-            )
-        |> Decoder.required "footer"
-            (Decoder.succeed Footer
-                |> Decoder.required "links" (Decoder.list linkValueDecoder)
-            )
-        |> Decoder.required "cookie"
-            (Decoder.succeed CookieBanner
-                |> Decoder.required "title" Decoder.string
-                |> Decoder.required "content" Decoder.string
-            )
-        |> Decoder.required "site"
-            (Decoder.succeed Site
-                |> Decoder.required "title" Decoder.string
-                |> Decoder.required "description" Decoder.string
-                |> Decoder.required "baseURL" Decoder.string
-            )

@@ -45,7 +45,11 @@ routes =
 
 
 type alias Data =
-    { url : List String, title : String }
+    { url : List String
+    , title : String
+    , description : String
+    , content : Maybe String
+    }
 
 
 data : RouteParams -> DataSource Data
@@ -59,7 +63,7 @@ data route =
                         item
 
                     Nothing ->
-                        { title = "", url = [ "" ] }
+                        { url = [ "" ], title = "", description = "", content = Nothing }
             )
 
 
@@ -74,16 +78,17 @@ pageData =
                             (Decoder.string
                                 |> Decoder.map
                                     (\url ->
-                                        -- TODO: check for empty string
-                                        case url of
-                                            "/" ->
+                                        case is (String.startsWith "/" url) (String.dropLeft 1 url) url of
+                                            "" ->
                                                 []
 
-                                            _ ->
-                                                is (String.startsWith "/" url) [ String.dropLeft 1 url ] [ url ]
+                                            other ->
+                                                [ other ]
                                     )
                             )
                         |> Decoder.required "title" Decoder.string
+                        |> Decoder.required "description" Decoder.string
+                        |> Decoder.required "title" (Decoder.maybe Decoder.string)
                     )
         )
 
@@ -92,16 +97,16 @@ head : StaticPayload Data RouteParams -> List Head.Tag
 head static =
     Seo.summary
         { canonicalUrlOverride = Nothing
-        , siteName = "elm-pages"
+        , siteName = "TODO"
         , image =
             { url = Pages.Url.external "TODO"
-            , alt = "elm-pages logo"
+            , alt = "TODO"
             , dimensions = Nothing
             , mimeType = Nothing
             }
-        , description = "TODO"
+        , description = static.data.description
         , locale = Nothing
-        , title = "TODO title"
+        , title = static.data.title
         }
         |> Seo.website
 
@@ -116,6 +121,6 @@ view maybeUrl sharedModel static =
     , body =
         [ Html.div
             [ Html.css [ Css.textDecoration Css.underline ] ]
-            [ Html.text static.data.title ]
+            [ Html.text (Maybe.withDefault "h" static.data.content) ]
         ]
     }

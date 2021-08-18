@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "cockpit-http-client": "1.0.1",
-    "elm-pages": "2.1.4",
+    "elm-pages": "2.1.7",
     "environment-decoder": "1.1.0"
   },
   "devDependencies": {

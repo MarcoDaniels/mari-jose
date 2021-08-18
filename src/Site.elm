@@ -1,40 +1,37 @@
 module Site exposing (config)
 
-import DataSource
 import Head
 import Pages.Manifest as Manifest
 import Path
+import Settings exposing (Settings, settingsData)
 import SiteConfig exposing (SiteConfig)
 
 
 type alias Data =
-    ()
+    Settings
 
 
 config : SiteConfig Data
 config =
-    { data = data
-    , canonicalUrl = "https://example.com"
+    { data = settingsData
+    , canonicalUrl = "" -- TODO: needs to be dynamic
     , manifest = manifest
     , head = head
     }
 
 
-data : DataSource.DataSource Data
-data =
-    DataSource.succeed ()
-
-
 head : Data -> List Head.Tag
-head _ =
-    [ Head.sitemapLink "/sitemap.xml" ]
+head data =
+    [ Head.sitemapLink "/sitemap.xml"
+    , Head.canonicalLink (Just data.config.baseURL)
+    ]
 
 
 manifest : Data -> Manifest.Config
-manifest _ =
+manifest data =
     Manifest.init
-        { name = "Site Name"
-        , description = "Description"
-        , startUrl = "" |> Path.fromString
+        { name = data.config.title
+        , description = data.config.description
+        , startUrl = data.config.baseURL |> Path.fromString
         , icons = []
         }
