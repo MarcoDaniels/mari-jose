@@ -115,7 +115,7 @@ view sharedData page model toMsg pageView =
         useTheme
             [ navigation
                 sharedData.navigation
-                { title = "", image = "" }
+                { title = sharedData.site.title, image = sharedData.site.image }
                 model.menuExpand
                 (MenuOp <| not model.menuExpand)
                 |> Html.map toMsg

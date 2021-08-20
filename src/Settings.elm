@@ -10,10 +10,11 @@ import OptimizedDecoder as Decoder exposing (Decoder)
 import OptimizedDecoder.Pipeline as Decoder
 
 
-type alias Config =
+type alias Site =
     { title : String
     , description : String
     , baseURL : String
+    , image : String
     }
 
 
@@ -21,7 +22,7 @@ type alias Settings =
     { navigation : Navigation
     , footer : Footer
     , cookie : CookieBanner
-    , config : Config
+    , site : Site
     }
 
 
@@ -60,8 +61,9 @@ settingsDecoder =
                 |> Decoder.required "content" Decoder.string
             )
         |> Decoder.required "site"
-            (Decoder.succeed Config
+            (Decoder.succeed Site
                 |> Decoder.required "title" Decoder.string
                 |> Decoder.required "description" Decoder.string
                 |> Decoder.required "baseURL" Decoder.string
+                |> Decoder.requiredAt [ "image", "path" ] Decoder.string
             )
