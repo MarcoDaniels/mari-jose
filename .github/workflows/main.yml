@@ -31,8 +31,6 @@ jobs:
           node-version: 14
       - name: Install Dependencies
         run: yarn --frozen-lockfile
-      - name: Sync Content
-        run: yarn sync
       - name: Build Application
         run: yarn build
       - name: Sync Build
