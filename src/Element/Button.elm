@@ -1,12 +1,12 @@
 module Element.Button exposing (button)
 
-import Context exposing (StyledElement)
 import Css
+import Element exposing (ElementStyled)
 import Html.Styled as Html
 import Style.Theme exposing (ThemeUse, useColor, useColorTheme)
 
 
-button : ThemeUse (StyledElement msg)
+button : ThemeUse (ElementStyled msg)
 button =
     { primary =
         Html.styled Html.button

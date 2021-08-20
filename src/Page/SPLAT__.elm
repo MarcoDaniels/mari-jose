@@ -1,6 +1,9 @@
 module Page.SPLAT__ exposing (Data, Model, Msg, page)
 
 import Cockpit exposing (collectionEntries)
+import Content.Decoder exposing (contentDecoder)
+import Content.Type exposing (Content)
+import Content.View exposing (dataContent)
 import Css
 import DataSource exposing (DataSource)
 import Head
@@ -48,7 +51,7 @@ type alias Data =
     { url : List String
     , title : String
     , description : String
-    , content : Maybe String
+    , content : Maybe (List Content)
     }
 
 
@@ -88,7 +91,7 @@ pageData =
                             )
                         |> Decoder.required "title" Decoder.string
                         |> Decoder.required "description" Decoder.string
-                        |> Decoder.required "title" (Decoder.maybe Decoder.string)
+                        |> Decoder.required "content" (Decoder.maybe (Decoder.list contentDecoder))
                     )
         )
 
@@ -118,9 +121,5 @@ view :
     -> View Msg
 view maybeUrl sharedModel static =
     { title = static.data.title
-    , body =
-        [ Html.div
-            [ Html.css [ Css.textDecoration Css.underline ] ]
-            [ Html.text (Maybe.withDefault "h" static.data.content) ]
-        ]
+    , body = dataContent static.data.content
     }

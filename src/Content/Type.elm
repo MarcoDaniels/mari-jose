@@ -1,27 +1,15 @@
-module Data.Type exposing (..)
+module Content.Type exposing (..)
 
 
-type alias PageData =
-    { data : Data }
-
-
-type alias Data =
-    { title : String
-    , description : String
-    , url : String
-    , content : Maybe (List DataContent)
-    }
-
-
-type alias DataContent =
-    { field : Field, value : Content }
+type alias Content =
+    { field : Field, value : ContentData }
 
 
 type alias Field =
     { fieldType : String, label : String }
 
 
-type Content
+type ContentData
     = ContentMarkdown String
     | ContentAsset AssetContent
     | ContentHero HeroContent

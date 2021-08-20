@@ -1,6 +1,7 @@
 module Element.Consent exposing (Consent, CookieBanner, consent)
 
 import Css
+import Element exposing (Element)
 import Element.Button exposing (button)
 import Element.Empty exposing (emptyElement)
 import Element.Icon exposing (icon)
@@ -21,7 +22,7 @@ type alias CookieBanner =
     { title : String, content : String }
 
 
-consent : Consent -> CookieBanner -> msg -> Html.Html msg
+consent : Consent -> CookieBanner -> msg -> Element msg
 consent { accepted } { title, content } onClick =
     is accepted
         emptyElement
