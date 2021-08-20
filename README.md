@@ -4,6 +4,6 @@
 ## TODO
 
 - [x] images for development
-- [ ] cleanup TypeScript
+- [x] cleanup TypeScript
 - [ ] preview
 - [ ] sitemap
