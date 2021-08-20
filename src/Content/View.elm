@@ -1,4 +1,4 @@
-module Content.View exposing (dataContent)
+module Content.View exposing (contentView)
 
 import Content.Type exposing (Content, ContentData(..))
 import Element exposing (Element)
@@ -13,8 +13,8 @@ import Html.Styled.Attributes as Html
 import Style.Container exposing (containerStyle)
 
 
-dataContent : Maybe (List Content) -> List (Element msg)
-dataContent maybeContents =
+contentView : Maybe (List Content) -> List (Element msg)
+contentView maybeContents =
     case maybeContents of
         Just cont ->
             cont

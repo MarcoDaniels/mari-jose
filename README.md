@@ -5,5 +5,5 @@
 
 - [x] images for development
 - [x] cleanup TypeScript
-- [ ] preview
+- [x] preview
 - [ ] sitemap
