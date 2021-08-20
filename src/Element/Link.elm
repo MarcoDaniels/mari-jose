@@ -1,7 +1,7 @@
 module Element.Link exposing (Link, link)
 
-import Context exposing (StyledElement)
 import Css
+import Element exposing (ElementStyled)
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Is exposing (is)
@@ -17,7 +17,7 @@ type alias Link =
 -- TODO: refactor link to be of link type extending a "type" (image, icon, text")
 
 
-link : ThemeUse (String -> StyledElement msg)
+link : ThemeUse (String -> ElementStyled msg)
 link =
     { primary =
         \href attributes ->

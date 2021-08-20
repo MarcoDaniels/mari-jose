@@ -2,6 +2,7 @@ module Element.Overlay exposing (..)
 
 import Css
 import Css.Transitions as Transitions
+import Element exposing (Element)
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Html.Styled.Events as Html
@@ -9,7 +10,7 @@ import Is exposing (is)
 import Style.Theme exposing (useColor, useColorTheme)
 
 
-overlay : Bool -> msg -> Html.Html msg
+overlay : Bool -> msg -> Element msg
 overlay open onClick =
     Html.div
         [ Html.onClick onClick

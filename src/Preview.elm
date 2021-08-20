@@ -1,10 +1,10 @@
 port module Preview exposing (..)
 
 import Browser
-import Context exposing (Msg(..))
 import Data.Decoder exposing (dataDecoder)
 import Data.Type exposing (Data)
 import Data.View exposing (dataContent)
+import Element exposing (Msg(..))
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import OptimizedDecoder exposing (decodeString)

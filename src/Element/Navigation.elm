@@ -1,7 +1,7 @@
 module Element.Navigation exposing (Navigation, navigation)
 
-import Context exposing (StyledElement)
 import Css
+import Element exposing (Element, ElementStyled)
 import Element.Button exposing (button)
 import Element.Empty exposing (emptyElement)
 import Element.Icon exposing (icon)
@@ -23,7 +23,7 @@ type alias Navigation =
     }
 
 
-wrapper : StyledElement msg
+wrapper : ElementStyled msg
 wrapper =
     Html.styled Html.header
         [ useColorTheme.primary
@@ -37,7 +37,7 @@ wrapper =
         ]
 
 
-listItem : StyledElement msg
+listItem : ElementStyled msg
 listItem =
     Html.styled Html.li
         [ Css.paddingLeft <| Css.px 25
@@ -52,7 +52,7 @@ type alias Site =
     { title : String, image : String }
 
 
-navigation : Navigation -> Site -> Bool -> msg -> Html.Html msg
+navigation : Navigation -> Site -> Bool -> msg -> Element msg
 navigation data site expanded onClick =
     wrapper
         []

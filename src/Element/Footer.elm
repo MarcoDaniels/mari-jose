@@ -1,6 +1,7 @@
 module Element.Footer exposing (Footer, footer)
 
 import Css
+import Element exposing (Element)
 import Element.Link exposing (Link, link)
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
@@ -12,7 +13,7 @@ type alias Footer =
     { links : List Link }
 
 
-footer : Footer -> Html.Html msg
+footer : Footer -> Element msg
 footer data =
     Html.footer
         [ Html.css

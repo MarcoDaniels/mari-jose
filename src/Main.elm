@@ -1,10 +1,10 @@
 port module Main exposing (..)
 
 import Color
-import Context exposing (Consent, ConsentMsg(..), Model, Msg(..))
 import Data.Decoder exposing (pageDataDecoder)
 import Data.Type exposing (PageData)
 import Data.View exposing (dataView)
+import Element exposing (Consent, ConsentMsg(..), Model, Msg(..))
 import Metadata exposing (Metadata, metadataDecoder)
 import OptimizedDecoder exposing (decoder, errorToString)
 import Pages exposing (images, internals, pages)

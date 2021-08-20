@@ -1,8 +1,8 @@
 module Element.Hero exposing (..)
 
-import Context exposing (Element)
+import Content.Type exposing (HeroContent)
 import Css
-import Data.Type exposing (HeroContent)
+import Element exposing (Element)
 import Element.Asset exposing (asset)
 import Element.Empty exposing (emptyElement)
 import Element.Markdown exposing (markdown)
@@ -12,7 +12,7 @@ import Style.Container exposing (containerStyle)
 import Style.Theme exposing (useColorTheme, useDevice)
 
 
-hero : HeroContent -> Element
+hero : HeroContent -> Element msg
 hero content =
     Html.div
         [ Html.css

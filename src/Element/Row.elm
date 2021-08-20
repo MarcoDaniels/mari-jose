@@ -1,8 +1,8 @@
 module Element.Row exposing (..)
 
-import Context exposing (Element)
+import Content.Type exposing (RowContent, RowContentValue(..))
 import Css
-import Data.Type exposing (RowContent, RowContentValue(..))
+import Element exposing (Element)
 import Element.Asset exposing (asset)
 import Element.Empty exposing (emptyElement)
 import Element.Markdown exposing (markdown)
@@ -22,7 +22,7 @@ rowItem =
         ]
 
 
-row : List RowContent -> Element
+row : List RowContent -> Element msg
 row content =
     Html.div
         [ Html.css

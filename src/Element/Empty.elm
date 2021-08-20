@@ -1,8 +1,9 @@
 module Element.Empty exposing (emptyElement)
 
+import Element exposing (Element)
 import Html.Styled as Html
 
 
-emptyElement : Html.Html msg
+emptyElement : Element msg
 emptyElement =
     Html.text ""

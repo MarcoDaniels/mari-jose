@@ -1,9 +1,9 @@
 module Element.Asset exposing (asset)
 
-import Context exposing (Element)
+import Content.Type exposing (AssetContent)
 import Css
 import Css.Media
-import Data.Type exposing (AssetContent)
+import Element exposing (Element)
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Image exposing (useImageAPI)
@@ -16,7 +16,7 @@ type alias AssetElement t =
     { default : t, hero : t, row : Int -> t }
 
 
-asset : AssetElement (AssetContent -> Maybe (List Css.Style) -> Element)
+asset : AssetElement (AssetContent -> Maybe (List Css.Style) -> Element msg)
 asset =
     { default =
         \content maybeStyle ->
@@ -50,7 +50,7 @@ asset =
     }
 
 
-picture : ShirtSizes Int -> AssetContent -> Maybe (List Css.Style) -> Element
+picture : ShirtSizes Int -> AssetContent -> Maybe (List Css.Style) -> Element msg
 picture sizes content maybeStyles =
     Html.node "picture"
         []

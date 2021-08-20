@@ -1,14 +1,14 @@
 module Element.IFrame exposing (iframe)
 
-import Context exposing (Element)
+import Content.Type exposing (IframeContent)
 import Css
-import Data.Type exposing (IframeContent)
+import Element exposing (Element)
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Style.Theme exposing (useDevice)
 
 
-iframe : IframeContent -> Element
+iframe : IframeContent -> Element msg
 iframe content =
     Html.iframe
         [ Html.css
