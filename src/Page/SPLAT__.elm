@@ -3,20 +3,15 @@ module Page.SPLAT__ exposing (Data, Model, Msg, page)
 import Cockpit exposing (collectionEntries)
 import Content.Decoder exposing (contentDecoder)
 import Content.Type exposing (Content)
-import Content.View exposing (dataContent)
-import Css
+import Content.View exposing (contentView)
 import DataSource exposing (DataSource)
 import Head
 import Head.Seo as Seo
-import Html.Styled as Html
-import Html.Styled.Attributes as Html
 import Is exposing (is)
 import OptimizedDecoder as Decoder
 import OptimizedDecoder.Pipeline as Decoder
 import Page exposing (Page, StaticPayload)
-import Pages.PageUrl exposing (PageUrl)
 import Pages.Url
-import Shared
 import View exposing (View)
 
 
@@ -28,6 +23,14 @@ type alias Msg =
     Never
 
 
+type alias Data =
+    { url : List String
+    , title : String
+    , description : String
+    , content : Maybe (List Content)
+    }
+
+
 type alias RouteParams =
     { splat : List String }
 
@@ -37,22 +40,14 @@ page =
     Page.prerender
         { data = data
         , head = head
-        , routes = routes
+        , routes =
+            pageData
+                |> DataSource.map
+                    (List.map
+                        (\item -> { splat = item.url })
+                    )
         }
-        |> Page.buildNoState { view = view }
-
-
-routes : DataSource (List RouteParams)
-routes =
-    pageData |> DataSource.map (List.map (\item -> { splat = item.url }))
-
-
-type alias Data =
-    { url : List String
-    , title : String
-    , description : String
-    , content : Maybe (List Content)
-    }
+        |> Page.buildNoState { view = \_ _ -> view }
 
 
 data : RouteParams -> DataSource Data
@@ -114,12 +109,8 @@ head static =
         |> Seo.website
 
 
-view :
-    Maybe PageUrl
-    -> Shared.Model
-    -> StaticPayload Data RouteParams
-    -> View Msg
-view maybeUrl sharedModel static =
+view : StaticPayload Data RouteParams -> View Msg
+view static =
     { title = static.data.title
-    , body = dataContent static.data.content
+    , body = contentView static.data.content
     }
