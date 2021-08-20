@@ -23,15 +23,15 @@ config =
 head : Data -> List Head.Tag
 head data =
     [ Head.sitemapLink "/sitemap.xml"
-    , Head.canonicalLink (Just data.config.baseURL)
+    , Head.canonicalLink (Just data.site.baseURL)
     ]
 
 
 manifest : Data -> Manifest.Config
 manifest data =
     Manifest.init
-        { name = data.config.title
-        , description = data.config.description
-        , startUrl = data.config.baseURL |> Path.fromString
+        { name = data.site.title
+        , description = data.site.description
+        , startUrl = data.site.baseURL |> Path.fromString
         , icons = []
         }

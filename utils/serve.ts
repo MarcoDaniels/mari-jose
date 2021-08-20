@@ -21,18 +21,21 @@ app.use('/image/api', (req, res) => {
     }
 })
 
-// on start mode point proxy to elm app
-if (env.COCKPIT_MODE === 'start') {
-    app.use(
-        '*',
-        createProxyMiddleware({
-            target: 'http://localhost:3000',
-            changeOrigin: true,
-        }),
-    )
-} else if (env.COCKPIT_MODE === 'serve') {
-    // on serve mode point application to dist folder
-    app.use(express.static(path.join(`${__dirname}/../dist/`)))
+switch (env.COCKPIT_MODE) {
+    case 'start':
+        // on start mode point proxy to elm app
+        app.use(
+            '*',
+            createProxyMiddleware({
+                target: 'http://localhost:1234',
+                changeOrigin: true,
+            }),
+        )
+        break
+    case 'serve':
+        // on serve mode point application to dist folder
+        app.use(express.static(path.join(`${__dirname}/../dist/`)))
+        break
 }
 
 app.listen(8000)
