@@ -3,7 +3,7 @@ module Style.Theme exposing (ShirtSizes, ThemeUse, useColor, useColorTheme, useD
 import Css
 import Css.Global
 import Css.Media
-import Html as ElmHtml
+import Element exposing (BaseHtml, Element)
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
 
@@ -92,7 +92,7 @@ useTypography =
     }
 
 
-globalStyle : List (Html.Html msg)
+globalStyle : List (Element msg)
 globalStyle =
     [ Css.Global.global
         [ Css.Global.body
@@ -109,7 +109,7 @@ globalStyle =
     ]
 
 
-useTheme : List (Html.Html msg) -> ElmHtml.Html msg
+useTheme : List (Element msg) -> BaseHtml msg
 useTheme content =
     Html.div
         [ Html.css

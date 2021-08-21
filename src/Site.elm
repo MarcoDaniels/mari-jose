@@ -14,24 +14,20 @@ type alias Data =
 config : SiteConfig Data
 config =
     { data = settingsData
-    , canonicalUrl = "" -- TODO: needs to be dynamic
-    , manifest = manifest
-    , head = head
+
+    -- TODO: needs to be dynamic
+    , canonicalUrl = "https://marijose.pt"
+    , manifest =
+        \data ->
+            Manifest.init
+                { name = data.site.title
+                , description = data.site.description
+                , startUrl = data.site.baseURL |> Path.fromString
+                , icons = []
+                }
+    , head =
+        \data ->
+            [ Head.sitemapLink "/sitemap.xml"
+            , Head.canonicalLink (Just data.site.baseURL)
+            ]
     }
-
-
-head : Data -> List Head.Tag
-head data =
-    [ Head.sitemapLink "/sitemap.xml"
-    , Head.canonicalLink (Just data.site.baseURL)
-    ]
-
-
-manifest : Data -> Manifest.Config
-manifest data =
-    Manifest.init
-        { name = data.site.title
-        , description = data.site.description
-        , startUrl = data.site.baseURL |> Path.fromString
-        , icons = []
-        }
