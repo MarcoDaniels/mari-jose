@@ -2,7 +2,6 @@ module Element.Icon exposing (icon)
 
 import Css
 import Element exposing (Element)
-import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Svg.Styled as Svg
 import Svg.Styled.Attributes as SvgAttr
@@ -13,10 +12,10 @@ type alias IconSettings =
 
 
 icon :
-    { facebook : IconSettings -> Html.Html msg
-    , burger : IconSettings -> Html.Html msg
-    , close : IconSettings -> Html.Html msg
-    , cookie : IconSettings -> Html.Html msg
+    { facebook : IconSettings -> Element msg
+    , burger : IconSettings -> Element msg
+    , close : IconSettings -> Element msg
+    , cookie : IconSettings -> Element msg
     }
 icon =
     { facebook =

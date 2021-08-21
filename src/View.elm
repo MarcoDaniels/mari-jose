@@ -1,10 +1,11 @@
 module View exposing (View, map)
 
+import Element exposing (Element)
 import Html.Styled
 
 
 type alias View msg =
-    { title : String, body : List (Html.Styled.Html msg) }
+    { title : String, body : List (Element msg) }
 
 
 map : (msg1 -> msg2) -> View msg1 -> View msg2
