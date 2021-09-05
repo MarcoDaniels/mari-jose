@@ -30,12 +30,18 @@ rowContentDecoder =
             (field "field" fieldDecoder
                 |> andThen
                     (\field ->
-                        case field.fieldType of
-                            "markdown" ->
-                                succeed RowContentMarkdown |> required "value" string
+                        case ( field.fieldType, field.label ) of
+                            ( "markdown", _ ) ->
+                                succeed RowContentMarkdown
+                                    |> required "value" string
 
-                            "asset" ->
-                                succeed RowContentAsset |> required "value" assetDecoder
+                            ( "asset", _ ) ->
+                                succeed RowContentAsset
+                                    |> required "value" assetDecoder
+
+                            ( "repeater", "Column" ) ->
+                                succeed RowContentColumn
+                                    |> required "value" (list rowContentDecoder)
 
                             _ ->
                                 succeed RowContentUnknown

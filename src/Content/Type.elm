@@ -35,6 +35,10 @@ type alias IframeContent =
     { source : String, title : String, ratio : String }
 
 
+
+-- TODO: rename row to grid
+
+
 type alias RowContent =
     { field : Field, value : RowContentValue }
 
@@ -42,4 +46,5 @@ type alias RowContent =
 type RowContentValue
     = RowContentMarkdown String
     | RowContentAsset AssetContent
+    | RowContentColumn (List RowContent)
     | RowContentUnknown

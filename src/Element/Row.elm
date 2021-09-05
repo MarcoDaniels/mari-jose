@@ -53,7 +53,27 @@ row content =
                                 [ Html.css [ rowItem ] ]
                                 [ asset.row (List.length content) assetContent Nothing ]
 
-                        RowContentUnknown ->
+                        RowContentColumn columnContent ->
+                            -- TODO: handle column content based on length
+                            Html.div []
+                                (columnContent
+                                    |> List.map
+                                        (\colItem ->
+                                            case colItem.value of
+                                                RowContentMarkdown colMarkdown ->
+                                                    Html.div [] <| markdown colMarkdown
+
+                                                RowContentAsset colAsset ->
+                                                    Html.div
+                                                        [ Html.css [] ]
+                                                        [ asset.row (List.length columnContent) colAsset Nothing ]
+
+                                                _ ->
+                                                    emptyElement
+                                        )
+                                )
+
+                        _ ->
                             emptyElement
                 )
         )
