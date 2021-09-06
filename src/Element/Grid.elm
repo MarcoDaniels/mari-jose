@@ -54,8 +54,16 @@ grid content =
                                 [ asset.grid (List.length content) assetContent Nothing ]
 
                         GridColumn columnContent ->
-                            -- TODO: handle column content based on length
-                            Html.div []
+                            Html.div
+                                [ Html.css
+                                    [ containerStyle
+                                    , centerStyle.column
+                                    , Css.justifyContent Css.spaceBetween
+                                    , Css.marginBottom <| Css.px 20
+                                    , Css.width (Css.pct (100 / toFloat (List.length columnContent)))
+                                    , useDevice.m [ Css.width <| Css.pct 100 ]
+                                    ]
+                                ]
                                 (columnContent
                                     |> List.map
                                         (\colItem ->
@@ -65,7 +73,7 @@ grid content =
 
                                                 GridAsset colAsset ->
                                                     Html.div
-                                                        [ Html.css [] ]
+                                                        [ Html.css [ centerStyle.inline, Css.width (Css.pct 60) ] ]
                                                         [ asset.grid (List.length columnContent) colAsset Nothing ]
 
                                                 _ ->
