@@ -1,6 +1,6 @@
 module Content.Decoder exposing (contentDecoder)
 
-import Content.Type exposing (AssetContent, Content, ContentData(..), Field, HeroContent, IframeContent, RowContent, RowContentValue(..))
+import Content.Type exposing (AssetContent, Content, ContentData(..), Field, GridContent, GridContentValue(..), HeroContent, IframeContent)
 import OptimizedDecoder exposing (Decoder, Error, andThen, field, int, list, maybe, string, succeed)
 import OptimizedDecoder.Pipeline exposing (custom, optional, required)
 
@@ -22,9 +22,9 @@ assetDecoder =
         |> optional "colors" (maybe (list string)) Nothing
 
 
-rowContentDecoder : Decoder RowContent
-rowContentDecoder =
-    succeed RowContent
+gridContentDecoder : Decoder GridContent
+gridContentDecoder =
+    succeed GridContent
         |> required "field" fieldDecoder
         |> custom
             (field "field" fieldDecoder
@@ -32,19 +32,19 @@ rowContentDecoder =
                     (\field ->
                         case ( field.fieldType, field.label ) of
                             ( "markdown", _ ) ->
-                                succeed RowContentMarkdown
+                                succeed GridMarkdown
                                     |> required "value" string
 
                             ( "asset", _ ) ->
-                                succeed RowContentAsset
+                                succeed GridAsset
                                     |> required "value" assetDecoder
 
                             ( "repeater", "Column" ) ->
-                                succeed RowContentColumn
-                                    |> required "value" (list rowContentDecoder)
+                                succeed GridColumn
+                                    |> required "value" (list gridContentDecoder)
 
                             _ ->
-                                succeed RowContentUnknown
+                                succeed GridUnknown
                     )
             )
 
@@ -74,9 +74,9 @@ contentDecoder =
                                             |> required "text" (maybe string)
                                         )
 
-                            ( "repeater", "Row" ) ->
-                                succeed ContentRow
-                                    |> required "value" (list rowContentDecoder)
+                            ( "repeater", "Grid" ) ->
+                                succeed ContentGrid
+                                    |> required "value" (list gridContentDecoder)
 
                             ( "set", "Iframe" ) ->
                                 succeed ContentIframe

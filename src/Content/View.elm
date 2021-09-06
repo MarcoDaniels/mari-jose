@@ -4,10 +4,10 @@ import Content.Type exposing (Content, ContentData(..))
 import Element exposing (Element)
 import Element.Asset exposing (asset)
 import Element.Empty exposing (emptyElement)
+import Element.Grid exposing (grid)
 import Element.Hero exposing (hero)
 import Element.IFrame exposing (iframe)
 import Element.Markdown exposing (markdown)
-import Element.Row exposing (row)
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Style.Container exposing (containerStyle)
@@ -30,8 +30,8 @@ contentView maybeContents =
                             ContentHero heroContent ->
                                 hero heroContent
 
-                            ContentRow rowContent ->
-                                row rowContent
+                            ContentGrid gridContent ->
+                                grid gridContent
 
                             ContentIframe iframeContent ->
                                 iframe iframeContent
