@@ -26,27 +26,25 @@ asset =
             in
             picture
                 (is landscape
-                    { s = 500, m = 700, l = 900, xl = 1200 }
-                    { s = 500, m = 700, l = 600, xl = 900 }
+                    { s = 500, m = 700, l = 900, xl = 1200, xxl = 1200 }
+                    { s = 500, m = 700, l = 600, xl = 900, xxl = 900 }
                 )
                 content
                 (is landscape
                     maybeStyle
                     (Just
-                        ([ Maybe.withDefault [] maybeStyle
-                         , [ Css.maxWidth <| Css.pct 50 ]
-                         ]
+                        ([ Maybe.withDefault [] maybeStyle, [ Css.maxWidth <| Css.pct 50 ] ]
                             |> List.concat
                         )
                     )
                 )
     , hero =
         picture
-            { s = 500, m = 700, l = 900, xl = 1400 }
+            { s = 500, m = 700, l = 900, xl = 1400, xxl = 1400 }
     , grid =
         \count ->
             picture
-                { s = 500, m = 700, l = 1000 // count, xl = 1200 // count }
+                { s = 500, m = 700, l = 1000 // count, xl = 1200 // count, xxl = 1200 // count }
     }
 
 

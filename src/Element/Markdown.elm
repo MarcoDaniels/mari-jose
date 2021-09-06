@@ -35,16 +35,17 @@ markdownRenderer =
             case level of
                 Block.H1 ->
                     Html.h1
-                        [ Html.id (textToId rawText)
-                        , Html.css [ useTypography.xl ]
-                        ]
+                        [ Html.id (textToId rawText), Html.css [ useTypography.xxl ] ]
                         children
 
                 Block.H2 ->
-                    Html.h2 [ Html.id (textToId rawText) ] children
+                    Html.h2
+                        [ Html.id (textToId rawText), Html.css [ useTypography.xl ] ]
+                        children
 
                 Block.H3 ->
-                    Html.h3 [ Html.id (textToId rawText) ] children
+                    Html.h3 [ Html.id (textToId rawText), Html.css [ useTypography.xl ] ]
+                        children
 
                 Block.H4 ->
                     Html.h4 [ Html.id (textToId rawText) ] children

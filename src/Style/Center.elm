@@ -10,6 +10,7 @@ centerStyle =
             [ Css.displayFlex
             , Css.justifyContent Css.center
             , Css.flexDirection Css.row
+            , Css.margin2 (Css.px 0) Css.auto
             ]
     , column =
         Css.batch

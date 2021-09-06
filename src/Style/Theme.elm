@@ -9,12 +9,12 @@ import Html.Styled.Attributes as Html
 
 
 type alias ShirtSizes t =
-    { s : t, m : t, l : t, xl : t }
+    { s : t, m : t, l : t, xl : t, xxl : t }
 
 
 useWidth : ShirtSizes Css.Px
 useWidth =
-    { s = Css.px 550, m = Css.px 750, l = Css.px 1000, xl = Css.px 1200 }
+    { s = Css.px 550, m = Css.px 750, l = Css.px 1000, xl = Css.px 1200, xxl = Css.px 1200 }
 
 
 useDevice : ShirtSizes (List Css.Style -> Css.Style)
@@ -23,6 +23,7 @@ useDevice =
     , m = Css.Media.withMedia [ Css.Media.all [ Css.Media.maxWidth useWidth.m ] ]
     , l = Css.Media.withMedia [ Css.Media.all [ Css.Media.maxWidth useWidth.l ] ]
     , xl = Css.Media.withMedia [ Css.Media.all [ Css.Media.maxWidth useWidth.xl ] ]
+    , xxl = Css.Media.withMedia [ Css.Media.all [ Css.Media.maxWidth useWidth.xxl ] ]
     }
 
 
@@ -82,6 +83,14 @@ useTypography =
             , Css.fontWeight <| Css.int 300
             ]
     , xl =
+        Css.batch
+            [ Css.fontSize <| Css.px 37
+            , Css.fontWeight <| Css.int 300
+            , Css.marginTop <| Css.px 15
+            , Css.marginBottom <| Css.px 10
+            , useColorTheme.secondary
+            ]
+    , xxl =
         Css.batch
             [ Css.fontSize <| Css.px 50
             , Css.fontWeight <| Css.int 400
