@@ -1,6 +1,6 @@
-module Element.Row exposing (..)
+module Element.Grid exposing (grid)
 
-import Content.Type exposing (RowContent, RowContentValue(..))
+import Content.Type exposing (GridContent, GridContentValue(..))
 import Css
 import Element exposing (Element)
 import Element.Asset exposing (asset)
@@ -13,8 +13,8 @@ import Style.Container exposing (containerStyle)
 import Style.Theme exposing (useDevice)
 
 
-rowItem : Css.Style
-rowItem =
+gridItem : Css.Style
+gridItem =
     Css.batch
         [ Css.width <| Css.pct 50
         , useDevice.m [ Css.width <| Css.pct 100 ]
@@ -22,8 +22,8 @@ rowItem =
         ]
 
 
-row : List RowContent -> Element msg
-row content =
+grid : List GridContent -> Element msg
+grid content =
     Html.div
         [ Html.css
             [ containerStyle
@@ -35,10 +35,10 @@ row content =
             |> List.map
                 (\item ->
                     case item.value of
-                        RowContentMarkdown markdownContent ->
+                        GridMarkdown markdownContent ->
                             Html.div
                                 [ Html.css
-                                    [ rowItem
+                                    [ gridItem
                                     , Css.padding2 (Css.px 0) (Css.px 15)
                                     , Css.firstChild [ Css.padding <| Css.px 0, Css.paddingRight <| Css.px 15 ]
                                     , Css.lastChild [ Css.padding <| Css.px 0, Css.paddingLeft <| Css.px 15 ]
@@ -48,25 +48,25 @@ row content =
                             <|
                                 markdown markdownContent
 
-                        RowContentAsset assetContent ->
+                        GridAsset assetContent ->
                             Html.div
-                                [ Html.css [ rowItem ] ]
-                                [ asset.row (List.length content) assetContent Nothing ]
+                                [ Html.css [ gridItem ] ]
+                                [ asset.grid (List.length content) assetContent Nothing ]
 
-                        RowContentColumn columnContent ->
+                        GridColumn columnContent ->
                             -- TODO: handle column content based on length
                             Html.div []
                                 (columnContent
                                     |> List.map
                                         (\colItem ->
                                             case colItem.value of
-                                                RowContentMarkdown colMarkdown ->
+                                                GridMarkdown colMarkdown ->
                                                     Html.div [] <| markdown colMarkdown
 
-                                                RowContentAsset colAsset ->
+                                                GridAsset colAsset ->
                                                     Html.div
                                                         [ Html.css [] ]
-                                                        [ asset.row (List.length columnContent) colAsset Nothing ]
+                                                        [ asset.grid (List.length columnContent) colAsset Nothing ]
 
                                                 _ ->
                                                     emptyElement

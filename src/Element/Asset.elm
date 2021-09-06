@@ -13,7 +13,7 @@ import Style.Theme exposing (ShirtSizes, useWidth)
 
 
 type alias AssetElement t =
-    { default : t, hero : t, row : Int -> t }
+    { default : t, hero : t, grid : Int -> t }
 
 
 asset : AssetElement (AssetContent -> Maybe (List Css.Style) -> Element msg)
@@ -43,7 +43,7 @@ asset =
     , hero =
         picture
             { s = 500, m = 700, l = 900, xl = 1400 }
-    , row =
+    , grid =
         \count ->
             picture
                 { s = 500, m = 700, l = 1000 // count, xl = 1200 // count }

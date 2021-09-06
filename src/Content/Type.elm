@@ -14,7 +14,7 @@ type ContentData
     | ContentAsset AssetContent
     | ContentHero HeroContent
     | ContentIframe IframeContent
-    | ContentRow (List RowContent)
+    | ContentGrid (List GridContent)
     | ContentUnknown
 
 
@@ -35,16 +35,12 @@ type alias IframeContent =
     { source : String, title : String, ratio : String }
 
 
-
--- TODO: rename row to grid
-
-
-type alias RowContent =
-    { field : Field, value : RowContentValue }
+type alias GridContent =
+    { field : Field, value : GridContentValue }
 
 
-type RowContentValue
-    = RowContentMarkdown String
-    | RowContentAsset AssetContent
-    | RowContentColumn (List RowContent)
-    | RowContentUnknown
+type GridContentValue
+    = GridMarkdown String
+    | GridAsset AssetContent
+    | GridColumn (List GridContent)
+    | GridUnknown
