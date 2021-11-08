@@ -56,8 +56,7 @@ grid content =
                         GridColumn columnContent ->
                             Html.div
                                 [ Html.css
-                                    [ containerStyle
-                                    , centerStyle.column
+                                    [ centerStyle.column
                                     , Css.justifyContent Css.spaceBetween
                                     , Css.marginBottom <| Css.px 20
                                     , Css.width (Css.pct (100 / toFloat (List.length columnContent)))
@@ -69,7 +68,7 @@ grid content =
                                         (\colItem ->
                                             case colItem.value of
                                                 GridMarkdown colMarkdown ->
-                                                    Html.div [] <| markdown colMarkdown
+                                                    Html.div [ Html.css [ containerStyle ] ] <| markdown colMarkdown
 
                                                 GridAsset colAsset ->
                                                     Html.div

@@ -40,16 +40,19 @@ hero content =
                         , Css.left <| Css.px 0
                         , Css.right <| Css.px 0
                         , Css.displayFlex
-                        , Css.justifyContent Css.center
-                        , Css.alignItems Css.center
+                        , Css.justifyContent Css.flexEnd
+                        , Css.alignItems Css.flexEnd
                         ]
                     ]
                     [ Html.div
                         [ Html.css
-                            [ useColorTheme.primary
-                            , Css.opacity <| Css.num 0.8
-                            , Css.padding2 (Css.px 25) (Css.px 30)
-                            , Css.borderRadius <| Css.px 10
+                            [ useColorTheme.secondary
+                            , Css.padding2 (Css.px 5) (Css.px 30)
+                            , Css.borderRadius4 (Css.px 100) (Css.px 100) (Css.px 0) (Css.px 0)
+                            , useDevice.m
+                                [ Css.padding2 (Css.px 5) (Css.px 15)
+                                , Css.borderRadius4 (Css.px 50) (Css.px 50) (Css.px 0) (Css.px 0)
+                                ]
                             ]
                         ]
                       <|

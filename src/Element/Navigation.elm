@@ -85,7 +85,7 @@ navigation data site expanded onClick =
                         ]
                         [ link.secondary
                             data.brand.url
-                            [ Html.attribute "aria-label" site.title ]
+                            [ Html.attribute "aria-label" site.title, Html.onClick onClick ]
                             [ Html.img
                                 [ Html.css [ Css.width <| Css.px 100 ]
                                 , Html.src (useImageAPI site.image 100)
@@ -118,7 +118,7 @@ navigation data site expanded onClick =
                                     []
                                     [ link.secondary
                                         item.url
-                                        []
+                                        [ Html.onClick onClick ]
                                         [ Html.text item.text ]
                                     ]
                             )
