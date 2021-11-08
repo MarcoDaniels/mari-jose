@@ -36,7 +36,6 @@ consent { accepted } { title, content } onClick =
                 , Css.left <| Css.px 0
                 , Css.right <| Css.px 0
                 , Css.zIndex <| Css.int 1
-                , Css.opacity <| Css.num 0.9
                 , Css.paddingBottom <| Css.px 20
                 , Css.borderTop3 (Css.px 1) Css.solid useColor.tertiary
                 , Css.boxShadow5 (Css.px 0) (Css.px -10) (Css.px 40) (Css.px -10) useColor.tertiary
