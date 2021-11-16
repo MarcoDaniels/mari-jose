@@ -39,38 +39,33 @@ useColor =
     }
 
 
-setSVGColor : Css.Color -> Css.Style
-setSVGColor color =
-    Css.Global.children
-        [ Css.Global.svg [ Css.Global.children [ Css.Global.everything [ Css.fill color ] ] ] ]
-
-
 useColorTheme : ThemeUse Css.Style
 useColorTheme =
     { primary =
         Css.batch
             [ Css.backgroundColor useColor.primary
             , Css.color useColor.secondary
-            , setSVGColor useColor.secondary
             ]
     , secondary =
         Css.batch
             [ Css.backgroundColor useColor.primary
             , Css.color useColor.tertiary
-            , setSVGColor useColor.tertiary
             ]
     , tertiary =
         Css.batch
             [ Css.backgroundColor useColor.tertiary
             , Css.color useColor.primary
-            , setSVGColor useColor.primary
             ]
     }
 
 
 useTypography : ShirtSizes Css.Style
 useTypography =
-    { s = Css.batch []
+    { s =
+        Css.batch
+            [ Css.fontSize <| Css.px 10
+            , useColorTheme.secondary
+            ]
     , m =
         Css.batch
             [ Css.fontSize <| Css.px 14
@@ -80,11 +75,11 @@ useTypography =
     , l =
         Css.batch
             [ Css.fontSize <| Css.px 17
-            , Css.fontWeight <| Css.int 300
+            , Css.fontWeight <| Css.int 400
             ]
     , xl =
         Css.batch
-            [ Css.fontSize <| Css.px 37
+            [ Css.fontSize <| Css.px 27
             , Css.fontWeight <| Css.int 300
             , Css.marginTop <| Css.px 15
             , Css.marginBottom <| Css.px 10
@@ -92,7 +87,7 @@ useTypography =
             ]
     , xxl =
         Css.batch
-            [ Css.fontSize <| Css.px 50
+            [ Css.fontSize <| Css.px 30
             , Css.fontWeight <| Css.int 400
             , Css.marginTop <| Css.px 10
             , Css.marginBottom <| Css.px 10

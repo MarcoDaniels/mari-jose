@@ -68,7 +68,14 @@ grid content =
                                         (\colItem ->
                                             case colItem.value of
                                                 GridMarkdown colMarkdown ->
-                                                    Html.div [ Html.css [ containerStyle ] ] <| markdown colMarkdown
+                                                    Html.div
+                                                        [ Html.css
+                                                            [ containerStyle
+                                                            , Css.padding2 (Css.px 0) (Css.px 15)
+                                                            ]
+                                                        ]
+                                                    <|
+                                                        markdown colMarkdown
 
                                                 GridAsset colAsset ->
                                                     Html.div

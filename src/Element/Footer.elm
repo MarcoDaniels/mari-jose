@@ -6,7 +6,7 @@ import Element.Link exposing (Link, link)
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Style.Container exposing (containerStyle)
-import Style.Theme exposing (useColor, useColorTheme)
+import Style.Theme exposing (useColor, useColorTheme, useTypography)
 
 
 type alias Footer =
@@ -30,4 +30,9 @@ footer data =
                         Html.li [] [ link.primary item.url [] [ Html.text item.text ] ]
                     )
             )
+        , Html.div [ Html.css [ containerStyle, Css.displayFlex, Css.justifyContent Css.flexEnd ] ]
+            [ link.primary "https://marcodaniels.com"
+                [ Html.css [ useTypography.s ] ]
+                [ Html.text "λ marcodaniels project" ]
+            ]
         ]

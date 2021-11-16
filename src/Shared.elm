@@ -79,6 +79,7 @@ template =
                         { title = sharedData.site.title, image = sharedData.site.image }
                         model.menuExpand
                         (MenuOp <| not model.menuExpand)
+                        (MenuOp <| False)
                         |> Html.map toMsg
                     , Html.article [] pageView.body
                     , footer sharedData.footer
