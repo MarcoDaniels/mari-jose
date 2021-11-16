@@ -52,8 +52,8 @@ type alias Site =
     { title : String, image : String }
 
 
-navigation : Navigation -> Site -> Bool -> msg -> Element msg
-navigation data site expanded onClick =
+navigation : Navigation -> Site -> Bool -> msg -> msg -> Element msg
+navigation data site expanded onClick close =
     wrapper
         []
         [ Html.div
@@ -85,7 +85,7 @@ navigation data site expanded onClick =
                         ]
                         [ link.secondary
                             data.brand.url
-                            [ Html.attribute "aria-label" site.title, Html.onClick onClick ]
+                            [ Html.attribute "aria-label" site.title, Html.onClick close ]
                             [ Html.img
                                 [ Html.css [ Css.width <| Css.px 100 ]
                                 , Html.src (useImageAPI site.image 100)
@@ -100,8 +100,8 @@ navigation data site expanded onClick =
                             , Html.css [ Css.display Css.none, useDevice.s [ Css.display Css.block ] ]
                             ]
                             [ is expanded
-                                (icon.close { size = "10", color = useColor.primary })
-                                (icon.burger { size = "10", color = useColor.primary })
+                                (icon.close { size = "10", color = useColor.secondary })
+                                (icon.burger { size = "10", color = useColor.secondary })
                             ]
                         ]
                     ]
@@ -118,7 +118,7 @@ navigation data site expanded onClick =
                                     []
                                     [ link.secondary
                                         item.url
-                                        [ Html.onClick onClick ]
+                                        [ Html.onClick close ]
                                         [ Html.text item.text ]
                                     ]
                             )
@@ -143,7 +143,7 @@ navigation data site expanded onClick =
                                         [ Html.attribute "aria-label" item.text ]
                                         [ case String.toLower item.text of
                                             "facebook" ->
-                                                icon.facebook { size = "14", color = useColor.primary }
+                                                icon.facebook { size = "14", color = useColor.secondary }
 
                                             _ ->
                                                 emptyElement

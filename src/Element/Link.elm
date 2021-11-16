@@ -13,10 +13,6 @@ type alias Link =
     { text : String, url : String }
 
 
-
--- TODO: refactor link to be of link type extending a "type" (image, icon, text")
-
-
 link : ThemeUse (String -> ElementStyled msg)
 link =
     { primary =

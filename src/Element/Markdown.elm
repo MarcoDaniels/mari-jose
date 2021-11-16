@@ -35,7 +35,7 @@ markdownRenderer =
             case level of
                 Block.H1 ->
                     Html.h1
-                        [ Html.id (textToId rawText), Html.css [ useTypography.xl ] ]
+                        [ Html.id (textToId rawText), Html.css [ useTypography.xxl ] ]
                         children
 
                 Block.H2 ->
@@ -44,7 +44,13 @@ markdownRenderer =
                         children
 
                 Block.H3 ->
-                    Html.h3 [ Html.id (textToId rawText), Html.css [ useTypography.l ] ]
+                    Html.h3
+                        [ Html.id (textToId rawText)
+                        , Html.css
+                            [ useTypography.l
+                            , useColorTheme.secondary
+                            ]
+                        ]
                         children
 
                 Block.H4 ->
@@ -69,7 +75,7 @@ markdownRenderer =
     , hardLineBreak = Html.br [] []
     , html = Markdown.Html.oneOf []
     , strong = Html.strong []
-    , emphasis = Html.em [ Html.css [ useColorTheme.secondary ] ]
+    , emphasis = Html.em [ Html.css [ useColorTheme.secondary, Css.fontWeight <| Css.int 500 ] ]
     , codeSpan = \content -> Html.code [] [ Html.text content ]
     , strikethrough = Html.del []
     , thematicBreak = Html.hr [] []
