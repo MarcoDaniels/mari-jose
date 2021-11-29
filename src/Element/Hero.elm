@@ -9,7 +9,7 @@ import Element.Markdown exposing (markdown)
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Style.Container exposing (containerStyle)
-import Style.Theme exposing (useColorTheme, useDevice)
+import Style.Theme exposing (useColorTheme, useDevice, useWidth)
 
 
 hero : HeroContent -> Element msg
@@ -18,6 +18,8 @@ hero content =
         [ Html.css
             [ Css.marginBottom <| Css.px 30
             , Css.position Css.relative
+            , Css.maxWidth useWidth.xxl
+            , Css.margin2 (Css.px 0) Css.auto
             ]
         ]
         [ asset.hero content.asset

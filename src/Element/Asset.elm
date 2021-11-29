@@ -40,7 +40,7 @@ asset =
                 )
     , hero =
         picture
-            { s = 500, m = 700, l = 900, xl = 1400, xxl = 1400 }
+            { s = 500, m = 700, l = 900, xl = 1400, xxl = 1800 }
     , grid =
         \count ->
             picture

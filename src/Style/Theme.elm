@@ -14,7 +14,7 @@ type alias ShirtSizes t =
 
 useWidth : ShirtSizes Css.Px
 useWidth =
-    { s = Css.px 550, m = Css.px 750, l = Css.px 1000, xl = Css.px 1200, xxl = Css.px 1200 }
+    { s = Css.px 550, m = Css.px 750, l = Css.px 1000, xl = Css.px 1200, xxl = Css.px 1800 }
 
 
 useDevice : ShirtSizes (List Css.Style -> Css.Style)
