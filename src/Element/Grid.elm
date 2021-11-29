@@ -40,8 +40,16 @@ grid content =
                                 [ Html.css
                                     [ gridItem
                                     , Css.padding2 (Css.px 0) (Css.px 15)
-                                    , Css.firstChild [ Css.padding <| Css.px 0, Css.paddingRight <| Css.px 15 ]
-                                    , Css.lastChild [ Css.padding <| Css.px 0, Css.paddingLeft <| Css.px 15 ]
+                                    , Css.firstChild
+                                        [ Css.padding <| Css.px 0
+                                        , Css.paddingRight <| Css.px 15
+                                        , useDevice.m [ Css.padding <| Css.px 0 ]
+                                        ]
+                                    , Css.lastChild
+                                        [ Css.padding <| Css.px 0
+                                        , Css.paddingLeft <| Css.px 15
+                                        , useDevice.m [ Css.padding <| Css.px 0 ]
+                                        ]
                                     , useDevice.m [ Css.padding <| Css.px 0 ]
                                     ]
                                 ]
@@ -51,14 +59,17 @@ grid content =
                         GridAsset assetContent ->
                             Html.div
                                 [ Html.css [ gridItem ] ]
-                                [ asset.grid (List.length content) assetContent Nothing ]
+                                [ asset.grid
+                                    (List.length content)
+                                    assetContent
+                                    (Just [ Css.padding2 (Css.px 5) (Css.px 0) ])
+                                ]
 
                         GridColumn columnContent ->
                             Html.div
                                 [ Html.css
                                     [ centerStyle.column
                                     , Css.justifyContent Css.spaceBetween
-                                    , Css.marginBottom <| Css.px 20
                                     , Css.width (Css.pct (100 / toFloat (List.length columnContent)))
                                     , useDevice.m [ Css.width <| Css.pct 100 ]
                                     ]
@@ -79,7 +90,7 @@ grid content =
 
                                                 GridAsset colAsset ->
                                                     Html.div
-                                                        [ Html.css [ centerStyle.inline, Css.width (Css.pct 60) ] ]
+                                                        [ Html.css [ centerStyle.inline, Css.width (Css.pct 90) ] ]
                                                         [ asset.grid (List.length columnContent) colAsset Nothing ]
 
                                                 _ ->
