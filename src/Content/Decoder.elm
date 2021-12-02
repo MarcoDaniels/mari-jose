@@ -71,7 +71,6 @@ contentDecoder =
                                     |> required "value"
                                         (succeed HeroContent
                                             |> required "image" assetDecoder
-                                            |> required "text" (maybe string)
                                         )
 
                             ( "repeater", "Grid" ) ->

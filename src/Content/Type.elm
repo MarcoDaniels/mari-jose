@@ -28,7 +28,7 @@ type alias AssetContent =
 
 
 type alias HeroContent =
-    { asset : AssetContent, text : Maybe String }
+    { asset : AssetContent }
 
 
 type alias IframeContent =
