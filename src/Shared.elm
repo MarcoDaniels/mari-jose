@@ -18,6 +18,9 @@ port consentRead : (Consent -> msg) -> Sub msg
 port consentWrite : Consent -> Cmd msg
 
 
+port pageChange : String -> Cmd msg
+
+
 type ConsentMsg
     = ConsentRead Consent
     | ConsentWrite
@@ -53,8 +56,8 @@ template =
     , update =
         \msg model ->
             case msg of
-                OnPageChange _ ->
-                    ( model, Cmd.none )
+                OnPageChange { path } ->
+                    ( model, pageChange <| Path.toAbsolute path )
 
                 MenuOp expand ->
                     ( { model | menuExpand = expand }, Cmd.none )
