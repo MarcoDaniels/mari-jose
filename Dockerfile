@@ -2,7 +2,7 @@ FROM node:current-alpine3.23 AS builder
 
 COPY . .
 
-RUN yarn install --frozen-lockfile:
+RUN yarn install --frozen-lockfile
 RUN yarn build:elm
 
 FROM nginx:alpine AS runner
