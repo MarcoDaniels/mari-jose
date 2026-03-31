@@ -14,10 +14,6 @@ jobs:
       COCKPIT_API_URL: ${{secrets.COCKPIT_API_URL}}
       COCKPIT_BASE_URL: ${{secrets.COCKPIT_BASE_URL}}
       COCKPIT_API_TOKEN: ${{secrets.COCKPIT_API_TOKEN}}
-      AWS_S3_BUCKET: ${{secrets.AWS_S3_BUCKET}}
-      AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-      AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-      AWS_DEFAULT_REGION: ${{secrets.AWS_DEFAULT_REGION}}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
@@ -33,5 +29,3 @@ jobs:
         run: yarn --frozen-lockfile
       - name: Build Application
         run: yarn build
-      - name: Sync Build
-        run: aws s3 sync ./dist s3://${{secrets.AWS_S3_BUCKET}}
