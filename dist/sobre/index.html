@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <link rel="stylesheet" href="/style.css">
+    
+    <link rel="preload" href="/elm.js" as="script">
+    <link rel="modulepreload" href="/index.js">
+    
+    <script defer="defer" src="/elm.js" type="text/javascript"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script type="module">
+import userInit from"/index.js";
+let prefetchedPages=[window.location.pathname],initialLocationHash=document.location.hash.replace(/^#/,"");function loadContentAndInitializeApp(){let a=window.location.pathname.replace(/(w)$/,"$1/");a.endsWith("/")||(a+="/");const b=Elm.TemplateModulesBeta.init({flags:{secrets:null,baseUrl:document.baseURI,isPrerendering:!1,isDevServer:!1,isElmDebugMode:!1,contentJson:JSON.parse(document.getElementById("__ELM_PAGES_DATA__").innerHTML),userFlags:userInit.flags()}});return b.ports.toJsPort.subscribe(()=>{loadNamedAnchor()}),b}function loadNamedAnchor(){if(""!==initialLocationHash){const a=document.querySelector(`[name=${initialLocationHash}]`);a&&a.scrollIntoView()}}function prefetchIfNeeded(a){if(a.host===window.location.host&&!prefetchedPages.includes(a.pathname)){prefetchedPages.push(a.pathname),console.log("Preloading...",a.pathname);const b=document.createElement("link");b.setAttribute("as","fetch"),b.setAttribute("rel","prefetch"),b.setAttribute("href",origin+a.pathname+"/content.json"),document.head.appendChild(b)}}const appPromise=new Promise(function(a){document.addEventListener("DOMContentLoaded",()=>{a(loadContentAndInitializeApp())})});userInit.load(appPromise),"function"==typeof connect&&connect(function(a){appPromise.then(b=>{b.ports.fromJsPort.send({contentJson:a})})});const trigger_prefetch=b=>{const c=find_anchor(b.target);c&&c.href&&c.hasAttribute("elm-pages:prefetch")&&prefetchIfNeeded(c)};let mousemove_timeout;const handle_mousemove=a=>{clearTimeout(mousemove_timeout),mousemove_timeout=setTimeout(()=>{trigger_prefetch(a)},20)};addEventListener("touchstart",trigger_prefetch),addEventListener("mousemove",handle_mousemove);function find_anchor(a){for(;a&&"A"!==a.nodeName.toUpperCase();)a=a.parentNode;return a}
+    </script>
+    <title>Cerejas Mari'José - Sobre nós</title>
+    <meta name="generator" content="elm-pages v2.1.7">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <link rel="canonical" href="https://marijose.pt/sobre" />    <meta name="description" content="Somos uma empresa familiar de produção e comercialização de cereja, situada na encosta norte da Serra da Gardunha, na localidade da Enxabarda, concelho do Fundão." />    <meta property="og:image" content="TODO" />    <meta property="og:image:secure_url" content="TODO" />    <meta property="og:image:alt" content="TODO" />    <meta property="og:title" content="Cerejas Mari'José - Sobre nós" />    <meta property="og:url" content="https://marijose.pt/sobre" />    <meta property="og:description" content="Somos uma empresa familiar de produção e comercialização de cereja, situada na encosta norte da Serra da Gardunha, na localidade da Enxabarda, concelho do Fundão." />    <meta property="og:site_name" content="TODO" />    <meta property="twitter:card" content="summary" />    <meta property="twitter:title" content="Cerejas Mari'José - Sobre nós" />    <meta property="twitter:description" content="Somos uma empresa familiar de produção e comercialização de cereja, situada na encosta norte da Serra da Gardunha, na localidade da Enxabarda, concelho do Fundão." />    <meta property="twitter:image" content="TODO" />    <meta property="twitter:image:alt" content="TODO" />    <meta property="og:type" content="website" />    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />    <link rel="canonical" href="https://marijose.pt" />
+    <script id="__ELM_PAGES_DATA__" type="application/json">{"staticData":{"3419107010":"{\"entries\":[{\"title\":\"Cerejas Mari'José\",\"url\":\"/\",\"description\":\"Somos uma empresa familiar de produção e comercialização de cereja situada na localidade de Enxabarda, Fundão.\",\"content\":[{\"field\":{\"type\":\"set\",\"label\":\"Hero\"},\"value\":{\"image\":{\"path\":\"/2021/04/19/cerejas_uid_607d7751339a7.jpg\",\"title\":\"Cerejas Mari'José - Ramo de cerejas\",\"mime\":\"image/jpeg\",\"description\":\"\",\"tags\":[],\"size\":796915,\"image\":true,\"video\":false,\"audio\":false,\"archive\":false,\"document\":false,\"code\":false,\"created\":1618835281,\"modified\":1638217488,\"_by\":\"603652746636634acc00019b\",\"width\":2448,\"height\":3264,\"colors\":[\"#5c7a69\",\"#c7d9d4\",\"#98cfb9\",\"#3e1924\",\"#7baabf\"],\"folder\":\"607d773a3330628c740002d7\",\"_id\":\"607d775163333880d0000393\"}}},{\"field\":{\"type\":\"repeater\",\"label\":\"Grid\"},\"value\":[{\"field\":{\"type\":\"markdown\",\"label\":\"Text\"},\"value\":\"# Cerejas Mari'José\\n\\nSomos uma empresa familiar de produção e comercialização de cereja. Situada na encosta norte da Serra da Gardunha, na localidade da Enxabarda, concelho do Fundão.\"},{\"field\":{\"type\":\"asset\",\"label\":\"Image\"},\"value\":{\"path\":\"/2021/04/19/mari-jose-logo_uid_607d77622c038.png\",\"title\":\"Cerejas Mari'José\",\"mime\":\"image/png\",\"description\":\"\",\"tags\":[],\"size\":86787,\"image\":true,\"video\":false,\"audio\":false,\"archive\":false,\"document\":false,\"code\":false,\"created\":1618835298,\"modified\":1638217282,\"_by\":\"603652746636634acc00019b\",\"width\":1181,\"height\":591,\"colors\":[\"#7c9f3a\",\"#612729\",\"#ddddcf\",\"#ca7c61\",\"#b4cc91\"],\"folder\":\"607d773a3330628c740002d7\",\"_id\":\"607d7762343337fcf2000104\"}}]}]},{\"title\":\"Cerejas Mari'José - Página não encontrada\",\"url\":\"/404\",\"description\":\"Erro - Página não encontrada\",\"content\":[{\"field\":{\"type\":\"repeater\",\"label\":\"Grid\"},\"value\":[{\"field\":{\"type\":\"markdown\",\"label\":\"Text\"},\"value\":\"# Página não encontrada\\n\\nA página que procura não existe no nosso site. \\n\\nVisite a [página inicial](/) para encontrar o que procura.\"},{\"field\":{\"type\":\"asset\",\"label\":\"Image\"},\"value\":{\"path\":\"/2021/04/19/cerejas_uid_607d7751339a7.jpg\",\"title\":\"Cerejas Mari'José - Ramo de cerejas\",\"mime\":\"image/jpeg\",\"description\":\"\",\"tags\":[],\"size\":796915,\"image\":true,\"video\":false,\"audio\":false,\"archive\":false,\"document\":false,\"code\":false,\"created\":1618835281,\"modified\":1638217488,\"_by\":\"603652746636634acc00019b\",\"width\":2448,\"height\":3264,\"colors\":[\"#5c7a69\",\"#c7d9d4\",\"#98cfb9\",\"#3e1924\",\"#7baabf\"],\"folder\":\"607d773a3330628c740002d7\",\"_id\":\"607d775163333880d0000393\"}}]}]},{\"title\":\"Cerejas Mari'José - Sobre nós\",\"url\":\"/sobre\",\"description\":\"Somos uma empresa familiar de produção e comercialização de cereja, situada na encosta norte da Serra da Gardunha, na localidade da Enxabarda, concelho do Fundão.\",\"content\":[{\"field\":{\"type\":\"repeater\",\"label\":\"Grid\"},\"value\":[{\"field\":{\"type\":\"markdown\",\"label\":\"Text\"},\"value\":\"# Sobre nós\\n\\nSomos uma empresa familiar de produção e comercialização de cereja, framboesa e groselha. Situada na encosta norte da Serra da Gardunha, na localidade da Enxabarda, concelho do Fundão.\\n\\nA marca _Cerejas Mari’José_ surge no ano de 2013, mas a empresa familiar remonta ao ano de 2000 em que se iniciam as primeiras plantações. Com a dedicação e a aprendizagem diária, desencadeia-se uma evolução constante da empresa com a aquisição de terrenos e execução de novos pomares, podendo contar neste momento com cerca de 20 hectares em plena produção.\"},{\"field\":{\"type\":\"asset\",\"label\":\"Image\"},\"value\":{\"path\":\"/2021/04/19/mari-jose-logo_uid_607d77622c038.png\",\"title\":\"Cerejas Mari'José\",\"mime\":\"image/png\",\"description\":\"\",\"tags\":[],\"size\":86787,\"image\":true,\"video\":false,\"audio\":false,\"archive\":false,\"document\":false,\"code\":false,\"created\":1618835298,\"modified\":1638217282,\"_by\":\"603652746636634acc00019b\",\"width\":1181,\"height\":591,\"colors\":[\"#7c9f3a\",\"#612729\",\"#ddddcf\",\"#ca7c61\",\"#b4cc91\"],\"folder\":\"607d773a3330628c740002d7\",\"_id\":\"607d7762343337fcf2000104\"}}]},{\"field\":{\"type\":\"repeater\",\"label\":\"Grid\"},\"value\":[{\"field\":{\"type\":\"asset\",\"label\":\"Image\"},\"value\":{\"path\":\"/2021/04/19/cerejeiras-em-flor_uid_607d775f983f2.jpg\",\"title\":\"Cerejas Mari'José - Cerejeiras em flor\",\"mime\":\"image/jpeg\",\"description\":\"\",\"tags\":[],\"size\":6009215,\"image\":true,\"video\":false,\"audio\":false,\"archive\":false,\"document\":false,\"code\":false,\"created\":1618835295,\"modified\":1638217318,\"_by\":\"603652746636634acc00019b\",\"width\":3264,\"height\":2448,\"colors\":[\"#4170bf\",\"#d2c49f\",\"#44371e\",\"#88c4ef\",\"#756e5d\"],\"folder\":\"607d773a3330628c740002d7\",\"_id\":\"607d775f646234b98a000040\"}},{\"field\":{\"type\":\"markdown\",\"label\":\"Text\"},\"value\":\"Ao longo da sua existência adquiriu notoriedade, saber e dimensão que lhe tem permitido a confiança e segurança junto dos seus fornecedores e clientes em todo o país.\\n\\nO objetivo diário é trabalhar sempre pensando num futuro promissor e brilhante, sendo a satisfação do cliente o triunfo de cada etapa.\"}]},{\"field\":{\"type\":\"markdown\",\"label\":\"Text\"},\"value\":\"&nbsp;\\n## Cerejas\\n\\nTemos como foco principal a produção e comercialização de Cereja e pretendemos manter um constante crescimento na produção anual. \\n\\nContamos com revendedores em todo território nacional, para mais informações não hesite em contactar-nos.\\n\"},{\"field\":{\"type\":\"repeater\",\"label\":\"Grid\"},\"value\":[{\"field\":{\"type\":\"repeater\",\"label\":\"Column\"},\"value\":[{\"field\":{\"type\":\"asset\",\"label\":\"Image\"},\"value\":{\"path\":\"/2021/11/29/Cerejas_uid_61a5373599e0a.jpeg\",\"title\":\"Cerejas Mari'José - cerejas\",\"mime\":\"image/jpeg\",\"description\":\"\",\"tags\":[],\"size\":440279,\"image\":true,\"video\":false,\"audio\":false,\"archive\":false,\"document\":false,\"code\":false,\"colors\":[\"#282d20\",\"#d4cdb8\",\"#78a1c5\",\"#618ace\",\"#756248\"],\"width\":1536,\"height\":2048,\"created\":1638217525,\"modified\":1638217545,\"_by\":\"603652746636634acc00019b\",\"folder\":\"607d773a3330628c740002d7\",\"_id\":\"61a537353535314a860001fc\"}}]},{\"field\":{\"type\":\"repeater\",\"label\":\"Column\"},\"value\":[{\"field\":{\"type\":\"asset\",\"label\":\"Image\"},\"value\":{\"path\":\"/2021/04/19/cerejas_uid_607d7751339a7.jpg\",\"title\":\"Cerejas Mari'José - Ramo de cerejas\",\"mime\":\"image/jpeg\",\"description\":\"\",\"tags\":[],\"size\":796915,\"image\":true,\"video\":false,\"audio\":false,\"archive\":false,\"document\":false,\"code\":false,\"created\":1618835281,\"modified\":1638217488,\"_by\":\"603652746636634acc00019b\",\"width\":2448,\"height\":3264,\"colors\":[\"#5c7a69\",\"#c7d9d4\",\"#98cfb9\",\"#3e1924\",\"#7baabf\"],\"folder\":\"607d773a3330628c740002d7\",\"_id\":\"607d775163333880d0000393\"}}]},{\"field\":{\"type\":\"repeater\",\"label\":\"Column\"},\"value\":[{\"field\":{\"type\":\"asset\",\"label\":\"Image\"},\"value\":{\"path\":\"/2021/11/29/cer_uid_61a53a794dfd6.jpeg\",\"title\":\"Cerejas Mari'José - Cerejas\",\"mime\":\"image/jpeg\",\"description\":\"\",\"tags\":[],\"size\":431591,\"image\":true,\"video\":false,\"audio\":false,\"archive\":false,\"document\":false,\"code\":false,\"colors\":[\"#383f1e\",\"#d2c565\",\"#88a9cc\",\"#7b98ea\",\"#867b2d\"],\"width\":1536,\"height\":2048,\"created\":1638218361,\"modified\":1638218392,\"_by\":\"603652746636634acc00019b\",\"folder\":\"607d773a3330628c740002d7\",\"_id\":\"61a53a7935626615d300036b\"}}]}]},{\"field\":{\"type\":\"markdown\",\"label\":\"Text\"},\"value\":\"&nbsp;\\n## Contactos\\n\\nPode nos contactar pela nossa [_página no facebook_](https://www.facebook.com/cerejas.marijose)\\n\\nou pelo email: _cerejas@marijose.pt_\"}]},{\"title\":\"Cerejas Mari'José - Qualidade\",\"url\":\"/qualidade\",\"description\":\"Garantimos um elevado controlo de qualidade, tendo um acompanhamento técnico constante, estando por isso implementada uma medida de proteção das culturas.\",\"content\":[{\"field\":{\"type\":\"repeater\",\"label\":\"Grid\"},\"value\":[{\"field\":{\"type\":\"asset\",\"label\":\"Image\"},\"value\":{\"path\":\"/2021/04/19/cerejeiras-em-flor_uid_607d775f983f2.jpg\",\"title\":\"cerejeiras-em-flor.jpg\",\"mime\":\"image/jpeg\",\"description\":\"\",\"tags\":[],\"size\":6009215,\"image\":true,\"video\":false,\"audio\":false,\"archive\":false,\"document\":false,\"code\":false,\"created\":1618835295,\"modified\":1618835295,\"_by\":\"603652746636634acc00019b\",\"width\":3264,\"height\":2448,\"colors\":[\"#4170bf\",\"#d2c49f\",\"#44371e\",\"#88c4ef\",\"#756e5d\"],\"folder\":\"607d773a3330628c740002d7\",\"_id\":\"607d775f646234b98a000040\"}},{\"field\":{\"type\":\"markdown\",\"label\":\"Text\"},\"value\":\"# Qualidade\\n\\nGarantimos um elevado controlo de qualidade, tendo um acompanhamento técnico constante, estando por isso implementada uma medida de proteção das culturas.\\n\\nApresentamos uma fruta sempre selecionada com a preocupação de que seja fornecido ao cliente o melhor produto com o calibre desejado. O controlo de qualidade é rigoroso e assume um papel fundamental em todo o processo.\\n\\nSão regularmente utilizadas técnicas como análises de solos, folhas e frutos, que permitem definir parâmetros para o controle de pragas e doenças como forma de prevenção, sendo o recurso à luta química encarado como última hipótese e mesmo assim com fortes condicionantes.\\n\\nPromove-se então a qualidade dos produtos, em simultâneo com o respeito pelo ambiente, com óbvios ganhos para o consumidor final cada vez mais exigente e preocupado com a preservação da Natureza.\"}]},{\"field\":{\"type\":\"repeater\",\"label\":\"Grid\"},\"value\":[{\"field\":{\"type\":\"markdown\",\"label\":\"Text\"},\"value\":\"A _Produção Integrada_ é um modo de produção agrícola que visa salvaguardar o desenvolvimento das culturas com um reduzido uso de pesticidas.\\n\\nPara mais informações visite [_DGADR - Direção-Geral de Agricultura e Desenvolvimento Rural_](https://www.dgadr.gov.pt/sustentavel/producao-integrada).\\n\\nO _GLOBALG.A.P._ é um referencial de Boas Práticas Agrícolas com o objectivo de certificação internacional.\\n\\nPara mais informacões visite [_GLOBALG.A.P._](https://www.globalgap.org/pt/)\"},{\"field\":{\"type\":\"asset\",\"label\":\"Image\"},\"value\":{\"path\":\"/2021/11/29/lans-globalgap-certificate_uid_61a53dd83e9b7.png\",\"title\":\"Global GAP\",\"mime\":\"image/png\",\"description\":\"\",\"tags\":[],\"size\":37948,\"image\":true,\"video\":false,\"audio\":false,\"archive\":false,\"document\":false,\"code\":false,\"colors\":[\"#049c3c\",\"#089c3c\",\"#089c3c\",\"#089c3c\",\"#089c3c\"],\"width\":604,\"height\":404,\"created\":1638219224,\"modified\":1638219262,\"_by\":\"603652746636634acc00019b\",\"folder\":\"607d773a3330628c740002d7\",\"_id\":\"61a53dd8313763332300004a\"}},{\"field\":{\"type\":\"asset\",\"label\":\"Image\"},\"value\":{\"path\":\"/2021/11/29/producao_uid_61a53dd2f3ba1.png\",\"title\":\"Produção Integrada\",\"mime\":\"image/png\",\"description\":\"\",\"tags\":[],\"size\":48212,\"image\":true,\"video\":false,\"audio\":false,\"archive\":false,\"document\":false,\"code\":false,\"colors\":[\"#2c5c2e\",\"#f9db54\",\"#89a459\",\"#9e684a\",\"#749c74\"],\"width\":273,\"height\":200,\"created\":1638219218,\"modified\":1638219240,\"_by\":\"603652746636634acc00019b\",\"folder\":\"607d773a3330628c740002d7\",\"_id\":\"61a53dd3346335661000022b\"}}]}]},{\"title\":\"Cerejas Mari'José - Politica de Privacidade\",\"url\":\"/privacidade\",\"description\":\"Politica de privacidade\",\"content\":[{\"field\":{\"type\":\"markdown\",\"label\":\"Text\"},\"value\":\"# Politica de privacidade\\n\\n\\n### O que são e para que servem os cookies?\\n\\nOs cookies são pequenos ficheiros de informação que ficam guardados no seu computador, tablet, telefone ou outro dispositivo com acesso à Internet, através do navegador (browser). As informações retidas pelos cookies são re-enviadas ao servidor do site sempre que o browser abre uma das suas páginas.\\n\\nOs cookies ajudam a determinar a utilidade, o interesse e as utilizações de um site, permitindo uma navegação mais rápida e eficiente. Evitam a introdução repetida das mesmas informações.\\n\\n\\n### Que tipo de cookies utilizamos no nosso website?\\n\\nExistem dois tipos principais de cookies: os de sessão e os permanentes. Os cookies de sessão são temporários e só permanecem no arquivo de cookies até o utilizador sair do site, pelo que são apagados quando fecha o browser. A informação obtida serve para analisar padrões de tráfego, o que facilita a identificação de problemas. Já os cookies permanentes ficam guardados até o utilizador apagá-los manualmente ou a data de validade expirar. São utilizados sempre que o utilizador faz uma nova visita ao site para um serviço mais personalizado, ajustando a navegação aos seus interesses.\\n\\nDestes, utilizamos cookies para várias finalidades. Os cookies analíticos são utilizados anonimamente para efeitos estatísticos. Os cookies de funcionalidade guardam as preferências do utilizador. Os cookies de terceiros medem o sucesso de aplicações e podem ser utilizados para personalizar botões, menus, ícones e outras componentes de interface gráfica com dados do utilizador (denominados widgets).\\n\\nNão armazenamos informação de identificação pessoal nos cookies que utilizamos.\"}]}]}","4098798569":"{\"navigation\":{\"brand\":{\"title\":\"Cerejas Mari'José\",\"url\":\"/\"},\"menu\":[{\"value\":{\"title\":\"Sobre Nós\",\"url\":\"/sobre\"}},{\"value\":{\"title\":\"Qualidade\",\"url\":\"/qualidade\"}}],\"social\":[{\"value\":{\"title\":\"Facebook\",\"url\":\"https://www.facebook.com/cerejas.marijose\"}}]},\"footer\":{\"links\":[{\"value\":{\"title\":\"Política de Privacidade\",\"url\":\"/privacidade\"}}]},\"cookie\":{\"title\":\"Cookies\",\"content\":\"Usamos cookies para controlar, melhorar e personalizar a sua experiência. Saiba mais sobre as formas como utilizamos os cookies na nossa [Política de Privacidade](/privacidade).\"},\"site\":{\"title\":\"Cerejas Mari´José\",\"description\":\"Somos uma empresa familiar de produção e comercialização de cereja situada na localidade de Enxabarda, Fundão.\",\"baseURL\":\"https://marijose.pt\",\"image\":{\"path\":\"/2021/04/19/mari-jose-logo_uid_607d77622c038.png\"}}}"},"is404":false,"path":"sobre"}</script>
+    </head>
+    <body>
+      <div data-url="" display="none"></div>
+      <div class="_5fbdb432"><style>._12259bf2 {
+    width:100px;
+}
+
+._18cb2d4d {
+    font-size:30px;
+    font-weight:400;
+    margin-top:10px;
+    margin-bottom:10px;
+    background-color:#FFF;
+    color:#6A971F;
+}
+
+._1cf1685c {
+    background-color:#FFF;
+    color:#000;
+    position:sticky;
+    top:0px;
+    left:0px;
+    right:0px;
+    padding:10px 0px;
+    z-index:2;
+    border-bottom:3px solid #6A971F;
+}
+
+._211e8554 {
+    font-size:10px;
+    background-color:#FFF;
+    color:#6A971F;
+}
+
+._2a4f9d30 {
+    display:flex;
+}
+
+@media (max-width: 550px) {
+    ._2a4f9d30 {
+        margin:0px;
+    overflow:hidden;
+    visibility:hidden;
+    max-height:0px;
+    transition:visibility 400ms 0ms ease-in-out,max-height 400ms 0ms ease-in-out;
+    flex-direction:column;
+    }
+}
+
+._41d0fa52 {
+    display:block;
+    max-width:100%;
+    height:auto;
+}
+
+@media (max-width: 550px) {
+    ._52fdc1e5 {
+        margin:0px;
+    overflow:hidden;
+    visibility:hidden;
+    max-height:0px;
+    transition:visibility 400ms 0ms ease-in-out,max-height 400ms 0ms ease-in-out;
+    display:flex;
+    justify-content:center;
+    }
+}
+
+._5eaae1af {
+    width:50%;
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
+}
+
+@media (max-width: 750px) {
+    ._5eaae1af {
+        width:100%;
+    }
+}
+
+._5fbdb432 {
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+._61c2ce3f {
+    background-color:#FFF;
+    color:#000;
+    border-top:3px solid #6A971F;
+    padding:10px 0px;
+    margin-top:auto;
+}
+
+._6dc1daaf {
+    display:block;
+    max-width:100%;
+    height:auto;
+    padding:5px 0px;
+}
+
+._8016532f {
+    font-size:27px;
+    font-weight:300;
+    margin-top:15px;
+    margin-bottom:10px;
+    background-color:#FFF;
+    color:#6A971F;
+}
+
+@media (max-width: 550px) {
+    ._80c4c26c {
+        display:flex;
+    justify-content:space-between;
+    align-items:center;
+    }
+}
+
+._847d082d {
+    width:50%;
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
+    padding:0px 15px;
+}
+
+._847d082d:first-child {
+    padding:0px;
+    padding-right:15px;
+}
+
+@media (max-width: 750px) {
+    ._847d082d:first-child {
+        padding:0px;
+    }
+}
+
+._847d082d:last-child {
+    padding:0px;
+    padding-left:15px;
+}
+
+@media (max-width: 750px) {
+    ._847d082d:last-child {
+        padding:0px;
+    }
+}
+
+@media (max-width: 750px) {
+    ._847d082d {
+        padding:0px;
+    }
+}
+
+@media (max-width: 750px) {
+    ._847d082d {
+        width:100%;
+    }
+}
+
+._895f84bc {
+    max-width:1200px;
+    margin:0px auto;
+    display:flex;
+    justify-content:flex-end;
+}
+
+@media (max-width: 1200px) {
+    ._895f84bc {
+        padding:0px 15px;
+    }
+}
+
+._897623af {
+    display:flex;
+    justify-content:center;
+    flex-direction:row;
+    margin:0px auto;
+    width:90%;
+}
+
+._8d713238 {
+    max-width:1200px;
+    margin:0px auto;
+    display:flex;
+    justify-content:center;
+}
+
+@media (max-width: 1200px) {
+    ._8d713238 {
+        padding:0px 15px;
+    }
+}
+
+._8ed4e786 {
+    background-color:#FFF;
+    color:#000;
+    overflow:hidden;
+    position:fixed;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    z-index:1;
+    opacity:0.8;
+    border-bottom:1px solid #6A971F;
+    height:0vh;
+    transition:height 400ms 0ms ease-in-out;
+}
+
+._9f9065cb {
+    max-width:1200px;
+    margin:0px auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+@media (max-width: 550px) {
+    ._9f9065cb {
+        flex-direction:column;
+    align-items:stretch;
+    }
+}
+
+@media (max-width: 1200px) {
+    ._9f9065cb {
+        padding:0px 15px;
+    }
+}
+
+._a391a787 {
+    padding-left:25px;
+}
+
+@media (max-width: 550px) {
+    ._a391a787 {
+        margin-top:12px;
+    padding-left:10px;
+    }
+}
+
+._b3159296 {
+    background-color:#FFF;
+    color:#000;
+    text-decoration:none;
+}
+
+._caaa4209 {
+    background-color:#FFF;
+    color:#6A971F;
+    font-weight:500;
+}
+
+._ccc3e604 {
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
+    justify-content:space-between;
+    width:100%;
+}
+
+@media (max-width: 750px) {
+    ._ccc3e604 {
+        width:100%;
+    }
+}
+
+._d071d86e {
+    display:none;
+}
+
+@media (max-width: 550px) {
+    ._d071d86e {
+        display:block;
+    }
+}
+
+._d4c785e3 {
+    background-color:#FFF;
+    color:#000;
+    text-decoration:none;
+    position:relative;
+}
+
+._d4c785e3::before {
+    background-color:#6A971F;
+    color:#FFF;
+    position:absolute;
+    content:'';
+    margin:0px auto;
+    height:1px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    visibility:hidden;
+    width:0px;
+    transition:visibility 400ms 0ms ease-in-out,width 400ms 0ms ease-in-out;
+}
+
+._d4c785e3:hover::before {
+    visibility:visible;
+    width:98%;
+}
+
+._d6d644ca {
+    font-size:14px;
+    line-height:1.4;
+    margin:0px 0px 10px;
+}
+
+._d8aa9d81 {
+    max-width:1200px;
+    margin:0px auto;
+}
+
+@media (max-width: 1200px) {
+    ._d8aa9d81 {
+        padding:0px 15px;
+    }
+}
+
+._d96010c0 {
+    max-width:1200px;
+    margin:0px auto;
+    display:flex;
+    justify-content:center;
+    flex-direction:row;
+    margin:0px auto;
+}
+
+@media (max-width: 750px) {
+    ._d96010c0 {
+        flex-direction:column;
+    }
+}
+
+@media (max-width: 1200px) {
+    ._d96010c0 {
+        padding:0px 15px;
+    }
+}
+
+._de6d6c8b {
+    display:flex;
+    align-items:center;
+    font-size:17px;
+    font-weight:400;
+}
+
+@media (max-width: 550px) {
+    ._de6d6c8b {
+        flex-direction:column;
+    align-items:stretch;
+    }
+}
+
+._f7544375 {
+    background-color:#FFF;
+    border:1px solid #000;
+    border-radius:5px;
+    padding:2px 6px 1px;
+    cursor:pointer;
+}</style><style>body {
+    margin:0px;
+    padding:0px;
+    font-family:Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+ul {
+    margin:0px;
+    padding:0px;
+    list-style:none;
+}</style><header class="_1cf1685c"><div class="_9f9065cb"><nav class="_de6d6c8b"><ul><li class="_80c4c26c"><a class="_b3159296" aria-label="Cerejas Mari´José" href="/"><img class="_12259bf2" alt="Cerejas Mari´José" src="/image/api/2021/04/19/mari-jose-logo_uid_607d77622c038.png?w=100&o=1&q=60&m=fitToWidth"></a><button class="_f7544375 _d071d86e" aria-expanded="true" aria-label="expand"><svg aria-hidden="true" height="10" viewBox="0 0 448 512" width="10"><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z" fill="#000"></path></svg></button></li></ul><ul class="_2a4f9d30"><li class="_a391a787"><a class="_b3159296" href="/sobre">Sobre Nós</a></li><li class="_a391a787"><a class="_b3159296" href="/qualidade">Qualidade</a></li></ul></nav><nav class="_52fdc1e5"><ul><li class="_a391a787"><a class="_b3159296" aria-label="Facebook" href="https://www.facebook.com/cerejas.marijose" rel="noopener noreferrer" target="_blank"><svg aria-hidden="true" height="14" viewBox="0 0 264 512" width="14"><path d="M76.7 512V283H0v-91h76.7v-71.7C76.7 42.4 124.3 0 193.8 0c33.3 0 61.9 2.5 70.2 3.6V85h-48.2c-37.8 0-45.1 18-45.1 44.3V192H256l-11.7 91h-73.6v229" fill="#000"></path></svg></a></li></ul></nav></div></header><article><div class="_d96010c0"><div class="_847d082d"><h1 class="_18cb2d4d" id="sobre-nós">Sobre nós</h1><p class="_d6d644ca">Somos uma empresa familiar de produção e comercialização de cereja, framboesa e groselha. Situada na encosta norte da Serra da Gardunha, na localidade da Enxabarda, concelho do Fundão.</p><p class="_d6d644ca">A marca <em class="_caaa4209">Cerejas Mari’José</em> surge no ano de 2013, mas a empresa familiar remonta ao ano de 2000 em que se iniciam as primeiras plantações. Com a dedicação e a aprendizagem diária, desencadeia-se uma evolução constante da empresa com a aquisição de terrenos e execução de novos pomares, podendo contar neste momento com cerca de 20 hectares em plena produção.</p></div><div class="_5eaae1af"><picture><source media="(max-width: 550px)" sizes="90vw" srcset="/image/api/2021/04/19/mari-jose-logo_uid_607d77622c038.png?w=500&o=1&q=60&m=fitToWidth 500w"><source media="(max-width: 750px)" sizes="90vw" srcset="/image/api/2021/04/19/mari-jose-logo_uid_607d77622c038.png?w=700&o=1&q=60&m=fitToWidth 700w"><source media="(max-width: 1000px)" sizes="90vw" srcset="/image/api/2021/04/19/mari-jose-logo_uid_607d77622c038.png?w=500&o=1&q=60&m=fitToWidth 500w"><source media="(max-width: 1200px), (min-width: 1200px)" sizes="90vw" srcset="/image/api/2021/04/19/mari-jose-logo_uid_607d77622c038.png?w=600&o=1&q=60&m=fitToWidth 600w"><img class="_6dc1daaf" alt="Cerejas Mari'José" loading="lazy" src="/image/api/2021/04/19/mari-jose-logo_uid_607d77622c038.png?w=900&o=1&q=60&m=fitToWidth"></picture></div></div><div class="_d96010c0"><div class="_5eaae1af"><picture><source media="(max-width: 550px)" sizes="90vw" srcset="/image/api/2021/04/19/cerejeiras-em-flor_uid_607d775f983f2.jpg?w=500&o=1&q=60&m=fitToWidth 500w"><source media="(max-width: 750px)" sizes="90vw" srcset="/image/api/2021/04/19/cerejeiras-em-flor_uid_607d775f983f2.jpg?w=700&o=1&q=60&m=fitToWidth 700w"><source media="(max-width: 1000px)" sizes="90vw" srcset="/image/api/2021/04/19/cerejeiras-em-flor_uid_607d775f983f2.jpg?w=500&o=1&q=60&m=fitToWidth 500w"><source media="(max-width: 1200px), (min-width: 1200px)" sizes="90vw" srcset="/image/api/2021/04/19/cerejeiras-em-flor_uid_607d775f983f2.jpg?w=600&o=1&q=60&m=fitToWidth 600w"><img class="_6dc1daaf" alt="Cerejas Mari'José - Cerejeiras em flor" loading="lazy" src="/image/api/2021/04/19/cerejeiras-em-flor_uid_607d775f983f2.jpg?w=900&o=1&q=60&m=fitToWidth"></picture></div><div class="_847d082d"><p class="_d6d644ca">Ao longo da sua existência adquiriu notoriedade, saber e dimensão que lhe tem permitido a confiança e segurança junto dos seus fornecedores e clientes em todo o país.</p><p class="_d6d644ca">O objetivo diário é trabalhar sempre pensando num futuro promissor e brilhante, sendo a satisfação do cliente o triunfo de cada etapa.</p></div></div><div class="_d8aa9d81"><p class="_d6d644ca"> </p><h2 class="_8016532f" id="cerejas">Cerejas</h2><p class="_d6d644ca">Temos como foco principal a produção e comercialização de Cereja e pretendemos manter um constante crescimento na produção anual.</p><p class="_d6d644ca">Contamos com revendedores em todo território nacional, para mais informações não hesite em contactar-nos.</p></div><div class="_d96010c0"><div class="_ccc3e604"><div class="_897623af"><picture><source media="(max-width: 550px)" sizes="90vw" srcset="/image/api/2021/11/29/Cerejas_uid_61a5373599e0a.jpeg?w=500&o=1&q=60&m=fitToWidth 500w"><source media="(max-width: 750px)" sizes="90vw" srcset="/image/api/2021/11/29/Cerejas_uid_61a5373599e0a.jpeg?w=700&o=1&q=60&m=fitToWidth 700w"><source media="(max-width: 1000px)" sizes="90vw" srcset="/image/api/2021/11/29/Cerejas_uid_61a5373599e0a.jpeg?w=1000&o=1&q=60&m=fitToWidth 1000w"><source media="(max-width: 1200px), (min-width: 1200px)" sizes="90vw" srcset="/image/api/2021/11/29/Cerejas_uid_61a5373599e0a.jpeg?w=1200&o=1&q=60&m=fitToWidth 1200w"><img class="_41d0fa52" alt="Cerejas Mari'José - cerejas" loading="lazy" src="/image/api/2021/11/29/Cerejas_uid_61a5373599e0a.jpeg?w=900&o=1&q=60&m=fitToWidth"></picture></div></div><div class="_ccc3e604"><div class="_897623af"><picture><source media="(max-width: 550px)" sizes="90vw" srcset="/image/api/2021/04/19/cerejas_uid_607d7751339a7.jpg?w=500&o=1&q=60&m=fitToWidth 500w"><source media="(max-width: 750px)" sizes="90vw" srcset="/image/api/2021/04/19/cerejas_uid_607d7751339a7.jpg?w=700&o=1&q=60&m=fitToWidth 700w"><source media="(max-width: 1000px)" sizes="90vw" srcset="/image/api/2021/04/19/cerejas_uid_607d7751339a7.jpg?w=1000&o=1&q=60&m=fitToWidth 1000w"><source media="(max-width: 1200px), (min-width: 1200px)" sizes="90vw" srcset="/image/api/2021/04/19/cerejas_uid_607d7751339a7.jpg?w=1200&o=1&q=60&m=fitToWidth 1200w"><img class="_41d0fa52" alt="Cerejas Mari'José - Ramo de cerejas" loading="lazy" src="/image/api/2021/04/19/cerejas_uid_607d7751339a7.jpg?w=900&o=1&q=60&m=fitToWidth"></picture></div></div><div class="_ccc3e604"><div class="_897623af"><picture><source media="(max-width: 550px)" sizes="90vw" srcset="/image/api/2021/11/29/cer_uid_61a53a794dfd6.jpeg?w=500&o=1&q=60&m=fitToWidth 500w"><source media="(max-width: 750px)" sizes="90vw" srcset="/image/api/2021/11/29/cer_uid_61a53a794dfd6.jpeg?w=700&o=1&q=60&m=fitToWidth 700w"><source media="(max-width: 1000px)" sizes="90vw" srcset="/image/api/2021/11/29/cer_uid_61a53a794dfd6.jpeg?w=1000&o=1&q=60&m=fitToWidth 1000w"><source media="(max-width: 1200px), (min-width: 1200px)" sizes="90vw" srcset="/image/api/2021/11/29/cer_uid_61a53a794dfd6.jpeg?w=1200&o=1&q=60&m=fitToWidth 1200w"><img class="_41d0fa52" alt="Cerejas Mari'José - Cerejas" loading="lazy" src="/image/api/2021/11/29/cer_uid_61a53a794dfd6.jpeg?w=900&o=1&q=60&m=fitToWidth"></picture></div></div></div><div class="_d8aa9d81"><p class="_d6d644ca"> </p><h2 class="_8016532f" id="contactos">Contactos</h2><p class="_d6d644ca">Pode nos contactar pela nossa <a class="_d4c785e3" href="https://www.facebook.com/cerejas.marijose" rel="noopener noreferrer" target="_blank"><em class="_caaa4209">página no facebook</em></a></p><p class="_d6d644ca">ou pelo email: <em class="_caaa4209">cerejas@marijose.pt</em></p></div></article><footer class="_61c2ce3f"><ul class="_8d713238"><li><a class="_d4c785e3" href="/privacidade">Política de Privacidade</a></li></ul><div class="_895f84bc"><a class="_d4c785e3 _211e8554" href="https://marcodaniels.com" rel="noopener noreferrer" target="_blank">λ marcodaniels project</a></div></footer><div class="_8ed4e786"></div></div>
+    </body>
+  </html>
+  

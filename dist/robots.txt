@@ -1,0 +1,4 @@
+User-agent: *
+Sitemap: https://marijose.pt/sitemap.xml
+Host: https://marijose.pt
+Disallow: /___preview
